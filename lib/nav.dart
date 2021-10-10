@@ -5,7 +5,6 @@ import 'package:simple_nav_bar/screens/home/home_screen.dart';
 import 'package:simple_nav_bar/screens/task/contracts_screen.dart';
 import 'package:simple_nav_bar/screens/time/time_screen.dart';
 
-import 'screens/contacts/contacts_screen.dart';
 import 'screens/data/data_screen.dart';
 import 'package:simple_nav_bar/themes.dart';
 
