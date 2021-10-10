@@ -1,0 +1,445 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+
+import '../../../themes.dart';
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(Intern());
+}
+
+class Intern extends StatefulWidget {
+  const Intern({Key? key}) : super(key: key);
+
+  @override
+  _InternState createState() => _InternState();
+}
+
+class _InternState extends State<Intern> {
+
+  @override
+  void initState() {
+    super.initState();
+    currentTheme.addListener(() {
+      if (this.mounted) { // check whether the state object is in tree
+        setState(() {
+          // make changes here
+        });
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: InternPage(title: 'Intern'),
+      title: 'Flutter Theme Demo',
+      debugShowCheckedModeBanner: false,
+      theme: CustomTheme.lightTheme,
+      darkTheme: CustomTheme.darkTheme,
+      themeMode: currentTheme.currentTheme,
+    );
+  }
+}
+
+
+class InternPage extends StatefulWidget {
+  InternPage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _InternPageState createState() => _InternPageState();
+}
+
+class _InternPageState extends State<InternPage> {
+
+  String _selectedDate = 'Tap to select date';
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? d = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2022),
+    );
+    if (d != null)
+      setState(() {
+        _selectedDate = DateFormat('yMMMMd').format(d);
+      });
+  }
+
+  final myControllerText = TextEditingController();
+
+  late bool _isTimeOkay = false;
+  late bool _isDateOkay = false;
+  late bool _isTextOkay = false;
+  late bool _isEverythingOkay = false;
+  Color _isEverythingOkayColor = Colors.red;
+  String errorText = "";
+  late TimeOfDay time = TimeOfDay.now();
+  late TimeOfDay time2 = TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 1)));
+
+  String getText() {
+    // if (time == null) {
+    //   return 'Select Time';
+    // } else {
+      final hours = time.hour.toString().padLeft(2, '0');
+      final minutes = time.minute.toString().padLeft(2, '0');
+
+      return '$hours:$minutes';
+    // }
+  }
+
+  String getText2() {
+    // if (time2 == null) {
+    //   return 'Select Time';
+    // } else {
+      final hours = time2.hour.toString().padLeft(2, '0');
+      final minutes = time2.minute.toString().padLeft(2, '0');
+
+      return '$hours:$minutes';
+    // }
+  }
+
+  Future pickTime(BuildContext context) async {
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: time,
+    );
+
+    if (newTime == null) return;
+
+    setState(() => time = newTime);
+  }
+
+  Future pickTime2(BuildContext context) async {
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: time2,
+    );
+
+    if (newTime == null) return;
+
+    setState(() => time2 = newTime);
+  }
+
+  void checkEverything(){
+    if((time.hour.toInt()+time.minute.toInt()) < (time2.hour.toInt()+time2.minute.toInt())){
+      _isTimeOkay = true;
+    }else{
+      _isTimeOkay = false;
+      _isEverythingOkayColor = Colors.red;
+      errorText = "Incorrect Time";
+    }
+
+    if(_selectedDate.contains('202')){
+      _isDateOkay = true;
+    }else{
+      if(_selectedDate == 'Tap to select date'){
+        errorText = "Please select Date";
+      }else{
+        errorText = "Date not okay";
+        _isDateOkay = false;
+        _isEverythingOkayColor = Colors.red;
+      }
+    }
+
+    if(myControllerText.text.isEmpty){
+      errorText = "Fill out Textfield";
+      _isTextOkay = false;
+      _isEverythingOkayColor = Colors.red;
+    }else{
+      _isTextOkay = true;
+    }
+
+    if(_isTimeOkay && _isDateOkay && _isTextOkay){
+      _isEverythingOkay = true;
+      _isEverythingOkayColor = Colors.green;
+      errorText = "Done";
+    }
+
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      backgroundColor: theme.backgroundColor,
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(widget.title,
+          style: theme.textTheme.headline6,
+        ),
+        elevation: 0,
+      ),
+      body: Center(
+          child: FittedBox(
+            fit: BoxFit.fitHeight,
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+              child: Container(
+                width: MediaQuery.of(context).size.width*0.95,
+                height: MediaQuery.of(context).size.height*0.95,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.85,
+                      height: MediaQuery.of(context).size.height*0.03,
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005,),
+                            child: Text(
+                              "Durchgeführte Tätigkeit",
+                              style: theme.textTheme.headline3,
+                            ),
+                          )
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.01,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.85,
+                      height: MediaQuery.of(context).size.height*0.15,
+                      child: TextField(
+                        controller: myControllerText,
+                        maxLines: 5,
+                        style: TextStyle(
+                            color: theme.shadowColor
+                        ),
+                        decoration: InputDecoration(
+                          isDense: true,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: theme.shadowColor),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: theme.shadowColor),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.01,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.85,
+                      height: MediaQuery.of(context).size.height*0.03,
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005,),
+                            child: Text(
+                              "Datum und Uhrzeit",
+                              style: theme.textTheme.headline3,
+                            ),
+                          )
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.01,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.85,
+                      height: MediaQuery.of(context).size.height*0.06,
+                      decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(width: 1.0, color: theme.shadowColor),
+                            left: BorderSide(width: 1.0, color: theme.shadowColor),
+                            right: BorderSide(width: 1.0, color: theme.shadowColor),
+                            bottom: BorderSide(width: 1.0, color: theme.shadowColor),
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(1.0),
+                        child: FittedBox(
+                          alignment: Alignment.center,
+                          fit: BoxFit.fitWidth,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.05,right:MediaQuery.of(context).size.width*0.1,),
+                                child: InkWell(
+                                  child: Text(
+                                    _selectedDate,
+                                    textAlign: TextAlign.center,
+                                    style: theme.textTheme.headline3,
+                                  ),
+                                  onTap: (){
+                                    _selectDate(context);
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right:MediaQuery.of(context).size.width*0.01,),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                      onPressed: (){
+                                        _selectDate(context);
+                                      },
+                                      tooltip: 'Tap to open date picker',
+                                      icon: Icon(Icons.calendar_today)),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.015,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.85,
+                      height: MediaQuery.of(context).size.height*0.1,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                              width: MediaQuery.of(context).size.width*0.4,
+                              height: MediaQuery.of(context).size.height*0.06,
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(width: 1.0, color: theme.shadowColor),
+                                    left: BorderSide(width: 1.0, color: theme.shadowColor),
+                                    right: BorderSide(width: 1.0, color: theme.shadowColor),
+                                    bottom: BorderSide(width: 1.0, color: theme.shadowColor),
+                                  ),
+                                  borderRadius: BorderRadius.all(Radius.circular(10))
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: InkWell(
+                                    child: Text(
+                                      getText(),
+                                      textAlign: TextAlign.center,
+                                      style: theme.textTheme.headline5,
+                                    ),
+                                    onTap: (){
+                                      pickTime(context);
+                                    },
+                                  ),
+                                ),
+                              )
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width*0.05,
+                          ),
+                          Container(
+                              width: MediaQuery.of(context).size.width*0.4,
+                              height: MediaQuery.of(context).size.height*0.06,
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(width: 1.0, color: theme.shadowColor),
+                                    left: BorderSide(width: 1.0, color: theme.shadowColor),
+                                    right: BorderSide(width: 1.0, color: theme.shadowColor),
+                                    bottom: BorderSide(width: 1.0, color: theme.shadowColor),
+                                  ),
+                                  borderRadius: BorderRadius.all(Radius.circular(10))
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: InkWell(
+                                    child: Text(
+                                      getText2(),
+                                      textAlign: TextAlign.center,
+                                      style: theme.textTheme.headline5,
+                                    ),
+                                    onTap: (){
+                                      pickTime2(context);
+                                    },
+                                  ),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.25,
+                    ),
+                    Container(
+                        height: MediaQuery.of(context).size.height*0.02,
+                        width: MediaQuery.of(context).size.width*0.85,
+                        child: (_isEverythingOkay)
+                            ? Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            errorText,
+                            style: TextStyle(
+                              color: _isEverythingOkayColor,
+                              fontSize: 17,
+                            ),
+                          ),
+                        )
+                            : Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            errorText,
+                            style: TextStyle(
+                              color: _isEverythingOkayColor,
+                              fontSize: 17,
+                            ),
+                          ),
+                        )
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.01,
+                    ),
+                    Container(
+                        height: MediaQuery.of(context).size.height*0.07,
+                        width: MediaQuery.of(context).size.width*0.85,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005),
+                          child: FloatingActionButton(
+                            elevation: 0,
+                            heroTag: "btnIntern",
+                            backgroundColor: theme.cardColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                checkEverything();
+                                if(errorText == "Done"){
+                                  Navigator.pop(context);
+                                }
+                              });
+                            },
+                            child: Text(
+                              'Speichern',
+                              style: theme.textTheme.bodyText1,
+                            ),
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+      ),
+      // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}

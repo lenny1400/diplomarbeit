@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="241" height="170" viewBox="0 0 241 170">
+  <g id="logo" transform="translate(-47.5 -249)">
+    <text id="contract." transform="translate(47.5 403)" fill="#fff" font-size="50" font-family="LucidaCalligraphy-Italic, Lucida Calligraphy" font-style="italic"><tspan x="0" y="0">contract.</tspan></text>
+    <g id="Group_2" data-name="Group 2" transform="translate(-37.957 -14.957)">
+      <path id="Icon_awesome-file" data-name="Icon awesome-file" d="M21.913,13.3V0H2.348A2.342,2.342,0,0,0,0,2.348V47.74a2.342,2.342,0,0,0,2.348,2.348h32.87a2.342,2.342,0,0,0,2.348-2.348V15.652h-13.3A2.355,2.355,0,0,1,21.913,13.3Zm15.652-1.379v.6H25.044V0h.6A2.346,2.346,0,0,1,27.3.685l9.577,9.587A2.34,2.34,0,0,1,37.566,11.925Z" transform="translate(187.87 277.913)" fill="#fff"/>
+      <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(166.957 263.957)" fill="none" stroke="#fff" stroke-width="3">
+        <circle cx="39" cy="39" r="39" stroke="none"/>
+        <circle cx="39" cy="39" r="37.5" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>
