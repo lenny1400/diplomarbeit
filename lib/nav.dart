@@ -135,18 +135,6 @@ class _NavbarState extends State<Navbar> {
               ),
               label: "Data"
           ),
-/*          BottomNavigationBarItem(
-              backgroundColor: Color(0x161616),
-              activeIcon: Icon(
-                BootstrapIcons.person_fill,
-                color: Colors.white,
-              ),
-              icon: Icon(
-                BootstrapIcons.person_fill,
-                color: Color(0xFF757575),
-              ),
-              label: "Contacts"
-          ),*/
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
