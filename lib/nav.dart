@@ -63,11 +63,10 @@ class _NavbarState extends State<Navbar> {
 
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
+    Home(),
     Time(),
     Tasks(),
-    Home(),
     Data(),
-    Contacts(),
   ];
 
   void _onItemTap(int index) {
@@ -88,6 +87,18 @@ class _NavbarState extends State<Navbar> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              backgroundColor: Color(0x161616),
+              activeIcon: Icon(
+                BootstrapIcons.house_door_fill,
+                color: Colors.white,
+              ),
+              icon: Icon(
+                BootstrapIcons.house_door_fill,
+                color: Color(0xFF757575),
+              ),
+              label: "Home"
+          ),
           BottomNavigationBarItem(
               activeIcon: Icon(
                 BootstrapIcons.clock_fill,
@@ -110,18 +121,6 @@ class _NavbarState extends State<Navbar> {
                 color: Color(0xFF757575),
               ),
               label: "File Text"
-          ),
-          BottomNavigationBarItem(
-              backgroundColor: Color(0x161616),
-              activeIcon: Icon(
-                BootstrapIcons.house_door_fill,
-                color: Colors.white,
-              ),
-              icon: Icon(
-                BootstrapIcons.house_door_fill,
-                color: Color(0xFF757575),
-              ),
-              label: "Home"
           ),
           BottomNavigationBarItem(
               backgroundColor: Color(0x161616),
