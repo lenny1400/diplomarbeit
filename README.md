@@ -1,4 +1,4 @@
-# simple_nav_bar
+# Diplomarbeit
 
 A new Flutter project.
 
