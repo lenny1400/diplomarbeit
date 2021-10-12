@@ -38,7 +38,8 @@ class _LoginRegisterState extends State<LoginRegister> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginRegisterPage(title: 'Flutter Theme Demo'),
+      home: LoginRegisterPage(),
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Theme Demo',
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -49,11 +50,6 @@ class _LoginRegisterState extends State<LoginRegister> {
 
 
 class LoginRegisterPage extends StatefulWidget {
-  final String title;
-
-  const LoginRegisterPage({
-    required this.title,
-  });
 
   @override
   _LoginRegisterPageState createState() => _LoginRegisterPageState();
@@ -62,6 +58,11 @@ class LoginRegisterPage extends StatefulWidget {
 
 class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,26 +81,26 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
             child: Center(
               child: Column(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width*0.9,
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        color: theme.iconTheme.color,
-                        icon: const Icon(
-                          Icons.brightness_4_rounded,
+                  Padding(
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height*0.10),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width*0.9,
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          color: theme.iconTheme.color,
+                          icon: const Icon(
+                            Icons.brightness_4_rounded,
+                          ),
+                          onPressed: () {
+                            currentTheme.toggleTheme();
+                          },
                         ),
-                        onPressed: () {
-                          currentTheme.toggleTheme();
-                        },
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.07,
-                  ),
                   Container(
-                    height: MediaQuery.of(context).size.height*0.3,
+                    height: MediaQuery.of(context).size.height*0.2,
                     width: MediaQuery.of(context).size.width*0.5,
                     child: Image.asset(
                       theme.backgroundColor == Colors.white
@@ -107,60 +108,72 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                           : 'assets/logo_white_login.png',
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.05,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.06,
-                    width: MediaQuery.of(context).size.width*0.7,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: theme.cardColor,
-                            fixedSize: Size.fromHeight(50),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-                            textStyle: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height*0.03,
-                            )
-                        ),
-                        onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoginForm()),
-                          );
-                        },
-                        child: Text(
-                          "Login",
-                          style: theme.textTheme.bodyText1,
-                        )
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height*0.06,
+                      width: MediaQuery.of(context).size.width*0.7,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: theme.cardColor,
+                              fixedSize: Size.fromHeight(50),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                              textStyle: TextStyle(
+                                fontSize: MediaQuery.of(context).size.height*0.03,
+                              )
+                          ),
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginForm()),
+                            );
+                          },
+                          child: Text(
+                            "Login",
+                            style: theme.textTheme.bodyText1,
+                          )
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.05,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.06,
-                    width: MediaQuery.of(context).size.width*0.7,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: theme.cardColor,
-                            fixedSize: Size.fromHeight(50),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-                            textStyle: TextStyle(
-                                fontSize: MediaQuery.of(context).size.height*0.03
-                            )
-                        ),
-                        onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => RegisterForm()),
-                          );
-                        },
-                        child: Text(
-                          "Register",
-                          style: theme.textTheme.bodyText1,
-                        )
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height*0.06,
+                      width: MediaQuery.of(context).size.width*0.7,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: theme.cardColor,
+                              fixedSize: Size.fromHeight(50),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                              textStyle: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height*0.03
+                              )
+                          ),
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => RegisterForm()),
+                            );
+                          },
+                          child: Text(
+                            "Register",
+                            style: theme.textTheme.bodyText1,
+                          )
+                      ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height*0.06,
+                      width: MediaQuery.of(context).size.width*0.5,
+                      child: Image.asset(
+                        theme.backgroundColor == Colors.white
+                            ? 'assets/rocomp_black.png'
+                            : 'assets/rocomp_white.png',
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
