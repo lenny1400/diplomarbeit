@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/screens/login/login_register.dart';
 import '../../../themes.dart';
+import 'package:get_storage/get_storage.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,7 @@ Future main()async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await GetStorage.init();
 
   runApp(Settings(title: 'Settings',));
 }
@@ -60,6 +62,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
+  final switchData = GetStorage();
   bool isSwitched = false;
 
   @override
@@ -67,6 +70,12 @@ class _SettingsPageState extends State<SettingsPage> {
     // TODO: implement initState
     super.initState();
 
+    if(switchData.read('isSwitched') != null)
+      {
+        setState(() {
+          isSwitched = switchData.read('isSwitched');
+        });
+      }
   }
 
   @override
@@ -243,6 +252,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                             onChanged: (value){
                                               setState(() {
                                                 isSwitched = value;
+                                                switchData.write('isSwitched', isSwitched);
                                                 currentTheme.toggleTheme();
                                               });
                                             },

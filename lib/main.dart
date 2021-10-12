@@ -39,8 +39,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bottom Navigation Bar Tutorial',
-      //home: Nav(),
-      home: LoadUpScreen(),
+      home: Nav(),
+      //home: LoadUpScreen(),
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
