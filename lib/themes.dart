@@ -47,7 +47,7 @@ class CustomTheme with ChangeNotifier {
           backgroundColor: Color(0xFF2e2e2e)
       ),
       primaryColor: Color(0xFF2e2e2e),
-      shadowColor: Colors.white,//borders new accent color
+      shadowColor: Colors.white, //new accent color
       backgroundColor: Color(0xFF212121),
       scaffoldBackgroundColor: Colors.grey.shade800,
       cardColor: Color(0xFF5D5D5D), // new button color
