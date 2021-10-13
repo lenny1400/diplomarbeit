@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "778790813514",
+    "project_id": "rocomp-app-d6d31",
+    "storage_bucket": "rocomp-app-d6d31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778790813514:android:77f08d8cb5727f5d5ccbb3",
+        "android_client_info": {
+          "package_name": "com.example.simple_nav_bar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778790813514-r99obb5iebn92nh3sssbj0srdq542kn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7Pr30qvxyeirNiYgrZP2V1saE2rzPoMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778790813514-r99obb5iebn92nh3sssbj0srdq542kn6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
