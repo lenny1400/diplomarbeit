@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/themes.dart';
 
+import '../../nav.dart';
 import 'login.dart';
 
 Future main() async {
@@ -55,6 +58,52 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  TextEditingController myName = TextEditingController();
+  TextEditingController myEmail = TextEditingController();
+  TextEditingController myPassword = TextEditingController();
+  TextEditingController myPasswordConfirm = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Firebase.initializeApp();
+  }
+
+  Future<void> registerUser(String _email, String _password) async {
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _email,
+          password: _password
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+    isRegistered();
+  }
+
+  void isRegistered(){
+    FirebaseAuth.instance
+        .userChanges()
+        .listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -87,6 +136,7 @@ class _MainPageState extends State<MainPage> {
                       width: MediaQuery.of(context).size.width*0.8,
                       height: MediaQuery.of(context).size.height*0.07,
                       child: TextField(
+                        controller: myName,
                         style: TextStyle(
                           color: theme.shadowColor,
                         ),
@@ -118,6 +168,7 @@ class _MainPageState extends State<MainPage> {
                       width: MediaQuery.of(context).size.width*0.8,
                       height: MediaQuery.of(context).size.height*0.07,
                       child: TextField(
+                        controller: myEmail,
                         style: TextStyle(
                           color: theme.shadowColor,
                         ),
@@ -149,6 +200,7 @@ class _MainPageState extends State<MainPage> {
                       width: MediaQuery.of(context).size.width*0.8,
                       height: MediaQuery.of(context).size.height*0.07,
                       child: TextField(
+                        controller: myPassword,
                         style: TextStyle(
                             color: theme.shadowColor
                         ),
@@ -181,6 +233,7 @@ class _MainPageState extends State<MainPage> {
                       width: MediaQuery.of(context).size.width*0.8,
                       height: MediaQuery.of(context).size.height*0.07,
                       child: TextField(
+                        controller: myPasswordConfirm,
                         style: TextStyle(
                             color: theme.shadowColor
                         ),
@@ -221,8 +274,9 @@ class _MainPageState extends State<MainPage> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         onPressed: () {
-                          // Navigator.push(
-                          //     context, MaterialPageRoute(builder: (_) => MainPage(title: 'Hello',)));
+                          if(myPassword.text == myPasswordConfirm.text){
+                            registerUser(myEmail.text, myPasswordConfirm.text);
+                          }
                         },
                         child: Text(
                           'Sign up',

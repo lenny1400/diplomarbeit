@@ -46,7 +46,6 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SettingsPage(title: 'Settings'),
-      title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,

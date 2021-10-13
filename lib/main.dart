@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/nav.dart';
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    Firebase.initializeApp();
     currentTheme.addListener(() {
       if (this.mounted) { // check whether the state object is in tree
         setState(() {

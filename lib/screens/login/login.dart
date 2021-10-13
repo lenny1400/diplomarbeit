@@ -86,9 +86,7 @@ class _MainPageState extends State<MainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Nav()),);
-        Navigator.pushReplacement(context,  MaterialPageRoute(builder: (context) => MainPage()),
-                (Route<dynamic> route) => false,);  
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });
   }
