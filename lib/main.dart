@@ -40,8 +40,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bottom Navigation Bar Tutorial',
-      home: Nav(),
-      //home: LoginRegister(),
+      //home: Nav(),
+      home: LoginRegister(),
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,

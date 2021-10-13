@@ -40,7 +40,6 @@ class _LoginRegisterState extends State<LoginRegister> {
     return MaterialApp(
       home: LoginRegisterPage(),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Theme Demo',
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
@@ -117,16 +116,13 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                           style: ElevatedButton.styleFrom(
                               primary: theme.cardColor,
                               fixedSize: Size.fromHeight(50),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                               textStyle: TextStyle(
                                 fontSize: MediaQuery.of(context).size.height*0.03,
                               )
                           ),
                           onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginForm()),
-                            );
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
                           },
                           child: Text(
                             "Login",
@@ -144,16 +140,13 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                           style: ElevatedButton.styleFrom(
                               primary: theme.cardColor,
                               fixedSize: Size.fromHeight(50),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                               textStyle: TextStyle(
                                   fontSize: MediaQuery.of(context).size.height*0.03
                               )
                           ),
                           onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => RegisterForm()),
-                            );
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterForm()),);
                           },
                           child: Text(
                             "Register",

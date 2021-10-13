@@ -38,8 +38,8 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(title: 'Flutter Theme Demo'),
-      title: 'Flutter Theme Demo',
+      home: MainPage(),
+      debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
@@ -49,11 +49,6 @@ class _RegisterFormState extends State<RegisterForm> {
 
 
 class MainPage extends StatefulWidget {
-  final String title;
-
-  const MainPage({
-    required this.title,
-  });
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -70,174 +65,183 @@ class _MainPageState extends State<MainPage> {
       body: Center(
         child: FittedBox(
           fit: BoxFit.fitHeight,
-          alignment: Alignment.center,
           child: Container(
             width: MediaQuery.of(context).size.width*1,
             height: MediaQuery.of(context).size.height*1,
-            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
             child: Center(
               child: Column(
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    child: Text(
-                      "Register",
-                      style: theme.textTheme.bodyText2,
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height*0.1,
+                      child: Text(
+                        "Register",
+                        style: theme.textTheme.bodyText2,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.07,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1 ),
-                    child: TextField(
-                      style: TextStyle(
-                        color: theme.shadowColor,
-                      ),
-                      decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.shadowColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.cardColor),
-                          ),
-                          labelText: 'Full Name',
-                          labelStyle: TextStyle(
-                              color: theme.shadowColor
-                          ),
-                          hintText: 'Enter your full name',
-                          hintStyle: TextStyle(
-                              color: theme.cardColor
-                          )
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1, top: MediaQuery.of(context).size.height*0.08 ),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width*0.8,
+                      height: MediaQuery.of(context).size.height*0.07,
+                      child: TextField(
+                        style: TextStyle(
+                          color: theme.shadowColor,
+                        ),
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.shadowColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.cardColor),
+                            ),
+                            labelText: 'Full Name',
+                            labelStyle: TextStyle(
+                                color: theme.shadowColor
+                            ),
+                            hintText: 'Enter your full name',
+                            hintStyle: TextStyle(
+                                color: theme.cardColor,
+                                fontSize: MediaQuery.of(context).size.height*0.02
+                            )
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.03,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1 ),
-                    child: TextField(
-                      style: TextStyle(
-                        color: theme.shadowColor,
-                      ),
-                      decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.shadowColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.cardColor),
-                          ),
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                              color: theme.shadowColor
-                          ),
-                          hintText: 'Enter valid mail',
-                          hintStyle: TextStyle(
-                              color: theme.cardColor
-                          )
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1,top: MediaQuery.of(context).size.height*0.03),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width*0.8,
+                      height: MediaQuery.of(context).size.height*0.07,
+                      child: TextField(
+                        style: TextStyle(
+                          color: theme.shadowColor,
+                        ),
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.shadowColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.cardColor),
+                            ),
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                                color: theme.shadowColor
+                            ),
+                            hintText: 'Enter valid mail',
+                            hintStyle: TextStyle(
+                                color: theme.cardColor,
+                                fontSize: MediaQuery.of(context).size.height*0.02
+                            )
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.03,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1 ),
-                    child: TextField(
-                      style: TextStyle(
-                          color: theme.shadowColor
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.shadowColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.cardColor),
-                          ),
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                              color: theme.shadowColor
-                          ),
-                          hintText: 'Enter your secure password',
-                          hintStyle: TextStyle(
-                              color: theme.cardColor
-                          )
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1, top: MediaQuery.of(context).size.height*0.03),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width*0.8,
+                      height: MediaQuery.of(context).size.height*0.07,
+                      child: TextField(
+                        style: TextStyle(
+                            color: theme.shadowColor
+                        ),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.shadowColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.cardColor),
+                            ),
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                color: theme.shadowColor
+                            ),
+                            hintText: 'Enter your secure password',
+                            hintStyle: TextStyle(
+                                color: theme.cardColor,
+                                fontSize: MediaQuery.of(context).size.height*0.02
+                            )
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.03,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1 ),
-                    child: TextField(
-                      style: TextStyle(
-                          color: theme.shadowColor
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.shadowColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.cardColor),
-                          ),
-                          labelText: 'Confirm password',
-                          labelStyle: TextStyle(
-                              color: theme.shadowColor
-                          ),
-                          hintText: 'Enter your secure password',
-                          hintStyle: TextStyle(
-                              color: theme.cardColor
-                          )
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right: MediaQuery.of(context).size.width*0.1,top: MediaQuery.of(context).size.height*0.03 ),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width*0.8,
+                      height: MediaQuery.of(context).size.height*0.07,
+                      child: TextField(
+                        style: TextStyle(
+                            color: theme.shadowColor
+                        ),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.shadowColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.cardColor),
+                            ),
+                            labelText: 'Confirm password',
+                            labelStyle: TextStyle(
+                                color: theme.shadowColor
+                            ),
+                            hintText: 'Enter your secure password',
+                            hintStyle: TextStyle(
+                                color: theme.cardColor,
+                                fontSize: MediaQuery.of(context).size.height*0.02
+                            )
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.04,
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height*0.055,
-                    width: MediaQuery.of(context).size.width*0.5,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: FloatingActionButton(
-                      elevation: 0,
-                      backgroundColor: theme.cardColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.06),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height*0.06,
+                      width: MediaQuery.of(context).size.width*0.5,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: FloatingActionButton(
+                        elevation: 0,
+                        backgroundColor: theme.cardColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        onPressed: () {
+                          // Navigator.push(
+                          //     context, MaterialPageRoute(builder: (_) => MainPage(title: 'Hello',)));
+                        },
+                        child: Text(
+                          'Sign up',
+                          style: theme.textTheme.bodyText1,
+                        ),
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context, MaterialPageRoute(builder: (_) => MainPage(title: 'Hello',)));
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.15),
+                    child: TextButton(
+                      onPressed: (){
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                            LoginForm()), (Route route) => true);
                       },
                       child: Text(
-                        'Sign up',
-                        style: theme.textTheme.bodyText1,
+                        'Already have an Account?',
+                        style: theme.textTheme.headline1,
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.14,
-                  ),
-                  TextButton(
-                    onPressed: (){
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                          LoginForm()), (Route route) => true);
-                    },
-                    child: Text(
-                      'Already have an Account?',
-                      style: theme.textTheme.headline2,
                     ),
                   ),
                 ],
