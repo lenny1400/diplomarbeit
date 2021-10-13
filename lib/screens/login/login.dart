@@ -1,7 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_nav_bar/nav.dart';
 import 'package:simple_nav_bar/screens/login/register.dart';
 import 'package:simple_nav_bar/themes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +57,50 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  final myEmail = TextEditingController();
+  final myPassword = TextEditingController();
+
+  Future<void> loginUser(String _email, String _password) async {
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _email,
+          password: _password
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+    isSignedin();
+  }
+
+  void isSignedin(){
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Nav()),);
+        Navigator.pushReplacement(context,  MaterialPageRoute(builder: (context) => MainPage()),
+                (Route<dynamic> route) => false,);  
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Firebase.initializeApp();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -109,6 +156,7 @@ class _MainPageState extends State<MainPage> {
                                   fontSize: MediaQuery.of(context).size.height*0.02
                               )
                           ),
+                          controller: myEmail,
                         ),
                       ),
                     ),
@@ -118,6 +166,7 @@ class _MainPageState extends State<MainPage> {
                         width: MediaQuery.of(context).size.width*0.8,
                         height: MediaQuery.of(context).size.height*0.07,
                         child: TextField(
+                          controller: myPassword,
                           style: TextStyle(
                               color: theme.shadowColor
                           ),
@@ -165,8 +214,9 @@ class _MainPageState extends State<MainPage> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         onPressed: () {
-                          // Navigator.push(
-                          //     context, MaterialPageRoute(builder: (_) => MainPage(title: 'Hello',)));
+                          print(myEmail.text);
+                          print(myPassword.text);
+                          loginUser(myEmail.text,myPassword.text);
                         },
                         child: Text(
                           'Sign in',

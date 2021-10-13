@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,8 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +40,7 @@ class _SettingsState extends State<Settings> {
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +80,21 @@ class _SettingsPageState extends State<SettingsPage> {
           isSwitched = switchData.read('isSwitched');
         });
       }
+  }
+
+  void signOut(){
+
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((User? user) async {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+        await FirebaseAuth.instance.signOut();
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginRegister()),);
+      }
+    });
   }
 
   @override
@@ -563,7 +582,11 @@ class _SettingsPageState extends State<SettingsPage> {
                             primary: theme.shadowColor,
                             onPrimary: theme.shadowColor,
                           ),
-                          onPressed: (){},
+                          onPressed: (){
+                            setState(() {
+                              signOut();
+                            });
+                          },
                           child: Text(
                               "Log out",
                             style: theme.textTheme.subtitle2,
