@@ -1,6 +1,7 @@
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_nav_bar/widgets/task_item.dart';
 import '../../themes.dart';
 import 'Screens_Home/all_tasks.dart';
 import 'Screens_Home/settings.dart';
@@ -17,7 +18,6 @@ Future main()async {
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
-
   @override
   _HomeState createState() => _HomeState();
 }
@@ -59,7 +59,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -125,394 +124,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Rocomp-23-08-Server",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconTheme(
-                                        data: new IconThemeData(
-                                            color: theme.shadowColor,
-                                            size: 35
-                                        ),
-                                        child: Icon(Icons.keyboard_arrow_right_sharp),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
+                  TaskItem(theme: theme, title: 'Rocomp-23-08-Server'),
                   Padding(
                     padding: EdgeInsets.only(top: 20, bottom: 0, left: 40),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Recently finished',
+                        'Finished',
                         style: theme.textTheme.headline5,
                       ),
                     ),
                   ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "LeDuigou-22-08-Kassa",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconTheme(
-                                        data: new IconThemeData(
-                                            color: theme.shadowColor,
-                                            size: 35
-                                        ),
-                                        child: Icon(Icons.keyboard_arrow_right_sharp),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20, bottom: 0, left: 40),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Activities',
-                        style: theme.textTheme.headline5,
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Max-Mustermann-22-08-Computer-Kauf",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                          color: theme.shadowColor,
-                                          size: 35
-                                      ),
-                                      child: Icon(Icons.keyboard_arrow_right_sharp),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Intern-22-08",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                          color: theme.shadowColor,
-                                          size: 35
-                                      ),
-                                      child: Icon(Icons.keyboard_arrow_right_sharp),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Häusle-20-08-Computer-Software",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                          color: theme.shadowColor,
-                                          size: 35
-                                      ),
-                                      child: Icon(Icons.keyboard_arrow_right_sharp),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Fulterer-19-08-Computer-Hardware",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                          color: theme.shadowColor,
-                                          size: 35
-                                      ),
-                                      child: Icon(Icons.keyboard_arrow_right_sharp),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
-                  Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.09,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20,left: 40, right: 20),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onPrimary: theme.canvasColor,
-                                  primary: theme.backgroundColor,
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: theme.shadowColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Fulterer-19-08-Computer-Hardware",
-                                          style: theme.textTheme.headline3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                          color: theme.shadowColor,
-                                          size: 35
-                                      ),
-                                      child: Icon(Icons.keyboard_arrow_right_sharp),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                  ),
+
+                  TaskItem(theme: theme, title: 'LeDuigou-22-08-Kassa'),
+                  TaskItem(theme: theme, title: 'Max-Mustermann-22-08-Computer-Kauf'),
+                  TaskItem(theme: theme, title: 'Intern-22-08'),
+                  TaskItem(theme: theme, title: 'Häusle-20-08-Computer-Software'),
+                  TaskItem(theme: theme, title: 'Fulterer-19-08-Computer-Hardware'),
+                  TaskItem(theme: theme, title: 'Fulterer-19-08-Computer-Hardware'),
+
                   Padding(
                     padding: EdgeInsets.only(left: 30, right: 30,top: 15),
                     child: Container(
