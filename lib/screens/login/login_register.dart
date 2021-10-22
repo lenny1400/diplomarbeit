@@ -31,7 +31,7 @@ class _LoginRegisterState extends State<LoginRegister> {
   void initState() {
     super.initState();
     currentTheme.addListener(() {
-      if (this.mounted) { // check whether the state object is in tree
+      if(this.mounted) { // check whether the state object is in tree
         setState(() {
           // make changes here
         });
@@ -61,7 +61,7 @@ class LoginRegisterPage extends StatefulWidget {
 
 class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
-  bool buildIt = true;
+  bool buildIt = false;
 
   @override
   void initState() {
@@ -94,116 +94,118 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
       body: Center(
         child: (buildIt)
             ? FittedBox(
-              fit: BoxFit.fitHeight,
-              alignment: Alignment.center,
-              child: Container(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
-                width: MediaQuery.of(context).size.width*1,
-                height: MediaQuery.of(context).size.height*1,
-                color: theme.primaryColor,
-              ),
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
+                  width: MediaQuery.of(context).size.width*1,
+                  height: MediaQuery.of(context).size.height*1,
+                  color: theme.primaryColor,
+          ),
         )
             : FittedBox(
-              fit: BoxFit.fitHeight,
-              alignment: Alignment.center,
-              child: Container(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
-                width: MediaQuery.of(context).size.width*1,
-                height: MediaQuery.of(context).size.height*1,
-                child: Center(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height*0.10),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.9,
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: IconButton(
-                              color: theme.iconTheme.color,
-                              icon: const Icon(
-                                Icons.brightness_4_rounded,
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
+                  width: MediaQuery.of(context).size.width*1,
+                  height: MediaQuery.of(context).size.height*1,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height*0.10),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width*0.9,
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: IconButton(
+                                color: theme.iconTheme.color,
+                                icon: const Icon(
+                                  Icons.brightness_4_rounded,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    currentTheme.toggleTheme();
+                                  });
+                                },
                               ),
-                              onPressed: () {
-                                currentTheme.toggleTheme();
-                              },
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height*0.2,
-                        width: MediaQuery.of(context).size.width*0.5,
-                        child: Image.asset(
-                          theme.backgroundColor == Colors.white
-                              ? 'assets/logo_black_login.png'
-                              : 'assets/logo_white_login.png',
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height*0.06,
-                          width: MediaQuery.of(context).size.width*0.7,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: theme.cardColor,
-                                  fixedSize: Size.fromHeight(50),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                                  textStyle: TextStyle(
-                                    fontSize: MediaQuery.of(context).size.height*0.03,
-                                  )
-                              ),
-                              onPressed: (){
-                                Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
-                              },
-                              child: Text(
-                                "Login",
-                                style: theme.textTheme.bodyText1,
-                              )
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height*0.06,
-                          width: MediaQuery.of(context).size.width*0.7,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: theme.cardColor,
-                                  fixedSize: Size.fromHeight(50),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                                  textStyle: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.height*0.03
-                                  )
-                              ),
-                              onPressed: (){
-                                Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterForm()),);
-                              },
-                              child: Text(
-                                "Register",
-                                style: theme.textTheme.bodyText1,
-                              )
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height*0.06,
+                        Container(
+                          height: MediaQuery.of(context).size.height*0.2,
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Image.asset(
                             theme.backgroundColor == Colors.white
-                                ? 'assets/rocomp_black.png'
-                                : 'assets/rocomp_white.png',
+                                ? 'assets/logo_black_login.png'
+                                : 'assets/logo_white_login.png',
                           ),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height*0.06,
+                            width: MediaQuery.of(context).size.width*0.7,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: theme.cardColor,
+                                    fixedSize: Size.fromHeight(50),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                    textStyle: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.height*0.03,
+                                    )
+                                ),
+                                onPressed: (){
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
+                                },
+                                child: Text(
+                                  "Login",
+                                  style: theme.textTheme.bodyText1,
+                                )
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height*0.06,
+                            width: MediaQuery.of(context).size.width*0.7,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: theme.cardColor,
+                                    fixedSize: Size.fromHeight(50),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                    textStyle: TextStyle(
+                                        fontSize: MediaQuery.of(context).size.height*0.03
+                                    )
+                                ),
+                                onPressed: (){
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterForm()),);
+                                },
+                                child: Text(
+                                  "Register",
+                                  style: theme.textTheme.bodyText1,
+                                )
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height*0.06,
+                            width: MediaQuery.of(context).size.width*0.5,
+                            child: Image.asset(
+                              theme.backgroundColor == Colors.white
+                                  ? 'assets/rocomp_black.png'
+                                  : 'assets/rocomp_white.png',
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ),
+          ),
         )
       ),
     );
