@@ -137,7 +137,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       height: MediaQuery.of(context).size.height*0.1,
                       child: TextButton(
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => LoginRegister()));
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => LoginRegister()));
                         },
                         style: TextButton.styleFrom(
                             onSurface: theme.backgroundColor,
