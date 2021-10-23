@@ -223,7 +223,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.24),
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
                       child: TextButton(
                         onPressed: (){
                           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>

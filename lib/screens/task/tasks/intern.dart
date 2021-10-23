@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../themes.dart';
 
@@ -67,7 +70,7 @@ class _InternPageState extends State<InternPage> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2021),
-      lastDate: DateTime(2022),
+      lastDate: DateTime.now(),
     );
     if (d != null)
       setState(() {
@@ -168,6 +171,109 @@ class _InternPageState extends State<InternPage> {
   }
 
 
+  Future<void> saveToStorage() async {
+    //get time of Input
+    final timeSave = getText(); // Time start
+    final time2Save = getText2(); // Time end
+    final _yearName = DateTime.now().year.toString(); //Year
+    //get text
+    final text = myControllerText.text;
+    //create folder Name 'MMdd'
+    final _monthName = (_selectedDate.split(" "))[0]; //Month Name
+    final _dayName = (((_selectedDate.split(","))[0]).split(" "))[1];
+
+    //get directory of Device
+    final directory = await getApplicationDocumentsDirectory();
+    // create path Year
+    final _pathYearFolder= Directory(directory.path + "/tasks/intern/" + "$_yearName");
+    // create path Month
+    final _pathMonthFolder= Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName);
+    // create path Day
+    final _pathDayFolder= Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName);
+
+    //checks if folder $Year exists
+    if ((await _pathYearFolder.exists())){
+      //checks if folder $Month exists
+      if ((await _pathMonthFolder.exists())){
+        //checks if folder $Day exists
+        if ((await _pathDayFolder.exists())){
+          // TODO: save file to storage
+          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
+          String _fileName = _countFilesinFolder.toString() + ".txt";
+          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+
+          final File file = File('$_pathFileSave/$_fileName');
+          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
+        }else{
+          //create folder
+          await _pathDayFolder.create(recursive: true);
+        }
+      }else{
+        // if not exists creates Folder $Year
+        await _pathMonthFolder.create(recursive: true);
+      }
+    }else{
+      //create year folder
+      await _pathYearFolder.create(recursive: true);
+      if ((await _pathMonthFolder.exists())){
+        //checks if folder $Day exists
+        if ((await _pathDayFolder.exists())){
+          // TODO: save file to storage
+          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
+          String _fileName = _countFilesinFolder.toString() + ".txt";
+          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+
+          final File file = File('$_pathFileSave/$_fileName');
+          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
+        }else{
+          //create folder
+          await _pathDayFolder.create(recursive: true);
+          // TODO: save file to storage
+          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
+          String _fileName = _countFilesinFolder.toString() + ".txt";
+          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+
+          final File file = File('$_pathFileSave/$_fileName');
+          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
+        }
+      }else{
+        // if not exists creates Folder $Year
+        await _pathMonthFolder.create(recursive: true);
+        if ((await _pathDayFolder.exists())){
+          // TODO: save file to storage
+          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
+          String _fileName = _countFilesinFolder.toString() + ".txt";
+          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+
+          final File file = File('$_pathFileSave/$_fileName');
+          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
+        }else{
+          //create folder
+          await _pathDayFolder.create(recursive: true);
+          // TODO: save file to storage
+          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
+          String _fileName = _countFilesinFolder.toString() + ".txt";
+          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+
+          final File file = File('$_pathFileSave/$_fileName');
+          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    String today = DateFormat('yMMMMd').format(new DateTime.now());
+    _selectedDate = today;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -186,16 +292,16 @@ class _InternPageState extends State<InternPage> {
             fit: BoxFit.fitHeight,
             alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
               child: Container(
-                width: MediaQuery.of(context).size.width*0.95,
-                height: MediaQuery.of(context).size.height*0.95,
+                width: MediaQuery.of(context).size.width*1,
+                height: MediaQuery.of(context).size.height*1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: MediaQuery.of(context).size.width*0.85,
-                      height: MediaQuery.of(context).size.height*0.03,
+                      width: MediaQuery.of(context).size.width*1,
+                      height: MediaQuery.of(context).size.height*0.04,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -207,37 +313,34 @@ class _InternPageState extends State<InternPage> {
                           )
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.01,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width*0.85,
-                      height: MediaQuery.of(context).size.height*0.15,
-                      child: TextField(
-                        controller: myControllerText,
-                        maxLines: 5,
-                        style: TextStyle(
-                            color: theme.shadowColor
-                        ),
-                        decoration: InputDecoration(
-                          isDense: true,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.shadowColor),
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.005),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*1,
+                        height: MediaQuery.of(context).size.height*0.3,
+                        child: TextField(
+                          controller: myControllerText,
+                          maxLines: 5,
+                          style: TextStyle(
+                              color: theme.shadowColor
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: theme.shadowColor),
+                          decoration: InputDecoration(
+                            isDense: true,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.shadowColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: theme.shadowColor),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.01,
-                    ),
                     Container(
-                      width: MediaQuery.of(context).size.width*0.85,
-                      height: MediaQuery.of(context).size.height*0.03,
+                      width: MediaQuery.of(context).size.width*1,
+                      height: MediaQuery.of(context).size.height*0.04,
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Padding(
@@ -249,12 +352,9 @@ class _InternPageState extends State<InternPage> {
                           )
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.01,
-                    ),
                     Container(
-                      width: MediaQuery.of(context).size.width*0.85,
-                      height: MediaQuery.of(context).size.height*0.06,
+                      width: MediaQuery.of(context).size.width*1,
+                      height: MediaQuery.of(context).size.height*0.07,
                       decoration: BoxDecoration(
                           border: Border(
                             top: BorderSide(width: 1.0, color: theme.shadowColor),
@@ -279,9 +379,12 @@ class _InternPageState extends State<InternPage> {
                                   child: Text(
                                     _selectedDate,
                                     textAlign: TextAlign.center,
-                                    style: theme.textTheme.headline3,
+                                    style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.height*0.02,
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
-                                  onTap: (){
+                                  onTap: () {
                                     _selectDate(context);
                                   },
                                 ),
@@ -290,12 +393,15 @@ class _InternPageState extends State<InternPage> {
                                 padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.1,right:MediaQuery.of(context).size.width*0.01,),
                                 child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: IconButton(
-                                      onPressed: (){
-                                        _selectDate(context);
-                                      },
-                                      tooltip: 'Tap to open date picker',
-                                      icon: Icon(Icons.calendar_today)),
+                                  child: Transform.scale(
+                                    scale: 0.7,
+                                    child: IconButton(
+                                        onPressed: (){
+                                          _selectDate(context);
+                                        },
+                                        tooltip: 'Tap to open date picker',
+                                        icon: Icon(Icons.calendar_today)),
+                                  ),
                                 ),
                               )
                             ],
@@ -303,16 +409,13 @@ class _InternPageState extends State<InternPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.015,
-                    ),
                     Container(
-                      width: MediaQuery.of(context).size.width*0.85,
+                      width: MediaQuery.of(context).size.width*1,
                       height: MediaQuery.of(context).size.height*0.1,
                       child: Row(
                         children: <Widget>[
                           Container(
-                              width: MediaQuery.of(context).size.width*0.4,
+                              width: MediaQuery.of(context).size.width*0.45,
                               height: MediaQuery.of(context).size.height*0.06,
                               decoration: BoxDecoration(
                                   border: Border(
@@ -341,10 +444,10 @@ class _InternPageState extends State<InternPage> {
                               )
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width*0.05,
+                            width: MediaQuery.of(context).size.width*0.1,
                           ),
                           Container(
-                              width: MediaQuery.of(context).size.width*0.4,
+                              width: MediaQuery.of(context).size.width*0.45,
                               height: MediaQuery.of(context).size.height*0.06,
                               decoration: BoxDecoration(
                                   border: Border(
@@ -375,63 +478,64 @@ class _InternPageState extends State<InternPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.25,
-                    ),
-                    Container(
-                        height: MediaQuery.of(context).size.height*0.02,
-                        width: MediaQuery.of(context).size.width*0.85,
-                        child: (_isEverythingOkay)
-                            ? Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            errorText,
-                            style: TextStyle(
-                              color: _isEverythingOkayColor,
-                              fontSize: 17,
-                            ),
-                          ),
-                        )
-                            : Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            errorText,
-                            style: TextStyle(
-                              color: _isEverythingOkayColor,
-                              fontSize: 17,
-                            ),
-                          ),
-                        )
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height*0.01,
-                    ),
-                    Container(
-                        height: MediaQuery.of(context).size.height*0.07,
-                        width: MediaQuery.of(context).size.width*0.85,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005),
-                          child: FloatingActionButton(
-                            elevation: 0,
-                            heroTag: "btnIntern",
-                            backgroundColor: theme.cardColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                checkEverything();
-                                if(errorText == "Done"){
-                                  Navigator.pop(context);
-                                }
-                              });
-                            },
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height*0.03,
+                          width: MediaQuery.of(context).size.width*0.85,
+                          child: (_isEverythingOkay)
+                              ? Align(
+                            alignment: Alignment.center,
                             child: Text(
-                              'Speichern',
-                              style: theme.textTheme.bodyText1,
+                              errorText,
+                              style: TextStyle(
+                                color: _isEverythingOkayColor,
+                                fontSize: 17,
+                              ),
                             ),
-                          ),
-                        )
+                          )
+                              : Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              errorText,
+                              style: TextStyle(
+                                color: _isEverythingOkayColor,
+                                fontSize: 17,
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.02),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height*0.09,
+                          width: MediaQuery.of(context).size.width*1,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005),
+                            child: FloatingActionButton(
+                              elevation: 0,
+                              heroTag: "btnIntern",
+                              backgroundColor: theme.cardColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  checkEverything();
+                                  if(errorText == "Done"){
+                                    //Navigator.pop(context);
+                                    saveToStorage();
+                                  }
+                                });
+                              },
+                              child: Text(
+                                'Speichern',
+                                style: theme.textTheme.bodyText1,
+                              ),
+                            ),
+                          )
+                      ),
                     ),
                   ],
                 ),
