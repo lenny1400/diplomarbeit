@@ -137,7 +137,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       height: MediaQuery.of(context).size.height*0.1,
                       child: TextButton(
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => LoginRegister()));
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => LoginRegister()));
                         },
                         style: TextButton.styleFrom(
                             onSurface: theme.backgroundColor,
@@ -153,7 +153,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   alignment: Alignment.center,
                                   child: IconTheme(
                                     data: new IconThemeData(
-                                        color: theme.shadowColor,
+                                        color: theme.cardColor,
                                         size: 60
                                     ),
                                     child: Icon(CupertinoIcons.person_alt),
@@ -182,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       alignment: Alignment.centerRight,
                                       child: IconTheme(
                                         data: new IconThemeData(
-                                            color: theme.shadowColor,
+                                            color: theme.cardColor,
                                             size: 35
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
@@ -230,7 +230,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   alignment: Alignment.center,
                                   child: IconTheme(
                                     data: new IconThemeData(
-                                        color: theme.shadowColor,
+                                        color: theme.cardColor,
                                         size: 60
                                     ),
                                     child: Icon(CupertinoIcons.moon_fill),
@@ -263,7 +263,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                           scale: 1.5,
                                           child: Switch(
                                             activeTrackColor: theme.cardColor,
-                                            activeColor: theme.shadowColor,
+                                            activeColor: theme.cardColor,
                                             inactiveTrackColor: theme.canvasColor,
                                             inactiveThumbColor: theme.scaffoldBackgroundColor,
                                             value: isSwitched,
@@ -310,7 +310,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   alignment: Alignment.center,
                                   child: IconTheme(
                                     data: new IconThemeData(
-                                        color: theme.shadowColor,
+                                        color: theme.cardColor,
                                         size: 60
                                     ),
                                     child: Icon(CupertinoIcons.bubble_left_bubble_right_fill),
@@ -349,7 +349,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       alignment: Alignment.center,
                                       child: IconTheme(
                                         data: new IconThemeData(
-                                            color: theme.shadowColor,
+                                            color: theme.cardColor,
                                             size: 35
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
@@ -387,7 +387,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   alignment: Alignment.center,
                                   child: IconTheme(
                                     data: new IconThemeData(
-                                        color: theme.shadowColor,
+                                        color: theme.cardColor,
                                         size: 60
                                     ),
                                     child: Icon(CupertinoIcons.bell_fill),
@@ -416,7 +416,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       alignment: Alignment.centerRight,
                                       child: IconTheme(
                                         data: new IconThemeData(
-                                            color: theme.shadowColor,
+                                            color: theme.cardColor,
                                             size: 35
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
@@ -454,7 +454,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   alignment: Alignment.center,
                                   child: IconTheme(
                                     data: new IconThemeData(
-                                        color: theme.shadowColor,
+                                        color: theme.cardColor,
                                         size: 60
                                     ),
                                     child: Icon(CupertinoIcons.mail_solid),
@@ -483,7 +483,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       alignment: Alignment.centerRight,
                                       child: IconTheme(
                                         data: new IconThemeData(
-                                            color: theme.shadowColor,
+                                            color: theme.cardColor,
                                             size: 35
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
@@ -521,7 +521,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   alignment: Alignment.center,
                                   child: IconTheme(
                                     data: new IconThemeData(
-                                        color: theme.shadowColor,
+                                        color: theme.cardColor,
                                         size: 60
                                     ),
                                     child: Icon(CupertinoIcons.info_circle_fill),
@@ -550,7 +550,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       alignment: Alignment.centerRight,
                                       child: IconTheme(
                                         data: new IconThemeData(
-                                            color: theme.shadowColor,
+                                            color: theme.cardColor,
                                             size: 35
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
@@ -574,12 +574,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Container(
-                        width: MediaQuery.of(context).size.width*0.4,
+                        width: MediaQuery.of(context).size.width*0.5,
                         height: MediaQuery.of(context).size.height*0.06,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.shadowColor,
-                            onPrimary: theme.shadowColor,
+                            primary: theme.cardColor,
+                            onPrimary: theme.cardColor,
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(10.0),
+                            ),
                           ),
                           onPressed: (){
                             setState(() {
