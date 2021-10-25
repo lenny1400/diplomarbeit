@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/screens/home/Screens_Home/all_tasks.dart';
 
-class HomeBet450N550 extends StatefulWidget {
-  const HomeBet450N550({Key? key, required this.constraint}) : super(key: key);
+class HomeBet400N450 extends StatefulWidget {
+  const HomeBet400N450({Key? key, required this.constraint}) : super(key: key);
 
   final constraint;
 
   @override
-  _HomeBet450N550State createState() => _HomeBet450N550State();
+  _HomeBet400N450State createState() => _HomeBet400N450State();
 }
 
-class _HomeBet450N550State extends State<HomeBet450N550> {
+class _HomeBet400N450State extends State<HomeBet400N450> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -48,9 +48,9 @@ class _HomeBet450N550State extends State<HomeBet450N550> {
                   child: Text(
                     'Not finished',
                     style: TextStyle(
-                      color: theme.dividerColor,
-                      fontSize: constraintX*0.04,
-                      fontWeight: FontWeight.bold
+                        color: theme.dividerColor,
+                        fontSize: constraintX*0.04,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                 ),
@@ -167,67 +167,9 @@ class _HomeBet450N550State extends State<HomeBet450N550> {
                   child: Text(
                     'Finished Contracts',
                     style: TextStyle(
-                      color: theme.dividerColor,
+                        color: theme.dividerColor,
                         fontSize: constraintX*0.04,
                         fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: constraintX*0.09, right: constraintX*0.05,top: constraintX*0.015,bottom: constraintX*0.015),
-                child: Container(
-                  height: constraintX*0.07,
-                  width: MediaQuery.of(context).size.width*1,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          onPrimary: theme.canvasColor,
-                          primary: theme.backgroundColor,
-                          side: BorderSide(
-                            width: 1,
-                            color: theme.dividerColor,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)
-                          )
-                      ),
-                      onPressed: (){},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: constraintX*0.01),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Adidas-12-08-Server",
-                                  style: TextStyle(
-                                    color: theme.dividerColor,
-                                    fontSize: constraintX*0.025,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            flex: 3,
-                          ),
-                          Flexible(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                "Tap to see",
-                                style: TextStyle(
-                                    color: theme.dividerColor,
-                                    fontSize: constraintX*0.015
-                                ),
-                              ),
-                            ),
-                            flex: 1,
-                          )
-                        ],
-                      ),
                     ),
                   ),
                 ),

@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/screens/home/Screens_Home/all_tasks.dart';
 
-class HomeLarger850 extends StatefulWidget {
-  const HomeLarger850({Key? key, required this.constraint}) : super(key: key);
+class HomeBet700N750 extends StatefulWidget {
+  const HomeBet700N750({Key? key, required this.constraint}) : super(key: key);
 
   final constraint;
 
   @override
-  _HomeLarger850State createState() => _HomeLarger850State();
+  _HomeBet700N750State createState() => _HomeBet700N750State();
 }
 
-class _HomeLarger850State extends State<HomeLarger850> {
+class _HomeBet700N750State extends State<HomeBet700N750> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -100,8 +100,8 @@ class _HomeLarger850State extends State<HomeLarger850> {
                               child: Text(
                                 "Tap to see",
                                 style: TextStyle(
-                                  color: theme.dividerColor,
-                                  fontSize: constraintX*0.012
+                                    color: theme.dividerColor,
+                                    fontSize: constraintX*0.012
                                 ),
                               ),
                             ),
