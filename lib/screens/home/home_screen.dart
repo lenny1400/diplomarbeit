@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../themes.dart';
-import 'Screens_Home/settings.dart';
+import 'settings.dart';
 import 'home_widgets/responsive_mobile.dart';
 
 Future main()async {
