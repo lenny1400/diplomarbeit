@@ -426,7 +426,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
+                    padding: EdgeInsets.only(left: _cons2, right: _cons2,top: _cons1,),
                     child: Container(
                       height: _cons5,
                       child: TextButton(

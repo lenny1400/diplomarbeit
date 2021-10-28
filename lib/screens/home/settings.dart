@@ -85,43 +85,43 @@ class _SettingsPageState extends State<SettingsPage> {
 
             if(constraints.maxHeight < 400){
               final _cons1 = mxHeight*0.02;
-              final _cons2 = mxHeight*0.03;
-              final _cons3 = mxHeight*0.05;
-              final _cons4 = mxHeight*0.07;
-              final _cons5 = mxHeight*0.075;
+              final _cons2 = mxHeight*0.035;
+              final _cons3 = mxHeight*0.06;
+              final _cons4 = mxHeight*0.09;
+              final _cons5 = mxHeight*0.12;
               return ResponsiveSettings(constraints: mxHeight,cons1: _cons1,cons2: _cons2,cons3: _cons3,cons4: _cons4,cons5: _cons5,);
             }else if(constraints.maxHeight > 400 && constraints.maxHeight < 500){
-              final _cons1 = mxHeight*0.015;
-              final _cons2 = mxHeight*0.02;
-              final _cons3 = mxHeight*0.035;
-              final _cons4 = mxHeight*0.05;
-              final _cons5 = mxHeight*0.075;
+              final _cons1 = mxHeight*0.02;
+              final _cons2 = mxHeight*0.03;
+              final _cons3 = mxHeight*0.05;
+              final _cons4 = mxHeight*0.09;
+              final _cons5 = mxHeight*0.11;
               return ResponsiveSettings(constraints: mxHeight,cons1: _cons1,cons2: _cons2,cons3: _cons3,cons4: _cons4,cons5: _cons5,);
             }else if(constraints.maxHeight > 500 && constraints.maxHeight < 600){
-              final _cons1 = mxHeight*0.02;
-              final _cons2 = mxHeight*0.025;
-              final _cons3 = mxHeight*0.04;
-              final _cons4 = mxHeight*0.06;
-              final _cons5 = mxHeight*0.075;
+              final _cons1 = mxHeight*0.01;
+              final _cons2 = mxHeight*0.04;
+              final _cons3 = mxHeight*0.045;
+              final _cons4 = mxHeight*0.09;
+              final _cons5 = mxHeight*0.115;
               return ResponsiveSettings(constraints: mxHeight,cons1: _cons1,cons2: _cons2,cons3: _cons3,cons4: _cons4,cons5: _cons5,);
             }else if(constraints.maxHeight > 600 && constraints.maxHeight < 700){
               final _cons1 = mxHeight*0.015;
-              final _cons2 = mxHeight*0.02;
-              final _cons3 = mxHeight*0.035;
-              final _cons4 = mxHeight*0.05;
-              final _cons5 = mxHeight*0.075;
+              final _cons2 = mxHeight*0.035;
+              final _cons3 = mxHeight*0.05;
+              final _cons4 = mxHeight*0.08;
+              final _cons5 = mxHeight*0.105;
               return ResponsiveSettings(constraints: mxHeight,cons1: _cons1,cons2: _cons2,cons3: _cons3,cons4: _cons4,cons5: _cons5,);
             }else if(constraints.maxHeight > 700 && constraints.maxHeight < 800) {
               final _cons1 = mxHeight*0.015;
-              final _cons2 = mxHeight*0.02;
-              final _cons3 = mxHeight*0.035;
-              final _cons4 = mxHeight*0.05;
-              final _cons5 = mxHeight*0.075;
+              final _cons2 = mxHeight*0.03;
+              final _cons3 = mxHeight*0.045;
+              final _cons4 = mxHeight*0.07;
+              final _cons5 = mxHeight*0.01;
               return ResponsiveSettings(constraints: mxHeight,cons1: _cons1,cons2: _cons2,cons3: _cons3,cons4: _cons4,cons5: _cons5,);
             }else{
-              final _cons1 = mxHeight*0.01;
+              final _cons1 = mxHeight*0.015;
               final _cons2 = mxHeight*0.03; //padding left
-              final _cons3 = mxHeight*0.045; //fontsize and padding
+              final _cons3 = mxHeight*0.04; //fontsize and padding
               final _cons4 = mxHeight*0.075; //mostly icon size
               final _cons5 = mxHeight*0.1; //box sizes of elements
               return ResponsiveSettings(constraints: mxHeight,cons1: _cons1,cons2: _cons2,cons3: _cons3,cons4: _cons4,cons5: _cons5,);
