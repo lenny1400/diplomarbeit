@@ -581,7 +581,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                 ),
                                 labelText: "Phone Number",
                                 labelStyle: TextStyle(
-                                    color: theme.accentColor
+                                    color: theme.cardColor
                                 ),
                                 hintText: "Enter phone number"
                             ),
