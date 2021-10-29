@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../themes.dart';
 import 'settings.dart';
 import 'home_widgets/responsive_mobile.dart';
+import 'package:get/get.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text("Home",
+        title: Text("ho_appbar1".tr,
           style: theme.textTheme.caption,
         ),
         elevation: 0,
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage(title: 'Settings',)));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => SettingsPage(title: 'se_appbar1'.tr,)));
                 },
                 child: const Icon(
                     Icons.settings

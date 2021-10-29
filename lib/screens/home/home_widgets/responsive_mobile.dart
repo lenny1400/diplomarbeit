@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/screens/home/all_tasks.dart';
+import 'package:get/get.dart';
 
 class MobileHome extends StatefulWidget {
   const MobileHome({
@@ -76,7 +77,7 @@ class _MobileHomeState extends State<MobileHome> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Not finished',
+                    'ho_title1'.tr,
                     style: TextStyle(
                         color: theme.dividerColor,
                         fontSize: _cons3,
@@ -128,7 +129,7 @@ class _MobileHomeState extends State<MobileHome> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                "Tap to see",
+                                "ho_buttonText1".tr,
                                 style: TextStyle(
                                     color: theme.dividerColor,
                                     fontSize: _cons1
@@ -165,7 +166,7 @@ class _MobileHomeState extends State<MobileHome> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: _cons2),
                                 child: Text(
-                                  "See all",
+                                  "ho_subtitle1".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: theme.dividerColor,
@@ -195,7 +196,7 @@ class _MobileHomeState extends State<MobileHome> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Finished Tasks',
+                    'ho_title2'.tr,
                     style: TextStyle(
                         color: theme.dividerColor,
                         fontSize: _cons3,
@@ -254,7 +255,7 @@ class _MobileHomeState extends State<MobileHome> {
                                   child: Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                      "Tap to see",
+                                      "ho_buttonText1".tr,
                                       style: TextStyle(
                                           color: theme.dividerColor,
                                           fontSize: _cons1
@@ -294,7 +295,7 @@ class _MobileHomeState extends State<MobileHome> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: _cons2),
                                 child: Text(
-                                  "See all",
+                                  "ho_subtitle1".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: theme.dividerColor,

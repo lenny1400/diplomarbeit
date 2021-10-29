@@ -6,6 +6,7 @@ import 'package:simple_nav_bar/screens/home/home_widgets/settings_widget/respons
 import 'package:simple_nav_bar/screens/login/login_register.dart';
 import '../../themes.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();

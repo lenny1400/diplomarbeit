@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:simple_nav_bar/language.dart';
 import 'package:simple_nav_bar/nav.dart';
 import 'package:simple_nav_bar/screens/login/login_register.dart';
 import 'package:simple_nav_bar/themes.dart';
@@ -39,7 +41,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bottom Navigation Bar Tutorial',
       //home: Nav(),
@@ -47,6 +49,9 @@ class _MyAppState extends State<MyApp> {
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
+
+      translations: Languages(),
+      locale: Get.deviceLocale,
     );
   }
 }

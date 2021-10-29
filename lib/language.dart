@@ -19,10 +19,10 @@ class Languages extends Translations {
 
       //Home
       'ho_appbar1':'Home',
-      'ho_smallText':'working',
+      'ho_buttonText1':'Tap to see',
       'ho_title1':'Not finished',
       'ho_title2':'Finished',
-      'ho_title3':'See all',
+      'ho_subtitle1':'See all',
 
     },
     'de_DE': {
@@ -40,11 +40,11 @@ class Languages extends Translations {
       'se_dialogText':'Wähle deine Sprache',
 
       //Home
-      'ho_appbar1':'Home',
-      'ho_smallText':'arbeiten',
+      'ho_appbar1':'Start',
+      'ho_buttonText1':'Antippen um zu sehen',
       'ho_title1':'Nicht abgeschlossen',
       'ho_title2':'Abgeschlossen',
-      'ho_title3':'Alle anzeigen',
+      'ho_subtitle1':'Alle anzeigen',
     }
   };
 }
