@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/widgets/task_item.dart';
 
-import '../../../themes.dart';
+import '../../themes.dart';
 
 class AllTasks extends StatefulWidget {
   const AllTasks({Key? key, required this.title}) : super(key: key);

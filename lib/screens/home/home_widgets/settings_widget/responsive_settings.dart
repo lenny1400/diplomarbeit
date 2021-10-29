@@ -1,84 +1,48 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/screens/login/login_register.dart';
-import '../../../themes.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:simple_nav_bar/screens/login/login_register.dart';
 
-Future main()async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  await GetStorage.init();
+import '../../../../themes.dart';
 
-  runApp(Settings(title: 'Settings',));
-}
+class ResponsiveSettings extends StatefulWidget {
+  const ResponsiveSettings({
+    Key? key,
+    required this.constraints,
+    required this.cons1,
+    required this.cons2,
+    required this.cons3,
+    required this.cons4,
+    required this.cons5,
+  }) : super(key: key);
 
-class Settings extends StatefulWidget {
-  const Settings({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _SettingsState createState() => _SettingsState();
-}
-
-class _SettingsState extends State<Settings> {
-
+  final constraints;
+  final cons1;
+  final cons2;
+  final cons3;
+  final cons4;
+  final cons5;
 
   @override
-  void initState() {
-    super.initState();
-    currentTheme.addListener(() {
-      if (this.mounted) { // check whether the state object is in tree
-        setState(() {
-          // make changes here
-        });
-      }
-    });
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SettingsPage(title: 'Settings'),
-      debugShowCheckedModeBanner: false,
-      theme: CustomTheme.lightTheme,
-      darkTheme: CustomTheme.darkTheme,
-      themeMode: currentTheme.currentTheme,
-    );
-  }
+  _ResponsiveSettingsState createState() => _ResponsiveSettingsState();
 }
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key,required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _SettingsPageState createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
+class _ResponsiveSettingsState extends State<ResponsiveSettings> {
 
   final switchData = GetStorage();
   bool isSwitched = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     if(switchData.read('isSwitched') != null)
-      {
-        setState(() {
-          isSwitched = switchData.read('isSwitched');
-        });
-      }
+    {
+      setState(() {
+        isSwitched = switchData.read('isSwitched');
+      });
+    }
   }
 
   void signOut(){
@@ -99,42 +63,46 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final mdHeight = MediaQuery.of(context).size.height*1;
+    final mdWidth = MediaQuery.of(context).size.width*1;
+    //constants
+    final _cons1 = widget.cons1;
+    final _cons2 = widget.cons2;
+    final _cons3 = widget.cons3;
+    final _cons4 = widget.cons4;
+    final _cons5 = widget.cons5;
+    // const main size constraint
+    final constraintX = widget.constraints;
 
-    return Scaffold(
-      backgroundColor: theme.backgroundColor,
-        appBar: AppBar(
-          title: Text(widget.title,
-          style: theme.textTheme.caption,
-      ),
-          elevation: 0,
-    ),
-    body: Center(
+    return Center(
       child: FittedBox(
         fit: BoxFit.fitHeight,
         alignment: Alignment.center,
         child: Container(
-          width: MediaQuery.of(context).size.width*1,
-          height: MediaQuery.of(context).size.height*1,
+          width: mdWidth,
+          height: mdHeight,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 40)),
               Padding(
-                padding: EdgeInsets.only(left: 40),
+                padding: EdgeInsets.only(top: _cons4,left: _cons3),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Account',
-                    style: theme.textTheme.caption,
+                    style: TextStyle(
+                      fontSize: _cons2,
+                      color: theme.dividerColor,
+                      fontWeight: FontWeight.w500
+                    ),
                   ),
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 20)),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 40,right: 20),
+                    padding: EdgeInsets.only(left: _cons2, right: _cons2, top: _cons1),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*0.1,
+                      height: _cons5,
                       child: TextButton(
                         onPressed: (){
                           //Navigator.push(context, MaterialPageRoute(builder: (_) => LoginRegister()));
@@ -154,7 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: IconTheme(
                                     data: new IconThemeData(
                                         color: theme.cardColor,
-                                        size: 60
+                                        size: _cons4
                                     ),
                                     child: Icon(CupertinoIcons.person_alt),
                                   ),
@@ -164,17 +132,21 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10,top: 5,bottom: 5),
+                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "Romeo Colic",
-                                          style: theme.textTheme.headline5,
+                                          style: TextStyle(
+                                            color: theme.dividerColor,
+                                            fontSize: _cons2,
+                                            fontWeight: FontWeight.w500
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -183,7 +155,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       child: IconTheme(
                                         data: new IconThemeData(
                                             color: theme.cardColor,
-                                            size: 35
+                                            size: _cons3
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
                                       ),
@@ -200,20 +172,24 @@ class _SettingsPageState extends State<SettingsPage> {
                   )
               ),
               Padding(
-                padding: EdgeInsets.only(left: 40, top: 20,bottom: 20),
+                padding: EdgeInsets.only(top: _cons3,left: _cons3),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Settings',
-                    style: theme.textTheme.caption,
+                    style: TextStyle(
+                        fontSize: _cons2,
+                        color: theme.dividerColor,
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
                 ),
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 40,right: 20),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*0.1,
+                      height: _cons5,
                       child: TextButton(
                         onPressed: (){},
                         style: TextButton.styleFrom(
@@ -231,7 +207,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: IconTheme(
                                     data: new IconThemeData(
                                         color: theme.cardColor,
-                                        size: 60
+                                        size: _cons4
                                     ),
                                     child: Icon(CupertinoIcons.moon_fill),
                                   ),
@@ -241,29 +217,33 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10,top: 5,bottom: 5),
+                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "Theme",
-                                          style: theme.textTheme.headline5,
+                                          style: TextStyle(
+                                              color: theme.dividerColor,
+                                              fontSize: _cons2,
+                                              fontWeight: FontWeight.w500
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 30),
+                                        padding: EdgeInsets.only(left: _cons2),
                                         child: Transform.scale(
                                           scale: 1.5,
                                           child: Switch(
-                                            activeTrackColor: theme.cardColor,
-                                            activeColor: theme.cardColor,
+                                            activeTrackColor: theme.scaffoldBackgroundColor,
+                                            activeColor: theme.dividerColor,
                                             inactiveTrackColor: theme.canvasColor,
                                             inactiveThumbColor: theme.scaffoldBackgroundColor,
                                             value: isSwitched,
@@ -291,9 +271,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 40,right: 20),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*0.1,
+                      height: _cons5,
                       child: TextButton(
                         onPressed: (){},
                         style: TextButton.styleFrom(
@@ -311,7 +291,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: IconTheme(
                                     data: new IconThemeData(
                                         color: theme.cardColor,
-                                        size: 60
+                                        size: _cons4
                                     ),
                                     child: Icon(CupertinoIcons.bubble_left_bubble_right_fill),
                                   ),
@@ -321,27 +301,34 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10,top: 5,bottom: 5),
+                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "Language",
-                                          style: theme.textTheme.headline5,
+                                          style: TextStyle(
+                                              color: theme.dividerColor,
+                                              fontSize: _cons2,
+                                              fontWeight: FontWeight.w500
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "English",
-                                          style: theme.textTheme.subtitle1,
+                                          style: TextStyle(
+                                              color: theme.cardColor,
+                                              fontSize: _cons2/1.35,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -350,7 +337,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       child: IconTheme(
                                         data: new IconThemeData(
                                             color: theme.cardColor,
-                                            size: 35
+                                            size: _cons3
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
                                       ),
@@ -368,9 +355,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 40,right: 20),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*0.1,
+                      height: _cons5,
                       child: TextButton(
                         onPressed: (){},
                         style: TextButton.styleFrom(
@@ -388,7 +375,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: IconTheme(
                                     data: new IconThemeData(
                                         color: theme.cardColor,
-                                        size: 60
+                                        size: _cons4
                                     ),
                                     child: Icon(CupertinoIcons.bell_fill),
                                   ),
@@ -398,17 +385,21 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10,top: 5,bottom: 5),
+                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "Notifications",
-                                          style: theme.textTheme.headline5,
+                                          style: TextStyle(
+                                              color: theme.dividerColor,
+                                              fontSize: _cons2,
+                                              fontWeight: FontWeight.w500
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -417,7 +408,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       child: IconTheme(
                                         data: new IconThemeData(
                                             color: theme.cardColor,
-                                            size: 35
+                                            size: _cons3
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
                                       ),
@@ -435,9 +426,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 40,right: 20),
+                    padding: EdgeInsets.only(left: _cons2, right: _cons2,top: _cons1,),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*0.1,
+                      height: _cons5,
                       child: TextButton(
                         onPressed: (){},
                         style: TextButton.styleFrom(
@@ -455,7 +446,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: IconTheme(
                                     data: new IconThemeData(
                                         color: theme.cardColor,
-                                        size: 60
+                                        size: _cons4
                                     ),
                                     child: Icon(CupertinoIcons.mail_solid),
                                   ),
@@ -465,17 +456,21 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10,top: 5,bottom: 5),
+                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "Support",
-                                          style: theme.textTheme.headline5,
+                                          style: TextStyle(
+                                              color: theme.dividerColor,
+                                              fontSize: _cons2,
+                                              fontWeight: FontWeight.w500
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -484,7 +479,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       child: IconTheme(
                                         data: new IconThemeData(
                                             color: theme.cardColor,
-                                            size: 35
+                                            size: _cons3
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
                                       ),
@@ -502,9 +497,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 40,right: 20),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*0.1,
+                      height: _cons5,
                       child: TextButton(
                         onPressed: (){},
                         style: TextButton.styleFrom(
@@ -522,7 +517,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: IconTheme(
                                     data: new IconThemeData(
                                         color: theme.cardColor,
-                                        size: 60
+                                        size: _cons4
                                     ),
                                     child: Icon(CupertinoIcons.info_circle_fill),
                                   ),
@@ -532,17 +527,21 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10,top: 5,bottom: 5),
+                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
                                           "Help",
-                                          style: theme.textTheme.headline5,
+                                          style: TextStyle(
+                                              color: theme.dividerColor,
+                                              fontSize: _cons2,
+                                              fontWeight: FontWeight.w500
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -551,7 +550,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       child: IconTheme(
                                         data: new IconThemeData(
                                             color: theme.cardColor,
-                                            size: 35
+                                            size: _cons3
                                         ),
                                         child: Icon(Icons.keyboard_arrow_right_sharp),
                                       ),
@@ -570,12 +569,12 @@ class _SettingsPageState extends State<SettingsPage> {
               Expanded(
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    padding: EdgeInsets.only(top: _cons2,),
                     child: Align(
                       alignment: Alignment.center,
                       child: Container(
-                        width: MediaQuery.of(context).size.width*0.5,
-                        height: MediaQuery.of(context).size.height*0.06,
+                        width: mdWidth*0.5,
+                        height: _cons4,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: theme.cardColor,
@@ -590,8 +589,12 @@ class _SettingsPageState extends State<SettingsPage> {
                             });
                           },
                           child: Text(
-                              "Log out",
-                            style: theme.textTheme.subtitle2,
+                            "Log out",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: _cons2*1.2
+                            ),
                           ),
                         ),
                       ),
@@ -601,10 +604,8 @@ class _SettingsPageState extends State<SettingsPage> {
               )
             ],
           ),
-        )
+        ),
       ),
-    ),
     );
   }
 }
-
