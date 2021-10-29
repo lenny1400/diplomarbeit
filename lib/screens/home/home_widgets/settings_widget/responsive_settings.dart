@@ -57,10 +57,20 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
     },
   ];
 
+
   showLocaleDialog(BuildContext context) {
+    final theme = Theme.of(context);
+
     showDialog(context: context,
+
       builder: (_) => AlertDialog(
-        title: Text("se_dialogText".tr),
+        backgroundColor: theme.backgroundColor,
+        title: Text(
+          "se_dialogText".tr,
+          style: TextStyle(
+            color: theme.shadowColor,
+          ),
+        ),
         content: Container(
           width: double.maxFinite,
           child: ListView.separated(
@@ -69,7 +79,12 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                   InkWell(
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(locales[index]['name']),
+                      child: Text(
+                          locales[index]['name'],
+                        style: TextStyle(
+                          color: theme.cardColor,
+                        ),
+                      ),
                     ),
                     onTap: () => updateLocale(
                         locales[index]['locale'],
@@ -78,7 +93,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                   ),
               separatorBuilder: (context, index) =>
                   Divider(
-                    color: Colors.black,
+                    color: theme.dividerColor,
                   ),
               itemCount: 2
           ),
@@ -400,11 +415,6 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     ),
                   )
               ),
-
-
-
-
-
               Flexible(
                   child: Padding(
                     padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),

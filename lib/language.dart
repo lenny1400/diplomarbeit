@@ -24,6 +24,21 @@ class Languages extends Translations {
       'ho_title2':'Finished',
       'ho_subtitle1':'See all',
 
+      //AllTasks
+      'at_appbar1':'All Tasks',
+
+      //Time
+      'ti_appbar1':'Time',
+      'ti_arrive':'Arrive',
+      'ti_leave':'Leave',
+      'ti_title1':'Currently working',
+      'ti_buttonText1':'Edit',
+
+      'ti_appbar2':'Edit Time',
+      'ti_appbar2':'Edit Time',
+      'ti_appbar2':'Edit Time',
+      'ti_appbar2':'Edit Time',
+
     },
     'de_DE': {
       //Settings
@@ -45,6 +60,10 @@ class Languages extends Translations {
       'ho_title1':'Nicht abgeschlossen',
       'ho_title2':'Abgeschlossen',
       'ho_subtitle1':'Alle anzeigen',
+
+      //AllTasks
+      'at_appbar1':'Alle Aufgaben',
+
     }
   };
 }
