@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_nav_bar/main.dart';
 import 'package:simple_nav_bar/nav.dart';
 import 'package:simple_nav_bar/screens/login/register.dart';
 import 'package:simple_nav_bar/themes.dart';
@@ -86,7 +87,7 @@ class _MainPageState extends State<MainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MyApp()),(route) => false,);
       }
     });
   }
