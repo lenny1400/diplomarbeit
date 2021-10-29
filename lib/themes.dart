@@ -53,7 +53,7 @@ class CustomTheme with ChangeNotifier {
       scaffoldBackgroundColor: Colors.grey.shade800,
       cardColor: Color(0xFF5D5D5D), // new button color
       canvasColor: Colors.grey.shade400, //Button onPrimary/click effect
-      dividerColor: Colors.white, //textcolor
+      dividerColor: Colors.white, //text color
       textTheme: TextTheme(
         headline1: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold, decoration: TextDecoration.underline,), //forgot password
         headline2: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400), //create new Account
