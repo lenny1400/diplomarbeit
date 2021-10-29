@@ -33,11 +33,12 @@ class Languages extends Translations {
       'ti_leave':'Leave',
       'ti_title1':'Currently working',
       'ti_buttonText1':'Edit',
-
       'ti_appbar2':'Edit Time',
-      'ti_appbar2':'Edit Time',
-      'ti_appbar2':'Edit Time',
-      'ti_appbar2':'Edit Time',
+      'ti_initialTime':'Initial Time',
+      'ti_hours':'Hours',
+      'ti_minutes':'Minutes',
+      'ti_seconds':'Seconds',
+      'ti_buttonText2':'Check Time',
 
     },
     'de_DE': {
@@ -64,6 +65,18 @@ class Languages extends Translations {
       //AllTasks
       'at_appbar1':'Alle Aufgaben',
 
+      //Time
+      'ti_appbar1':'Zeit',
+      'ti_arrive':'ankommen',
+      'ti_leave':'verlassen',
+      'ti_title1':'derzeit arbeitend',
+      'ti_buttonText1':'Bearbeiten',
+      'ti_appbar2':'Zeit editieren',
+      'ti_initialTime':'Anfangszeitpunkt',
+      'ti_hours':'Stunden',
+      'ti_minutes':'Minuten',
+      'ti_seconds':'Sekunden',
+      'ti_buttonText2':'Uhrzeit kontrollieren',
     }
   };
 }
