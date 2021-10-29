@@ -67,6 +67,7 @@ class _TasksPageState extends State<TasksPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
         title: Text(widget.title,

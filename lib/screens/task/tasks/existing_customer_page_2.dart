@@ -1,9 +1,11 @@
 import 'dart:io' as io;
 
 import 'package:camera/camera.dart';
+import 'package:signature/signature.dart';
 import 'package:simple_nav_bar/screens/task/camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_nav_bar/screens/task/signature/signature.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:flutter/services.dart';
 
@@ -354,12 +356,6 @@ class _CreateTaskState extends State<CreateTask> {
                             ),
                             onPressed: () {
                               setState(() {
-                                if(errorText == "Done"){
-                                  var count = 0;
-                                  Navigator.popUntil(context, (route) {
-                                    return count++ == pop;
-                                  });
-                                }
 
                                 controllEverything();
 
@@ -367,10 +363,21 @@ class _CreateTaskState extends State<CreateTask> {
                                   errorText = "Done";
                                   _isEverythingOkayColor = Colors.green;
                                 }
+
+                                if(errorText == "Done"){
+
+                                  pop = pop + 1;
+
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => SignatureApp(pop: pop)));
+                                  //var count = 0;
+                                  //Navigator.popUntil(context, (route) {return count++ == pop;});
+                                }
+
                               });
+
                             },
                             child: Text(
-                              "Speichern",
+                              "Next",
                               style: theme.textTheme.bodyText1,
                             ),
                           ),
