@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actionsIconTheme: IconThemeData(
             size: 30.0,
             color: theme.shadowColor,
-            opacity: 10.0
+            opacity: 12.0
         ),
       ),
       body: LayoutBuilder(
