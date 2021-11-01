@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:simple_nav_bar/screens/login/login_register.dart';
 
@@ -43,6 +44,67 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
         isSwitched = switchData.read('isSwitched');
       });
     }
+  }
+
+  final List locales =[
+    {
+      'name': 'English',
+      'locale': Locale('en', 'US')
+    },
+    {
+      'name': 'Deutsch',
+      'locale': Locale('de', 'DE')
+    },
+  ];
+
+
+  showLocaleDialog(BuildContext context) {
+    final theme = Theme.of(context);
+
+    showDialog(context: context,
+
+      builder: (_) => AlertDialog(
+        backgroundColor: theme.backgroundColor,
+        title: Text(
+          "se_dialogText".tr,
+          style: TextStyle(
+            color: theme.shadowColor,
+          ),
+        ),
+        content: Container(
+          width: double.maxFinite,
+          child: ListView.separated(
+            shrinkWrap: true,
+              itemBuilder: (context, index) =>
+                  InkWell(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                          locales[index]['name'],
+                        style: TextStyle(
+                          color: theme.cardColor,
+                        ),
+                      ),
+                    ),
+                    onTap: () => updateLocale(
+                        locales[index]['locale'],
+                        context
+                    ),
+                  ),
+              separatorBuilder: (context, index) =>
+                  Divider(
+                    color: theme.dividerColor,
+                  ),
+              itemCount: 2
+          ),
+        ),
+      ),
+    );
+  }
+
+  updateLocale(Locale locale, BuildContext context){
+    Navigator.of(context).pop();
+    Get.updateLocale(locale);
   }
 
   void signOut(){
@@ -89,7 +151,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Account',
+                    'se_title1'.tr,
                     style: TextStyle(
                       fontSize: _cons2,
                       color: theme.dividerColor,
@@ -176,7 +238,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Settings',
+                    'se_title2'.tr,
                     style: TextStyle(
                         fontSize: _cons2,
                         color: theme.dividerColor,
@@ -226,7 +288,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                       child: Padding(
                                         padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
-                                          "Theme",
+                                          "se_subtitle1".tr,
                                           style: TextStyle(
                                               color: theme.dividerColor,
                                               fontSize: _cons2,
@@ -275,7 +337,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     child: Container(
                       height: _cons5,
                       child: TextButton(
-                        onPressed: (){},
+                        onPressed: () => showLocaleDialog(context),
                         style: TextButton.styleFrom(
                             onSurface: theme.backgroundColor,
                             primary: theme.backgroundColor
@@ -310,7 +372,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                       child: Padding(
                                         padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
-                                          "Language",
+                                          "se_subtitle2".tr,
                                           style: TextStyle(
                                               color: theme.dividerColor,
                                               fontSize: _cons2,
@@ -324,10 +386,10 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                       child: Padding(
                                         padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
-                                          "English",
+                                          "se_select".tr,
                                           style: TextStyle(
-                                              color: theme.cardColor,
-                                              fontSize: _cons2/1.35,
+                                            color: theme.cardColor,
+                                            fontSize: _cons2/1.35,
                                           ),
                                         ),
                                       ),
@@ -394,7 +456,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                       child: Padding(
                                         padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
-                                          "Notifications",
+                                          "se_subtitle3".tr,
                                           style: TextStyle(
                                               color: theme.dividerColor,
                                               fontSize: _cons2,
@@ -465,7 +527,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                       child: Padding(
                                         padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
-                                          "Support",
+                                          "se_subtitle4".tr,
                                           style: TextStyle(
                                               color: theme.dividerColor,
                                               fontSize: _cons2,
@@ -536,7 +598,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                       child: Padding(
                                         padding: EdgeInsets.only(left: _cons1),
                                         child: Text(
-                                          "Help",
+                                          "se_subtitle5".tr,
                                           style: TextStyle(
                                               color: theme.dividerColor,
                                               fontSize: _cons2,
@@ -589,7 +651,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                             });
                           },
                           child: Text(
-                            "Log out",
+                            "se_logout".tr,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,

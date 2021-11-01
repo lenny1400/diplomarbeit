@@ -4,8 +4,8 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../themes.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -42,8 +42,10 @@ class _TimeState extends State<Time> {
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
+
     return MaterialApp(
-      home: TimePage(title: 'Time'),
+      home: TimePage(title: 'ti_appbar1'.tr),
       title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
@@ -52,6 +54,10 @@ class _TimeState extends State<Time> {
     );
   }
 
+  updateLocale(Locale locale, BuildContext context){
+    Navigator.of(context).pop();
+    Get.updateLocale(locale);
+  }
 }
 
 
@@ -77,9 +83,10 @@ class _TimePageState extends State<TimePage> {
     return formatter.format(date);
   }
 
-  var dayofweek; //= DateFormat('EEEE', ).format(DateTime.now());
+  //var dayofweek; //= DateFormat('EEEE', ).format(DateTime.now());
+  var dayofweek = DateFormat.EEEE(Get.locale.toString()).format(DateTime.now());
   var dayofmonth = DateTime.now().day;
-  var month = DateFormat('MMMM').format(DateTime.now());
+  var month = DateFormat.MMMM(Get.locale.toString()).format(DateTime.now());
 
   //Buttons
   bool btnArrive = false;
@@ -237,7 +244,7 @@ class _TimePageState extends State<TimePage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width*1,
-                  height: MediaQuery.of(context).size.height*0.2,
+                  height: MediaQuery.of(context).size.height*0.225,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,7 +285,7 @@ class _TimePageState extends State<TimePage> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Arrive",
+                                  "ti_arrive".tr,
                                   style: TextStyle(
                                     color: theme.shadowColor,
                                     fontFamily: 'Moon',
@@ -327,7 +334,7 @@ class _TimePageState extends State<TimePage> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Leave",
+                                  "ti_leave".tr,
                                   style: TextStyle(
                                     color: theme.shadowColor,
                                     fontFamily: 'Moon',
@@ -351,7 +358,7 @@ class _TimePageState extends State<TimePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'Currently working',
+                        'ti_title1'.tr,
                         style: TextStyle(
                           color: theme.shadowColor,
                           fontSize: MediaQuery.of(context).size.height*0.03,
@@ -381,7 +388,7 @@ class _TimePageState extends State<TimePage> {
                             Navigator.push(context,MaterialPageRoute(builder: (context) => EditTime(time: currentlyWorking,)),
                             );
                           },
-                          child: Text("Edit",style: TextStyle(fontSize: MediaQuery.of(context).size.height*0.02),),
+                          child: Text("ti_buttonText1".tr,style: TextStyle(fontSize: MediaQuery.of(context).size.height*0.02),),
                           backgroundColor: theme.cardColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -441,7 +448,7 @@ class _EditTimeState extends State<EditTime> {
       backgroundColor: theme.backgroundColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Edit Time",
+        title: Text("ti_appbar2".tr,
           style: theme.textTheme.caption,
         ),
         elevation: 0,
@@ -462,7 +469,7 @@ class _EditTimeState extends State<EditTime> {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "Initial Time",
+                          "ti_initialTime".tr,
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height*0.06
                           ),
@@ -489,7 +496,7 @@ class _EditTimeState extends State<EditTime> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                    "Hours",
+                                    "ti_hours".tr,
                                   style: TextStyle(
                                     fontSize: MediaQuery.of(context).size.height*0.05
                                   ),
@@ -514,7 +521,7 @@ class _EditTimeState extends State<EditTime> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Minutes",
+                                  "ti_minutes".tr,
                                   style: TextStyle(
                                       fontSize: MediaQuery.of(context).size.height*0.05
                                   ),
@@ -539,7 +546,7 @@ class _EditTimeState extends State<EditTime> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Seconds",
+                                  "ti_seconds".tr,
                                   style: TextStyle(
                                       fontSize: MediaQuery.of(context).size.height*0.05
                                   ),
@@ -571,7 +578,7 @@ class _EditTimeState extends State<EditTime> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: (){},
-          label: Text("Check Time"),
+          label: Text("ti_buttonText2".tr),
           backgroundColor: theme.cardColor,
       ),
     );

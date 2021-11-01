@@ -12,6 +12,7 @@ import 'package:simple_nav_bar/screens/time/time_screen.dart';
 import '../../nav.dart';
 import '../../themes.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 
 import 'home_screen.dart';
 
