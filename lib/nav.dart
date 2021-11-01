@@ -2,7 +2,7 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/screens/home/home_screen.dart';
-import 'package:simple_nav_bar/screens/task/contracts_screen.dart';
+import 'package:simple_nav_bar/screens/task/task_screen.dart';
 import 'package:simple_nav_bar/screens/time/time_screen.dart';
 
 import 'screens/data/data_screen.dart';

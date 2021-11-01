@@ -2,10 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_nav_bar/screens/data/data_screen.dart';
 import 'package:simple_nav_bar/screens/home/home_widgets/settings_widget/responsive_settings.dart';
+import 'package:simple_nav_bar/screens/login/login.dart';
 import 'package:simple_nav_bar/screens/login/login_register.dart';
+import 'package:simple_nav_bar/screens/login/register.dart';
+import 'package:simple_nav_bar/screens/task/task_screen.dart';
+import 'package:simple_nav_bar/screens/time/time_screen.dart';
+import '../../nav.dart';
 import '../../themes.dart';
 import 'package:get_storage/get_storage.dart';
+
+import 'home_screen.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +55,10 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SettingsPage(title: 'Settings'),
+      routes: {
+        '/loginregister': (context) => LoginRegisterPage(),
+        '/home': (context) => Home(),
+      },
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,

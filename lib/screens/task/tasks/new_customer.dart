@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/screens/task/tasks/existing_customer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +43,9 @@ class _NewCustomerState extends State<NewCustomer> {
     return MaterialApp(
       home: NewCustomerPage(title: 'New Customer'),
       title: 'Flutter Theme Demo',
+      routes: {
+        '/existing_cust': (context) => ExistingCustomerPage(title: 'Existing Customer', pop: 0),
+      },
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -67,6 +73,8 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   final myControllerProvince = TextEditingController();
   final myControllerZipCode = TextEditingController();
   final myControllerCountry = TextEditingController();
+  final myControllerPhone = TextEditingController();
+  final myControllerEmail = TextEditingController();
 
   bool _validateCompany = false;
   bool _validateFirstName = false;
@@ -80,132 +88,139 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   bool _isEverythingOkay = false;
 
   String errorText = "";
-  String btnText = "Save";
-  Color _isEverythingOkayColor = Colors.red;
+  Color errorTextColor = Colors.red;
 
-  void controllTextCompany(){
-    setState(() {
-      if(myControllerCompany.text.isEmpty){
-        errorText = "Company can't be empty";
-        btnText = "Save";
-        print(myControllerCompany.text);
-        _isEverythingOkayColor = Colors.red;
-      }else{
-        _validateCompany = true;
-        print(myControllerCompany.text);
-      }
-    });
+  void ctrlTxtFields(){
+    final _company = myControllerCompany.text;
+    final _firstname = myControllerFirstName.text;
+    final _lastname = myControllerLastName.text;
+    final _street = myControllerStreet.text;
+    final _streetnr = myControllerStreetNr.text;
+    final _province= myControllerProvince.text;
+    final _zipcode = myControllerZipCode.text;
+    final _country = myControllerCountry.text;
+
+    //Country
+    if(_country.isEmpty){
+      _validateCountry = false;
+      errorText = "Country cant be empty";
+    }else{
+      _validateCountry = true;
+    }
+    //ZipCode
+    if(_zipcode.isEmpty){
+      _validateZipCode = false;
+      errorText = "Zip Code cant be empty";
+    }else{
+      _validateZipCode = true;
+    }
+    //Province
+    if(_province.isEmpty){
+      _validateProvince = false;
+      errorText = "Province cant be empty";
+    }else{
+      _validateProvince = true;
+    }
+    //StreetNr
+    if(_streetnr.isEmpty){
+      _validateStreetNr = false;
+      errorText = "Street Nr cant be empty";
+    }else{
+      _validateStreetNr = true;
+    }
+    //Street
+    if(_street.isEmpty){
+      _validateStreet = false;
+      errorText = "Street cant be empty";
+    }else{
+      _validateStreet = true;
+    }
+    //Last Name
+    if(_lastname.isEmpty){
+      _validateLastName = false;
+      errorText = "Last Name cant be empty";
+    }else{
+      _validateLastName = true;
+    }
+    //First Name
+    if(_firstname.isEmpty){
+      _validateFirstName = false;
+      errorText = "Firstname cant be empty";
+    }else{
+      _validateFirstName = true;
+    }
+    //Company Name
+    if(_company.isEmpty){
+      _validateCompany = false;
+      errorText = "Company cant be empty";
+    }else{
+      _validateCompany = true;
+    }
+    //check everything
+    if(_validateCompany&&_validateFirstName&&_validateLastName&&_validateStreet&&_validateStreetNr&&_validateProvince&&_validateProvince&&_validateZipCode&&_validateCountry){
+      _isEverythingOkay = true;
+      errorText = "Data is Okay";
+    }
+
+    setState(() {});
   }
 
-  void controllTextFirstName(){
-    setState(() {
-      if(myControllerFirstName.text.isEmpty){
-        errorText = "First Name can't be empty";
-        btnText = "Save";
-        _isEverythingOkayColor = Colors.red;
-        print(myControllerFirstName.text);
-      }else{
-        _validateFirstName = true;
-        print(myControllerFirstName.text);
-      }
-    });
-  }
 
-  void controllTextLastName(){
-    setState(() {
-      if(myControllerLastName.text.isEmpty){
-        errorText = "Last Name can't be empty";
-        print(myControllerLastName.text);
-        _isEverythingOkayColor = Colors.red;
-        btnText = "Save";
-      }else{
-        _validateLastName = true;
-        print(myControllerLastName.text);
-      }
-    });
-  }
+  Future<void> saveToStorage() async {
+    final _company = myControllerCompany.text;
+    final _firstname = myControllerFirstName.text;
+    final _lastname = myControllerLastName.text;
+    final _street = myControllerStreet.text;
+    final _streetnr = myControllerStreetNr.text;
+    final _province= myControllerProvince.text;
+    final _zipcode = myControllerZipCode.text;
+    final _country = myControllerCountry.text;
+    final _email = myControllerPhone.text;
+    final _phone = myControllerEmail.text;
 
-  void controllTextStreet(){
-    setState(() {
-      if(myControllerStreet.text.isEmpty){
-        errorText = "Street can't be empty";
-        _isEverythingOkayColor = Colors.red;
-        print(myControllerStreet.text);
-        btnText = "Save";
-      }else{
-        _validateStreet = true;
-        print(myControllerStreet.text);
-      }
-    });
-  }
+    String fileInput = formatFile(_company, _firstname, _lastname, _street, _streetnr, _province, _zipcode, _country, _email, _phone);
+    String fileName = _lastname+"_"+_firstname+".csv";
 
-  void controllTextStreetNr(){
-    setState(() {
-      if(myControllerStreetNr.text.isEmpty){
-        errorText = "Street Nr can't be empty";
-        _isEverythingOkayColor = Colors.red;
-        print(myControllerStreetNr.text);
-        btnText = "Save";
-      }else{
-        _validateStreetNr = true;
-        print(myControllerStreetNr.text);
-      }
-    });
-  }
+    //get directory of Device
+    final directory = await getApplicationDocumentsDirectory();
+    // create path Year
+    final _path= Directory(directory.path.toString() + "/Kunden");
+    final _pathString = _path.path.toString();
+    final _pathCustomer= File(_path.toString() + "/" + fileName);
 
-  void controllTextProvince(){
-    setState(() {
-      if(myControllerProvince.text.isEmpty){
-        errorText = "Province can't be empty";
-        btnText = "Save";
-        _isEverythingOkayColor = Colors.red;
-        print(myControllerProvince.text);
+    if ((await _path.exists())){
+      if((await _pathCustomer.exists())){
+        errorText = "Customer already exists";
+        _isEverythingOkay = false;
+        return null;
       }else{
-        _validateProvince = true;
-        print(myControllerProvince.text);
-      }
-    });
-  }
-
-  void controllTextZipCode(){
-    setState(() {
-      if(myControllerZipCode.text.isEmpty){
-        errorText = "ZipCode can't be empty";
-        btnText = "Save";
-        _isEverythingOkayColor = Colors.red;
-        print(myControllerZipCode.text);
-      }else{
-        _validateZipCode = true;
-        print(myControllerZipCode.text);
-      }
-    });
-  }
-
-  void controllTextCountry(){
-    setState(() {
-      if(myControllerCountry.text.isEmpty){
-        errorText = "Country can't be empty";
-        btnText = "Save";
-        _isEverythingOkayColor = Colors.red;
-        print(myControllerCountry.text);
-      }else{
-        _validateCountry = true;
-        print(myControllerCountry.text);
-      }
-    });
-  }
-
-  void controllEverything(){
-    setState(() {
-      if(_validateCompany && _validateFirstName && _validateLastName && _validateStreet && _validateStreetNr && _validateProvince && _validateZipCode && _validateCountry){
-        errorText = "Perfect";
-        btnText = "Next";
+        errorText = "Customer saved";
         _isEverythingOkay = true;
-        _isEverythingOkayColor = Colors.green;
-        int pop = 2;
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'New Customer', pop: pop)));
+        final File file = File('$_pathString/$fileName');
+        await file.writeAsString(fileInput);
       }
-    });
+    }else{
+      _path.create(recursive: true);
+      if((await _pathCustomer.exists())){
+        errorText = "Customer already exists";
+        _isEverythingOkay = false;
+        return null;
+      }else{
+        errorText = "Customer saved";
+        _isEverythingOkay = true;
+        final File file = File('$_pathString/$fileName');
+        await file.writeAsString(fileInput);
+      }
+    }
+    setState(() {});
+  }
+
+  String formatFile(String company, String fname, String lname, String street, String streetNr,String province, String zip, String country, String phone, String email){
+    String output =
+        "Company,Firstname,Lastname,Street,Street Nr,Province,Zip Code,Country,Email,Phone Nr\n" + "$company,$fname,$lname,$street,$streetNr,$province,$zip,$country,$phone,$email"
+    ;
+
+    return output;
   }
 
 
@@ -225,6 +240,10 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final mdHeight = MediaQuery.of(context).size.height*1;
+    final mdWidth = MediaQuery.of(context).size.width*1;
+    //constant
+    final boxHeight = mdHeight*0.065;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -240,20 +259,17 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
           fit: BoxFit.fitHeight,
           alignment: Alignment.center,
           child: Container(
-            width: MediaQuery.of(context).size.width*1,
-            height: MediaQuery.of(context).size.height*1,
+            width: mdWidth,
+            height: mdHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  height: MediaQuery.of(context).size.height*0.1,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width*0.97,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.085),
+                  child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextField(
@@ -261,37 +277,33 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                             textAlign: TextAlign.left,
                             maxLines: 1,
                             style: TextStyle(
-                              color: theme.accentColor,
+                              color: theme.dividerColor,
                             ),
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Company Name*",
+                                labelText: "Company Name (required)",
                                 labelStyle: TextStyle(
-                                    color: theme.accentColor
+                                    color: theme.dividerColor
                                 ),
                                 hintText: "Enter company name"
                             ),
                           )
-                      ),
-                    )
+                      )
+                  ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*1,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width*0.6,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextField(
@@ -299,37 +311,33 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                             textAlign: TextAlign.left,
                             maxLines: 1,
                             style: TextStyle(
-                              color: theme.accentColor,
+                              color: theme.dividerColor,
                             ),
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "First Name*",
+                                labelText: "First Name (required)",
                                 labelStyle: TextStyle(
-                                    color: theme.accentColor
+                                    color: theme.dividerColor
                                 ),
                                 hintText: "Enter first name"
                             ),
                           )
-                      ),
-                    )
+                      )
+                  ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*1,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width*0.6,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextField(
@@ -337,95 +345,91 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                             textAlign: TextAlign.left,
                             maxLines: 1,
                             style: TextStyle(
-                              color: theme.accentColor,
+                              color: theme.dividerColor,
                             ),
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Last Name*",
+                                labelText: "Last Name (required)",
                                 labelStyle: TextStyle(
-                                    color: theme.accentColor
+                                    color: theme.dividerColor
                                 ),
                                 hintText: "Enter last name"
                             ),
                           )
-                      ),
-                    )
+                      )
+                  ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.85,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width*1,
-                  height: MediaQuery.of(context).size.height*0.05,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                    width: mdWidth,
+                    height: boxHeight,
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: <Widget>[
                           Container(
-                            width: MediaQuery.of(context).size.width*0.7,
+                            width: mdWidth*0.75,
                             child: TextField(
                               controller: myControllerStreet,
                               textAlign: TextAlign.left,
                               maxLines: 1,
                               style: TextStyle(
-                                color: theme.accentColor,
+                                color: theme.dividerColor,
                               ),
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
+                                    borderSide: BorderSide(color: theme.dividerColor),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
+                                    borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Street*",
+                                  labelText: "Street (required)",
                                   labelStyle: TextStyle(
-                                      color: theme.accentColor
+                                      color: theme.dividerColor
                                   ),
                                   hintText: "Enter street name"
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width*0.02,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width*0.20,
-                            child: TextField(
-                              controller: myControllerStreetNr,
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: theme.accentColor,
-                              ),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(15),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
-                                  ),
-                                  labelText: "Nr*",
-                                  labelStyle: TextStyle(
-                                      color: theme.accentColor
-                                  ),
-                                  hintText: "Nr"
+                          Padding(
+                            padding: EdgeInsets.only(left: mdWidth*0.05),
+                            child: Container(
+                              width: mdWidth*0.2,
+                              child: TextField(
+                                controller: myControllerStreetNr,
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: theme.dividerColor,
+                                ),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(15),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide: BorderSide(color: theme.dividerColor),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide: BorderSide(color: theme.dividerColor),
+                                    ),
+                                    labelText: "Nr*",
+                                    labelStyle: TextStyle(
+                                        color: theme.dividerColor
+                                    ),
+                                    hintText: "Nr"
+                                ),
                               ),
                             ),
                           ),
@@ -434,76 +438,72 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.85,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width*1,
-                  height: MediaQuery.of(context).size.height*0.05,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                    width: mdWidth,
+                    height: boxHeight,
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: <Widget>[
                           Container(
-                            width: MediaQuery.of(context).size.width*0.6,
+                            width: mdWidth*0.65,
                             child: TextField(
                               controller: myControllerProvince,
                               textAlign: TextAlign.left,
                               maxLines: 1,
                               style: TextStyle(
-                                color: theme.accentColor,
+                                color: theme.dividerColor,
                               ),
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
+                                    borderSide: BorderSide(color: theme.dividerColor),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
+                                    borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Province*",
+                                  labelText: "Province (required)",
                                   labelStyle: TextStyle(
-                                      color: theme.accentColor
+                                      color: theme.dividerColor
                                   ),
                                   hintText: "Enter province name"
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width*0.02,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width*0.3,
-                            child: TextField(
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              controller: myControllerZipCode,
-                              textAlign: TextAlign.left,
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: theme.accentColor,
-                              ),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(15),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: theme.accentColor),
-                                  ),
-                                  labelText: "Zip Code*",
-                                  labelStyle: TextStyle(
-                                      color: theme.accentColor
-                                  ),
-                                  hintText: "Zip"
+                          Padding(
+                            padding: EdgeInsets.only(left: mdWidth*0.05),
+                            child: Container(
+                              width: mdWidth*0.3,
+                              child: TextField(
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                controller: myControllerZipCode,
+                                textAlign: TextAlign.left,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: theme.dividerColor,
+                                ),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(15),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide: BorderSide(color: theme.dividerColor),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide: BorderSide(color: theme.dividerColor),
+                                    ),
+                                    labelText: "Zip Code*",
+                                    labelStyle: TextStyle(
+                                        color: theme.dividerColor
+                                    ),
+                                    hintText: "Zip"
+                                ),
                               ),
                             ),
                           ),
@@ -513,15 +513,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.85,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width*0.65,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextField(
@@ -529,177 +525,189 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                             textAlign: TextAlign.left,
                             maxLines: 1,
                             style: TextStyle(
-                              color: theme.accentColor,
+                              color: theme.dividerColor,
                             ),
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Country*",
+                                labelText: "Country (required)",
                                 labelStyle: TextStyle(
-                                    color: theme.accentColor
+                                    color: theme.dividerColor
                                 ),
                                 hintText: "Enter country"
                             ),
                           )
-                      ),
-                    )
+                      )
+                  ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.85,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width*0.65,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextField(
+                            controller: myControllerPhone,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.left,
                             maxLines: 1,
                             style: TextStyle(
-                              color: theme.accentColor,
+                              color: theme.dividerColor,
                             ),
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 labelText: "Phone Number",
                                 labelStyle: TextStyle(
-                                    color: theme.cardColor
+                                    color: theme.dividerColor
                                 ),
                                 hintText: "Enter phone number"
                             ),
                           )
-                      ),
-                    )
+                      )
+                  ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.85,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width*0.97,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextField(
+                            controller: myControllerEmail,
                             textAlign: TextAlign.left,
                             maxLines: 1,
                             style: TextStyle(
-                              color: theme.accentColor,
+                              color: theme.dividerColor,
                             ),
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: theme.accentColor),
+                                  borderSide: BorderSide(color: theme.dividerColor),
                                 ),
                                 labelText: "Email",
                                 labelStyle: TextStyle(
-                                    color: theme.accentColor
+                                    color: theme.dividerColor
                                 ),
                                 hintText: "Enter email address"
                             ),
                           )
-                      ),
-                    )
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.95,
-                  height: MediaQuery.of(context).size.height*0.13,
-                ),
-                Container(
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: (_isEverythingOkay)
-                          ? Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          errorText,
-                          style: TextStyle(
-                            color: _isEverythingOkayColor,
-                            fontSize: 17,
-                          ),
-                        ),
-                      )
-                          : Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          errorText,
-                          style: TextStyle(
-                            color: _isEverythingOkayColor,
-                            fontSize: 17,
-                          ),
-                        ),
                       )
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.85,
-                  height: MediaQuery.of(context).size.height*0.02,
-                ),
-                Align(
-                  alignment: Alignment.center,
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
                   child: Container(
-                      height: MediaQuery.of(context).size.height*0.06,
-                      width: MediaQuery.of(context).size.width*0.85,
-                      child: Padding(
-                        padding: EdgeInsets.all(0),
-                        child: FloatingActionButton(
-                          elevation: 0,
-                          heroTag: "btnNewCustomer",
-                          backgroundColor: theme.cardColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              controllEverything();
-                              controllTextCountry();
-                              controllTextZipCode();
-                              controllTextProvince();
-                              controllTextStreetNr();
-                              controllTextStreet();
-                              controllTextLastName();
-                              controllTextFirstName();
-                              controllTextCompany();
-                            });
-                          },
-                          child: Text(
-                            btnText,
-                            style: theme.textTheme.bodyText1,
-                          ),
-                        ),
-                      )
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: (_isEverythingOkay)
+                            ? Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  errorText,
+                                  style: TextStyle(
+                                    color: Colors.green.shade500,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                            : Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  errorText,
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
         )
       ),
+        floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10,bottom: 10),
+                child: Container(
+                  height: mdHeight*0.07,
+                  width: mdHeight*0.07,
+                  child: (_isEverythingOkay)
+                    ? FloatingActionButton(
+                        backgroundColor: theme.cardColor,
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: theme.primaryColor,
+                          size: mdHeight*0.07/2,
+                        ),
+                        onPressed: () {},
+                        heroTag: "Next",
+                    )
+                      : SizedBox(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
+                child: Container(
+                  height: mdHeight*0.07,
+                  width: mdHeight*0.07,
+                  child: (_isEverythingOkay)
+                    ? FloatingActionButton(
+                      backgroundColor: theme.cardColor,
+                      child: Icon(
+                        Icons.save,
+                        color: theme.primaryColor,
+                        size: mdHeight*0.07/2,
+                      ),
+                      onPressed: () {
+                          saveToStorage();
+                      },
+                      heroTag: "ChecknSave",
+                    )
+                  : FloatingActionButton(
+                      backgroundColor: theme.cardColor,
+                      child: Icon(
+                        Icons.check,
+                        color: theme.primaryColor,
+                        size: mdHeight*0.07/2,
+                      ),
+                      onPressed: () {
+                        ctrlTxtFields();
+                      },
+                      heroTag: "ChecknSave",
+                      ),
+                ),
+              )
+            ]
+        )
+
     );
   }
 }

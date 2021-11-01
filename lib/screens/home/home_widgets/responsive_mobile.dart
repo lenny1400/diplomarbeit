@@ -153,7 +153,7 @@ class _MobileHomeState extends State<MobileHome> {
                         primary: theme.backgroundColor,
                       ),
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const AllTasksPage(title: 'All Tasks',)));
+                        Navigator.pushNamed(context, '/alltasks');
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -282,7 +282,7 @@ class _MobileHomeState extends State<MobileHome> {
                         primary: theme.backgroundColor,
                       ),
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const AllTasksPage(title: 'All Tasks',)));
+                        Navigator.pushNamed(context, '/alltasks');
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

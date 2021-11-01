@@ -41,7 +41,12 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
+      home: LoginMainPage(),
+      routes: {
+        '/login': (context) => LoginForm(),
+        '/register': (context) => RegisterForm(),
+        '/nav': (context) => Nav(),
+      },
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -51,13 +56,13 @@ class _LoginFormState extends State<LoginForm> {
 }
 
 
-class MainPage extends StatefulWidget {
+class LoginMainPage extends StatefulWidget {
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _LoginMainPageState createState() => _LoginMainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _LoginMainPageState extends State<LoginMainPage> {
 
   final myEmail = TextEditingController();
   final myPassword = TextEditingController();
@@ -87,7 +92,8 @@ class _MainPageState extends State<MainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MyApp()),(route) => false,);
+        FocusScope.of(context).unfocus();
+        Navigator.pushNamedAndRemoveUntil(context, '/nav', (Route<dynamic> route) => false);
       }
     });
   }
@@ -227,9 +233,8 @@ class _MainPageState extends State<MainPage> {
                       padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.2),
                       child: TextButton(
                         onPressed: (){
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              RegisterForm()), (Route route) => true);
-                        },
+                          Navigator.pushReplacementNamed(context, '/register');
+                          },
                         child: Text(
                           'Create Account',
                           style: theme.textTheme.headline1,

@@ -41,7 +41,12 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
+      home: RegisterMainPage(),
+      routes: {
+        '/login': (context) => LoginForm(),
+        '/register': (context) => RegisterForm(),
+        '/nav': (context) => Nav(),
+      },
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -51,13 +56,13 @@ class _RegisterFormState extends State<RegisterForm> {
 }
 
 
-class MainPage extends StatefulWidget {
+class RegisterMainPage extends StatefulWidget {
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _RegisterMainPageState createState() => _RegisterMainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _RegisterMainPageState extends State<RegisterMainPage> {
 
   TextEditingController myName = TextEditingController();
   TextEditingController myEmail = TextEditingController();
@@ -98,7 +103,7 @@ class _MainPageState extends State<MainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
+        Navigator.pushNamedAndRemoveUntil(context, '/nav',(r) => false);
       }
     });
   }
@@ -289,8 +294,7 @@ class _MainPageState extends State<MainPage> {
                     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.15),
                     child: TextButton(
                       onPressed: (){
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                            LoginForm()), (Route route) => true);
+                        Navigator.pushReplacementNamed(context, '/login');
                       },
                       child: Text(
                         'Already have an Account?',

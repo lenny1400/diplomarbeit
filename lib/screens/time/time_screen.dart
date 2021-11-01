@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../../themes.dart';
 import 'my_flutter_app_icons.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   // add these lines
@@ -68,7 +70,14 @@ class _TimePageState extends State<TimePage> {
   var hour;
   var min;
   var sec;
-  var dayofweek = DateFormat('EEEE').format(DateTime.now());
+  final String defaultLocale = Platform.localeName; // Phone local
+
+  static String _getLocalizedWeekDay(String local, DateTime date) {
+    final formatter = DateFormat(DateFormat.WEEKDAY, local);
+    return formatter.format(date);
+  }
+
+  var dayofweek; //= DateFormat('EEEE', ).format(DateTime.now());
   var dayofmonth = DateTime.now().day;
   var month = DateFormat('MMMM').format(DateTime.now());
 
@@ -89,6 +98,7 @@ class _TimePageState extends State<TimePage> {
     hour = DateTime.now().hour;
     min = DateTime.now().minute;
     sec = DateTime.now().second;
+    dayofweek = _getLocalizedWeekDay("de_DE", DateTime.now());
 
     //if min smaller than 10
     if (min < 10){
@@ -158,12 +168,13 @@ class _TimePageState extends State<TimePage> {
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting(defaultLocale);
     time();
   }
 
   @override
   void dispose() {
-    _timer!.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -301,7 +312,7 @@ class _TimePageState extends State<TimePage> {
                                       if(btnArrive && !btnLeave){
                                         btnArrive = false;
                                         btnLeave = true;
-                                        _timer!.cancel();
+                                        _timer?.cancel();
                                       }
                                     },
                                     icon: Icon(
