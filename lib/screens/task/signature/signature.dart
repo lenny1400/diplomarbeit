@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
-import 'package:simple_nav_bar/screens/task/contracts_screen.dart';
+
 
 
 class SignatureApp extends StatefulWidget {
@@ -99,10 +99,6 @@ class _SignatureAppState extends State<SignatureApp> {
                       Image.memory(data!);
 
                       String name = "423432";//id vom Auftag maybe?
-
-                      final directory1 = await getApplicationDocumentsDirectory();
-
-                      print(directory1.path);
 
                       Directory? directory = await getExternalStorageDirectory();
                       String path = directory!.path;
