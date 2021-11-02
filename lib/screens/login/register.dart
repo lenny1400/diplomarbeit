@@ -42,11 +42,6 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: RegisterMainPage(),
-      routes: {
-        '/login': (context) => LoginForm(),
-        '/register': (context) => RegisterForm(),
-        '/nav': (context) => Nav(),
-      },
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -103,7 +98,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.pushNamedAndRemoveUntil(context, '/nav',(r) => false);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });
   }
@@ -294,7 +289,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.15),
                     child: TextButton(
                       onPressed: (){
-                        Navigator.pushReplacementNamed(context, '/login');
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginForm()), (Route route) => true);
                       },
                       child: Text(
                         'Already have an Account?',

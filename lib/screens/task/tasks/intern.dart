@@ -185,11 +185,11 @@ class _InternPageState extends State<InternPage> {
     //get directory of Device
     final directory = await getExternalStorageDirectory();
     // create path Year
-    final _pathYearFolder= Directory(directory!.path + "/tasks/intern/" + "$_yearName");
+    final _pathYearFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName");
     // create path Month
-    final _pathMonthFolder= Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName);
+    final _pathMonthFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName);
     // create path Day
-    final _pathDayFolder= Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName);
+    final _pathDayFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName);
 
     //checks if folder $Year exists
     if ((await _pathYearFolder.exists())){
@@ -200,8 +200,8 @@ class _InternPageState extends State<InternPage> {
           // TODO: save file to storage
           int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
           String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
 
           final File file = File('$_pathFileSave/$_fileName');
           await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
@@ -222,8 +222,8 @@ class _InternPageState extends State<InternPage> {
           // TODO: save file to storage
           int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
           String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
 
           final File file = File('$_pathFileSave/$_fileName');
           await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
@@ -233,8 +233,8 @@ class _InternPageState extends State<InternPage> {
           // TODO: save file to storage
           int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
           String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
 
           final File file = File('$_pathFileSave/$_fileName');
           await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
@@ -246,8 +246,8 @@ class _InternPageState extends State<InternPage> {
           // TODO: save file to storage
           int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
           String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
 
           final File file = File('$_pathFileSave/$_fileName');
           await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
@@ -257,8 +257,8 @@ class _InternPageState extends State<InternPage> {
           // TODO: save file to storage
           int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
           String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/tasks/intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
+          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
+          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
 
           final File file = File('$_pathFileSave/$_fileName');
           await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
@@ -515,7 +515,7 @@ class _InternPageState extends State<InternPage> {
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005),
                             child: FloatingActionButton(
                               elevation: 0,
-                              heroTag: "btnIntern",
+                              heroTag: "Save",
                               backgroundColor: theme.cardColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),

@@ -117,7 +117,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
       } else {
         print('User is signed in!');
         await FirebaseAuth.instance.signOut();
-        Navigator.pushNamedAndRemoveUntil(context, '/loginregister', (Route<dynamic> route) => false);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginRegister()),);
       }
     });
   }

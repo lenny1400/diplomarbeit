@@ -38,14 +38,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp().whenComplete(() => currentTheme.addListener(() {
+    Firebase.initializeApp();
+    currentTheme.addListener(() {
       if (this.mounted) { // check whether the state object is in tree
         setState(() {
           // make changes here
-          });
-        }
-      })
-    );
+        });
+      }
+    });
   }
 
   @override
@@ -55,21 +55,9 @@ class _MyAppState extends State<MyApp> {
       title: 'Bottom Navigation Bar Tutorial',
       //home: Nav(),
       home: LoginRegister(),
-      routes: {
-        '/login': (context) => LoginForm(),
-        '/loginregister': (context) => LoginRegister(),
-        '/register': (context) => RegisterForm(),
-        '/nav': (context) => Nav(),
-        '/home': (context) => Home(),
-        '/time': (context) => Time(),
-        '/task': (context) => Tasks(),
-        '/data': (context) => Data(),
-        '/alltasks': (context) => AllTasksPage(title: 'All Tasks'),
-      },
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
-
       translations: Languages(),
       locale: Get.deviceLocale,
     );

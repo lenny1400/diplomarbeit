@@ -57,7 +57,6 @@ class _SettingsState extends State<Settings> {
     return MaterialApp(
       home: SettingsPage(title: 'Settings'),
       routes: {
-        '/loginregister': (context) => LoginRegisterPage(),
         '/home': (context) => Home(),
       },
       debugShowCheckedModeBanner: false,

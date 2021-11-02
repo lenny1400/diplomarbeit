@@ -43,11 +43,6 @@ class _LoginRegisterState extends State<LoginRegister> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: LoginRegisterPage(),
-      routes: {
-        '/login': (context) => LoginForm(),
-        '/register': (context) => RegisterForm(),
-        '/nav': (context) => Nav(),
-      },
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -66,7 +61,7 @@ class LoginRegisterPage extends StatefulWidget {
 
 class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
-  bool buildIt = true;
+  bool buildIt = false;
 
   @override
   void initState() {
@@ -85,7 +80,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
       } else {
         print('User is signed in!');
         print(user.uid.toString());
-        Navigator.pushNamedAndRemoveUntil(context, '/nav', (Route<dynamic> route) => false);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });
   }
@@ -162,7 +157,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                                     )
                                 ),
                                 onPressed: (){
-                                  Navigator.pushNamed(context,'/login');
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => LoginForm()),);
                                 },
                                 child: Text(
                                   "Login",
@@ -186,7 +181,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                                     )
                                 ),
                                 onPressed: (){
-                                  Navigator.pushNamed(context,'/register');
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterForm()),);
                                 },
                                 child: Text(
                                   "Register",
