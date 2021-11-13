@@ -182,9 +182,9 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     String fileName = _lastname+"_"+_firstname+".csv";
 
     //get directory of Device
-    final directory = await getExternalStorageDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     // create path Year
-    final _path= Directory(directory!.path.toString() + "/Kunden");
+    final _path= Directory(directory.path.toString() + "/Kunden");
     final _pathString = _path.path.toString();
     final _pathCustomer= File(_path.toString() + "/" + fileName);
 

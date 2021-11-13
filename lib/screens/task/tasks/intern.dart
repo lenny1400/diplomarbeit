@@ -183,7 +183,7 @@ class _InternPageState extends State<InternPage> {
     final _dayName = (((_selectedDate.split(","))[0]).split(" "))[1];
 
     //get directory of Device
-    final directory = await getExternalStorageDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     // create path Year
     final _pathYearFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName");
     // create path Month
