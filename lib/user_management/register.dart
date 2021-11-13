@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/themes.dart';
 
-import '../../nav.dart';
+import '../nav.dart';
 import 'login.dart';
 
 Future main() async {

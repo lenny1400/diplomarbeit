@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:simple_nav_bar/screens/login/login_register.dart';
+import 'package:simple_nav_bar/user_management/login_register.dart';
 
 import '../../../../themes.dart';
 

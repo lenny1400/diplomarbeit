@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_nav_bar/screens/home/all_tasks.dart';
+import 'package:simple_nav_bar/responsive_screens/home/all_tasks.dart';
 import 'package:get/get.dart';
 
 class MobileHome extends StatefulWidget {

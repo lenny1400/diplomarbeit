@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/main.dart';
 import 'package:simple_nav_bar/nav.dart';
-import 'package:simple_nav_bar/screens/login/register.dart';
+import 'package:simple_nav_bar/user_management/register.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

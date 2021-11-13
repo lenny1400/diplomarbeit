@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/screens/task/task_widget/responsive_task.dart';
-import 'package:simple_nav_bar/screens/task/tasks/existing_customer.dart';
-import 'package:simple_nav_bar/screens/task/tasks/intern.dart';
-import 'package:simple_nav_bar/screens/task/tasks/new_customer.dart';
+import 'package:simple_nav_bar/responsive_screens/task/task_widget/responsive_task.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/intern.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/new_customer.dart';
 
-import '../../themes.dart';
+import '../themes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,11 +1,11 @@
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/screens/home/home_screen.dart';
-import 'package:simple_nav_bar/screens/task/task_screen.dart';
-import 'package:simple_nav_bar/screens/time/time_screen.dart';
+import 'package:simple_nav_bar/main_screens/home_screen.dart';
+import 'package:simple_nav_bar/main_screens/task_screen.dart';
+import 'package:simple_nav_bar/main_screens/time_screen.dart';
 
-import 'screens/data/data_screen.dart';
+import 'main_screens/data_screen.dart';
 import 'package:simple_nav_bar/themes.dart';
 
 Future main()async {

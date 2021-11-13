@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/screens/login/login.dart';
-import 'package:simple_nav_bar/screens/login/login_register.dart';
-import '../../themes.dart';
-import 'all_tasks.dart';
-import 'settings.dart';
-import 'home_widgets/responsive_mobile.dart';
+import 'package:simple_nav_bar/user_management/login.dart';
+import 'package:simple_nav_bar/user_management/login_register.dart';
+import '../themes.dart';
+import '../responsive_screens/home/all_tasks.dart';
+import '../responsive_screens/home/settings.dart';
+import '../responsive_screens/home/home_widgets/responsive_mobile.dart';
 import 'package:get/get.dart';
 
 Future main()async {

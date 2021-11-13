@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../themes.dart';
-import 'my_flutter_app_icons.dart';
+import '../themes.dart';
+import '../responsive_screens/time/my_flutter_app_icons.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {

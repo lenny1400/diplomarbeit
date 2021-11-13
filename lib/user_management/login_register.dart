@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/screens/login/register.dart';
-import 'package:simple_nav_bar/screens/login/login.dart';
+import 'package:simple_nav_bar/user_management/register.dart';
+import 'package:simple_nav_bar/user_management/login.dart';
 import 'package:simple_nav_bar/themes.dart';
 
-import '../../nav.dart';
+import '../nav.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

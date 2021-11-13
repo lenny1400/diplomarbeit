@@ -2,19 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/screens/data/data_screen.dart';
-import 'package:simple_nav_bar/screens/home/home_widgets/settings_widget/responsive_settings.dart';
-import 'package:simple_nav_bar/screens/login/login.dart';
-import 'package:simple_nav_bar/screens/login/login_register.dart';
-import 'package:simple_nav_bar/screens/login/register.dart';
-import 'package:simple_nav_bar/screens/task/task_screen.dart';
-import 'package:simple_nav_bar/screens/time/time_screen.dart';
+import 'package:simple_nav_bar/main_screens/data_screen.dart';
+import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/responsive_settings.dart';
+import 'package:simple_nav_bar/user_management/login.dart';
+import 'package:simple_nav_bar/user_management/login_register.dart';
+import 'package:simple_nav_bar/user_management/register.dart';
+import 'package:simple_nav_bar/main_screens/task_screen.dart';
+import 'package:simple_nav_bar/main_screens/time_screen.dart';
 import '../../nav.dart';
 import '../../themes.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
-import 'home_screen.dart';
+import '../../main_screens/home_screen.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();

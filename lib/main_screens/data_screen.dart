@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_nav_bar/screens/data/data_screens/import/importfiles.dart';
+import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importfiles.dart';
 import 'dart:io' as io;
-import '../../themes.dart';
-import 'data_screens/export/exportfiles.dart';
+import '../themes.dart';
+import '../responsive_screens/data/data_screens/export/exportfiles.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();

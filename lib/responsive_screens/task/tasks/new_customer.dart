@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_nav_bar/screens/task/tasks/existing_customer.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../themes.dart';
+import 'existing_customer.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

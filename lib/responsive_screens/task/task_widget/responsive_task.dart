@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_nav_bar/screens/task/tasks/existing_customer.dart';
-import 'package:simple_nav_bar/screens/task/tasks/intern.dart';
-import 'package:simple_nav_bar/screens/task/tasks/new_customer.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/intern.dart';
+import 'package:simple_nav_bar/responsive_screens/task/tasks/new_customer.dart';
 
 class ResponsiveTask extends StatefulWidget {
   const ResponsiveTask({
