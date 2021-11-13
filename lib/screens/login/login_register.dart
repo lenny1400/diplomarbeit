@@ -101,8 +101,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                   width: MediaQuery.of(context).size.width*1,
                   height: MediaQuery.of(context).size.height*1,
                   color: theme.primaryColor,
-          ),
-        )
+                ),
+            )
             : FittedBox(
                 fit: BoxFit.fitHeight,
                 alignment: Alignment.center,
@@ -205,8 +205,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                       ],
                     ),
                   ),
-          ),
-        )
+                ),
+            )
       ),
     );
 

@@ -87,7 +87,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MyApp()),(route) => false,);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });
   }
