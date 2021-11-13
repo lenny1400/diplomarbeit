@@ -100,8 +100,8 @@ class _SignatureAppState extends State<SignatureApp> {
 
                       String name = "423432";//id vom Auftag maybe?
 
-                      Directory? directory = await getExternalStorageDirectory();
-                      String path = directory!.path;
+                      Directory? directory = await getApplicationDocumentsDirectory();
+                      String path = directory.path;
                       print(path);
 
                       await Directory('$path/signatures').create(recursive: true);
