@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:simple_nav_bar/user_startup/user_customer.dart';
+import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 import 'existing_customer_page_2.dart';
 
@@ -83,6 +88,12 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
   late int var1;
   late int var2;
+
+  String dropdownValue = "Porsche";
+
+  List<String> list = ["Porsche","Apple","Blum"];
+
+  bool Anfahrt = false;
 
   String getText() {
     // if (time == null) {
@@ -239,12 +250,69 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
             child: Container(
               width: MediaQuery.of(context).size.width*1,
               height: MediaQuery.of(context).size.height*1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.all(15.0),
                 children: <Widget>[
                   SizedBox(
                     height: MediaQuery.of(context).size.height*0.07,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.85,
+                    height: MediaQuery.of(context).size.height*0.05,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 60),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Kunde",
+                          style: theme.textTheme.headline6,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.85,
+                    height: MediaQuery.of(context).size.height*0.01,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.85,
+                    height: MediaQuery.of(context).size.height*0.05,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 60),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                            child: DropdownButton<String>(
+                              value: dropdownValue,
+                              icon: const Icon(Icons.arrow_downward),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: const TextStyle(color: Colors.black, fontSize: 18),
+                              underline: Container(
+                                height: 2,
+                                color: theme.cardColor,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  dropdownValue = newValue!;
+                                });
+                              },
+                              items:list
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value,style: TextStyle(fontSize: 18)),
+                                );
+                              }).toList(),
+                            ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.85,
+                    height: MediaQuery.of(context).size.height*0.01,
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width*0.85,
@@ -282,10 +350,13 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                   value: isCheckedYes,
                                   onChanged: (newValue){
                                     setState(() {
-                                      isCheckedYes = newValue!;
-                                      isCheckedNo = !isCheckedYes;
-                                      isEnabledYes = true;
-                                      isEnabledNo = true;
+                                      if(!isCheckedYes) {
+                                        isCheckedYes = newValue!;
+                                        isCheckedNo = !isCheckedYes;
+                                        isEnabledYes = true;
+                                        isEnabledNo = true;
+                                        Anfahrt = true;
+                                      }
                                     });
                                   },
                                 ),
@@ -309,12 +380,15 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                   value: isCheckedNo,
                                   onChanged: (newValue){
                                     setState(() {
-                                      isCheckedNo = newValue!;
-                                      isCheckedYes = !isCheckedNo;
-                                      isEnabledYes = false;
-                                      isEnabledNo = false;
-                                      myControllerKMStandA.clear();
-                                      myControllerKMStandB.clear();
+                                      if(!isCheckedNo){
+                                        isCheckedNo = newValue!;
+                                        isCheckedYes = !isCheckedNo;
+                                        isEnabledYes = false;
+                                        isEnabledNo = false;
+                                        Anfahrt = false;
+                                        myControllerKMStandA.clear();
+                                        myControllerKMStandB.clear();
+                                      }
                                     });
                                   },
                                 ),
@@ -576,7 +650,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width*0.85,
-                    height: MediaQuery.of(context).size.height*0.25,
+                    height: MediaQuery.of(context).size.height*0.1,
                   ),
                   Container(
                     child: Align(
@@ -622,14 +696,39 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10.0)),
                             ),
-                            onPressed: () {
-                              setState(() {
+                            onPressed: ()  {
+
+                              User_customer customer = User_customer("company", 0000,"Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
+                              User_task task = User_task("AUF0000",false, customer, "time", "text", "Material");
+
+                              int hours = time2.hour.toInt() - time.hour.toInt();
+
+                              int minutes =  time2.minute.toInt() - time.minute.toInt();
+
+                              task.name = "12-AUF0001";
+
+                              task.Anfahrt = Anfahrt;
+
+                              if(Anfahrt){
+                               String anfang = myControllerKMStandA.text.toString();
+                               String ende = myControllerKMStandB.text.toString();
+
+                               int a = int.parse(anfang);
+                               int e = int.parse(ende);
+                               task.km= e-a;
+                              }
+
+                              task.customer = customer;
+
+                              task.time = hours.toString() + " Stunden und " + minutes.toString() + " Minuten!";
+
+                              setState(()  {
                                 getText();
                                 getText2();
                                 checkData();
                                 if(_isEverythingOkay){
                                   pop = pop + 1;
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => CreateTask(title:'Exisiting Customer',pop: pop)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => CreateTask(title:'Exisiting Customer',pop: pop,task: task)));
                                 }
                               });
                             },

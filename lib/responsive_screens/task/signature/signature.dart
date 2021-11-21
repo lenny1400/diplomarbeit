@@ -6,23 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
+import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 
 
 class SignatureApp extends StatefulWidget {
 
-  const SignatureApp({Key? key, required this.pop}) : super(key: key);
+  const SignatureApp({Key? key, required this.pop, required this.task}) : super(key: key);
 
+  final User_task task;
   final int pop;
 
   @override
-  _SignatureAppState createState() => _SignatureAppState(this.pop);
+  _SignatureAppState createState() => _SignatureAppState(this.pop,this.task);
 }
 
 class _SignatureAppState extends State<SignatureApp> {
 
+  User_task task;
   int pop;
-  _SignatureAppState(this.pop);
+  _SignatureAppState(this.pop,this.task);
 
   final SignatureController _controller = SignatureController(
     penStrokeWidth: 1,
@@ -98,20 +101,35 @@ class _SignatureAppState extends State<SignatureApp> {
 
                       Image.memory(data!);
 
-                      String name = "423432";//id vom Auftag maybe?
+                      String name = task.name;//id vom Auftag maybe?
 
                       Directory? directory = await getApplicationDocumentsDirectory();
                       String path = directory.path;
                       print(path);
 
-                      await Directory('$path/signatures').create(recursive: true);
+                      await Directory('$path/tasks/extern/$name').create(recursive: true);
 
-                      File('$path/signatures/$name.png')
+                      File('$path/tasks/extern/$name/signature.png')
                           .writeAsBytesSync(data.buffer.asInt8List());
 
                       var count = 0;
 
                       FocusScope.of(context).unfocus();
+
+                      String content = "Auftrag: " + task.name + "\n";
+
+                      if(task.Anfahrt){
+                        content += "Eine Anfahrt von: " + task.km.toString()+ "\n";;
+                      }
+
+                      content += "Kunde: " + task.customer.company + "\n";
+
+                      content += "Zeitaufwand: " + task.time + "\n" + "Arbeit: " + task.text + "\n" + "Materiel: " + task.material + "\n";
+
+                      final File file =  File('$path/tasks/extern/$name/task.txt');
+
+                      file.writeAsString(content);
+
 
                       Navigator.popUntil(context, (route) {return count++ == pop;});
 

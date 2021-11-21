@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/responsive_screens/task/signature/signature.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 // Future main() async {
 //
@@ -20,7 +21,7 @@ import 'package:flutter/services.dart';
 //   runApp(ExistingCustomerSecondPage());
 //
 // }
-
+/*
 class ExistingCustomerSecondPage extends StatefulWidget {
   final int pop;
   const ExistingCustomerSecondPage({Key? key, required this.pop}) : super(key: key);
@@ -58,21 +59,23 @@ class _ExistingCustomerSecondPageState extends State<ExistingCustomerSecondPage>
     );
   }
 }
-
+*/
 class CreateTask extends StatefulWidget {
-  const CreateTask({Key? key, required this.title,required this.pop,}) : super(key: key);
+  const CreateTask({Key? key, required this.title,required this.pop, required this.task}) : super(key: key);
 
+  final User_task task;
   final String title;
   final int pop;
 
   @override
-  _CreateTaskState createState() => _CreateTaskState(pop);
+  _CreateTaskState createState() => _CreateTaskState(pop,task);
 }
 
 class _CreateTaskState extends State<CreateTask> {
 
+  final User_task task;
   int pop;
-  _CreateTaskState(this.pop);
+  _CreateTaskState(this.pop,this.task);
 
   bool _isTextFieldDTOkay = false;
   bool _isTextFieldMAOkay = false;
@@ -282,7 +285,7 @@ class _CreateTaskState extends State<CreateTask> {
                                       alignment: Alignment.centerLeft,
                                       child: IconButton(
                                         onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (_) => TakePictureScreen(camera: camera,)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (_) => TakePictureScreen(camera: camera, task: task)));
                                         },
                                         icon: Icon(CupertinoIcons.camera),
                                         iconSize: 50,
@@ -357,6 +360,9 @@ class _CreateTaskState extends State<CreateTask> {
                             onPressed: () {
                               setState(() {
 
+                                task.material = myControllerMaterial.text;
+                                task.text = myControllerDoneTask.text;
+
                                 controllEverything();
 
                                 if(_isEverythingOkay){
@@ -364,11 +370,12 @@ class _CreateTaskState extends State<CreateTask> {
                                   _isEverythingOkayColor = Colors.green;
                                 }
 
+
                                 if(errorText == "Done"){
 
                                   pop = pop + 1;
 
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => SignatureApp(pop: pop)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => SignatureApp(pop: pop, task: task)));
                                   //var count = 0;
                                   //Navigator.popUntil(context, (route) {return count++ == pop;});
                                 }
