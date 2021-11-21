@@ -78,8 +78,6 @@ class _TimePageState extends State<TimePage> {
   var sec;
   final String defaultLocale = Platform.localeName; // Phone local
 
-  var data; //after time edit
-
   static String _getLocalizedWeekDay(String local, DateTime date) {
     final formatter = DateFormat(DateFormat.WEEKDAY, local);
     return formatter.format(date);
@@ -102,6 +100,8 @@ class _TimePageState extends State<TimePage> {
   int timeSec = 0;
   int timeMin = 0;
   int timeHour = 0;
+  //after time edit
+  var data;
 
   void time(){
     hour = DateTime.now().hour;
@@ -180,9 +180,6 @@ class _TimePageState extends State<TimePage> {
           });
       },
     );
-
-
-    Isolate.spawn()
   }
 
   @override
