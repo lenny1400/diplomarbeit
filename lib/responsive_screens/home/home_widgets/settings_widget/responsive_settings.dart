@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:simple_nav_bar/main.dart';
 import 'package:simple_nav_bar/user_management/login_register.dart';
 
 import '../../../../themes.dart';
@@ -117,7 +118,9 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
       } else {
         print('User is signed in!');
         await FirebaseAuth.instance.signOut();
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginRegister()),);
+        setState(() {
+          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false,);
+        });
       }
     });
   }

@@ -2,10 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/main.dart';
+import 'package:simple_nav_bar/main_screens/home_screen.dart';
 import 'package:simple_nav_bar/nav.dart';
 import 'package:simple_nav_bar/user_management/register.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:simple_nav_bar/user_startup/startup.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,6 +89,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
+        startUp(FirebaseAuth.instance.currentUser!.uid);
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });

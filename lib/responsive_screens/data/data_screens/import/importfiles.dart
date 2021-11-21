@@ -44,7 +44,6 @@ class _ImportFilesState extends State<ImportFiles> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ImportFilesPage(title: 'Import Files'),
-      title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -91,7 +90,7 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                     height: MediaQuery.of(context).size.height*0.07,
                     child: FloatingActionButton(
                       elevation: 0,
-                      heroTag: "btnImport",
+                      heroTag: "btnImportFile",
                       backgroundColor: theme.cardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -99,10 +98,10 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                       onPressed: () {
                         //int pop = 1;
                         //Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'Existing Customer',pop: pop,)));
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => FromFilePage(title: 'From Files')));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => FromFile()));
                       },
                       child: Text(
-                        'From File',
+                        'From Device',
                         style: theme.textTheme.bodyText1,
                       ),
                     )
@@ -114,7 +113,7 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                     height: MediaQuery.of(context).size.height*0.07,
                     child: FloatingActionButton(
                       elevation: 0,
-                      heroTag: "btnExport",
+                      heroTag: "btnImportDatabase",
                       backgroundColor: theme.cardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),

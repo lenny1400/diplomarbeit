@@ -102,7 +102,7 @@ class _DataPageState extends State<DataPage> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => ImportFiles()));
                       },
                       child: Text(
-                        'Import',
+                        'Import Data',
                         style: theme.textTheme.bodyText1,
                       ),
                     )
@@ -125,7 +125,7 @@ class _DataPageState extends State<DataPage> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => ExportFiles()));
                       },
                       child: Text(
-                        'Export',
+                        'Export Data',
                         style: theme.textTheme.bodyText1,
                       ),
                     )

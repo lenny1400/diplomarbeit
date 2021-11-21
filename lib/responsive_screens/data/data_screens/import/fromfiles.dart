@@ -42,7 +42,6 @@ class _FromFileState extends State<FromFile> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: FromFilePage(title: 'From Files'),
-      title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -91,7 +90,7 @@ class _FromFilePageState extends State<FromFilePage> {
                   },
                   color: theme.cardColor,
                   padding: EdgeInsets.all(15),
-                  child: const Text('Open File Picker'),
+                  child: Text('Pick File', style: theme.textTheme.bodyText1,),
                 ),
               ),
             ),
@@ -250,9 +249,9 @@ class _SelectedState extends State<Selected> {
                       Container(
                         height: 60,
                         child: ListTile(
-                          title: Text(name,style: TextStyle(color: widget.theme.accentColor,fontSize: 35,),),
+                          title: Text(name,style: TextStyle(color: widget.theme.shadowColor,fontSize: 35,),),
                           contentPadding: EdgeInsets.only(bottom: 10,),
-                          subtitle: Text(fileName,style: TextStyle(color: widget.theme.accentColor,fontSize: 25,),),
+                          subtitle: Text(fileName,style: TextStyle(color: widget.theme.shadowColor,fontSize: 25,),),
                         ),
                       ),
                       SizedBox(
@@ -261,9 +260,9 @@ class _SelectedState extends State<Selected> {
                       Container(
                         height: 60,
                         child: ListTile(
-                          title: Text(sizename,style: TextStyle(color: widget.theme.accentColor,fontSize: 35,),),
+                          title: Text(sizename,style: TextStyle(color: widget.theme.shadowColor,fontSize: 35,),),
                           contentPadding: EdgeInsets.only(bottom: 20,),
-                          subtitle: Text(filesize,style: TextStyle(color: widget.theme.accentColor,fontSize: 25,),),
+                          subtitle: Text(filesize,style: TextStyle(color: widget.theme.shadowColor,fontSize: 25,),),
                         ),
                       ),
                       SizedBox(
@@ -272,9 +271,9 @@ class _SelectedState extends State<Selected> {
                       Container(
                         height: 60,
                         child: ListTile(
-                          title: Text(datename,style: TextStyle(color: widget.theme.accentColor,fontSize: 35,),),
+                          title: Text(datename,style: TextStyle(color: widget.theme.shadowColor,fontSize: 35,),),
                           contentPadding: EdgeInsets.only(bottom: 20,),
-                          subtitle: Text(date,style: TextStyle(color: widget.theme.accentColor,fontSize: 25,),),
+                          subtitle: Text(date,style: TextStyle(color: widget.theme.shadowColor,fontSize: 25,),),
                         ),
                       )
                     ],
