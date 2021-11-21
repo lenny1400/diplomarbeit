@@ -78,6 +78,8 @@ class _TimePageState extends State<TimePage> {
   var sec;
   final String defaultLocale = Platform.localeName; // Phone local
 
+  var data; //after time edit
+
   static String _getLocalizedWeekDay(String local, DateTime date) {
     final formatter = DateFormat(DateFormat.WEEKDAY, local);
     return formatter.format(date);
@@ -105,53 +107,62 @@ class _TimePageState extends State<TimePage> {
     hour = DateTime.now().hour;
     min = DateTime.now().minute;
     sec = DateTime.now().second;
-    dayofweek = _getLocalizedWeekDay("de_DE", DateTime.now());
+    dayofweek = _getLocalizedWeekDay(Get.locale.toString(), DateTime.now());
 
     //if min smaller than 10
     if (min < 10){
       min = "0" + min.toString();
     }
-
     currentlyWorking = "00:00:00";
   }
 
   Timer? _timer;
   int _start = 0;
 
-  void timeWorkUpdate(){
+  void timeEdit(){
+      timeSec = int.parse(data.split(":")[2]);
+      timeMin = int.parse(data.split(":")[1]);
+      timeHour = int.parse(data.split(":")[0]);
+
+      //if (_start <= timeSec){  //Example: You change minutes, while the Timer is still on. Seconds will be overwritten
+        _start = timeSec;
+      //}
+  }
+
+  void timeWorkUpdate() {
     String sec = "";
     String min = "";
     String hour = "";
 
-
     timeSec = _start;
 
-    if(timeSec > 59){
+    if (timeSec > 59) {
       timeSec = 0;
       timeMin++;
-      if(timeMin > 59){
+      if (timeMin > 59) {
         timeMin = 0;
         timeHour++;
       }
     }
 
-    if(timeSec < 10){
+    if (timeSec < 10) {
       sec = "0" + timeSec.toString();
-    }else{
+    } else {
       sec = timeSec.toString();
     }
-    if(timeMin < 10){
+    if (timeMin < 10) {
       min = "0" + timeMin.toString();
-    }else{
+    } else {
       min = timeMin.toString();
     }
-    if(timeHour < 10){
+    if (timeHour < 10) {
       hour = "0" + timeHour.toString();
-    }else{
+    } else {
       hour = timeHour.toString();
     }
 
-    currentlyWorking = hour+ ":" + min + ":" + sec;
+
+    currentlyWorking = hour + ":" + min + ":" + sec;
   }
 
   void startTimer(bool _change) {
@@ -170,6 +181,8 @@ class _TimePageState extends State<TimePage> {
       },
     );
 
+
+    Isolate.spawn()
   }
 
   @override
@@ -384,9 +397,13 @@ class _TimePageState extends State<TimePage> {
                         width: MediaQuery.of(context).size.width*0.18,
                         child: FloatingActionButton(
                           elevation: 0,
-                          onPressed: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => EditTime(time: currentlyWorking,)),
+                          onPressed: () async {
+                            data = await Navigator.push(context,MaterialPageRoute(builder: (context) => EditTime(time: currentlyWorking,)),
                             );
+                            if(data != null){
+                              timeEdit();
+                              //print(data); //For testing
+                            }
                           },
                           child: Text("ti_buttonText1".tr,style: TextStyle(fontSize: MediaQuery.of(context).size.height*0.02),),
                           backgroundColor: theme.cardColor,
@@ -423,13 +440,14 @@ class _EditTimeState extends State<EditTime> {
   TextEditingController mysec = TextEditingController();
   TextEditingController myhour = TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
 
-    mymin.text = "00";
-    mysec.text = "00";
-    myhour.text = "00";
+    mymin.text = widget.time.split(":")[1];
+    mysec.text = widget.time.split(":")[2];
+    myhour.text = widget.time.split(":")[0];
 
     currentTheme.addListener(() {
       if (this.mounted) { // check whether the state object is in tree
@@ -443,6 +461,8 @@ class _EditTimeState extends State<EditTime> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
+    String newCurrentlyWorking ="";
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
@@ -577,7 +597,10 @@ class _EditTimeState extends State<EditTime> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){},
+          onPressed: (){
+            newCurrentlyWorking = myhour.text +":"+ mymin.text +":"+ mysec.text;
+            Navigator.pop(context, newCurrentlyWorking);
+          },
           label: Text("ti_buttonText2".tr),
           backgroundColor: theme.cardColor,
       ),
