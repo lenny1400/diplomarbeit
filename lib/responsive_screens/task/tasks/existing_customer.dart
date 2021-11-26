@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:csv/csv.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/themes.dart';
@@ -10,43 +12,7 @@ import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 import 'existing_customer_page_2.dart';
 
-class ExistingCustomer extends StatefulWidget {
-  final int pop;
-  const ExistingCustomer({Key? key, required this.pop}) : super(key: key);
 
-  @override
-  _ExistingCustomerState createState() => _ExistingCustomerState(pop);
-}
-
-class _ExistingCustomerState extends State<ExistingCustomer> {
-  
-  int pop;
-  _ExistingCustomerState(this.pop);
-
-  @override
-  void initState() {
-    super.initState();
-    currentTheme.addListener(() {
-      if (this.mounted) { // check whether the state object is in tree
-        setState(() {
-          // make changes here
-        });
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ExistingCustomerPage(title: 'Existing Customer', pop: pop,),
-      title: 'Flutter Theme Demo',
-      debugShowCheckedModeBanner: false,
-      theme: CustomTheme.lightTheme,
-      darkTheme: CustomTheme.darkTheme,
-      themeMode: currentTheme.currentTheme,
-    );
-  }
-}
 
 class ExistingCustomerPage extends StatefulWidget {
   const ExistingCustomerPage({Key? key, required this.title, required this.pop,}) : super(key: key);
@@ -89,11 +55,41 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
   late int var1;
   late int var2;
 
-  String dropdownValue = "Porsche";
-
-  List<String> list = ["Porsche","Apple","Blum"];
-
+  String dropdownValue = "";
+  List<String> list = [];
   bool Anfahrt = false;
+  late List<List<dynamic>> list1;
+
+  Future<void> csvReader() async{
+
+    print("Im Here");
+
+    String user = FirebaseAuth.instance.currentUser!.uid;
+
+    Directory? directory = await getApplicationDocumentsDirectory();
+
+    String path = directory.path;
+
+    await Directory('$path/User/$user/Customer/').create(recursive: true);
+
+    String csv = await File('$path/User/$user/Customer/Customers.csv').readAsString();
+
+    list1 = const CsvToListConverter().convert(csv);
+
+    String csvString = list1.toString();
+
+    for(int i = 0; i<list1.length; i++){
+      List<String> elems = list1[i].toString().split(";");
+      if(i != 0){
+        list.add(elems[0].split("[")[1]);
+      }
+    }
+    dropdownValue = list.first;
+    print("Still Here");
+    setState(() {
+    });
+  }
+
 
   String getText() {
     // if (time == null) {
@@ -214,6 +210,12 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
     checkEverything();
 
+  }
+
+  @override
+  void initState() {
+    csvReader();
+    super.initState();
   }
 
   @override
@@ -696,7 +698,15 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10.0)),
                             ),
-                            onPressed: ()  {
+                            onPressed: ()  async {
+
+                              String user = FirebaseAuth.instance.currentUser!.uid;
+
+                              final directory = await getApplicationDocumentsDirectory();
+
+                              String path =directory.path;
+
+                              String count = await File('$path/User/$user/tasks/extern/count.txt').readAsString();
 
                               User_customer customer = User_customer("company", 0000,"Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
                               User_task task = User_task("AUF0000",false, customer, "time", "text", "Material");
@@ -705,7 +715,24 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
                               int minutes =  time2.minute.toInt() - time.minute.toInt();
 
-                              task.name = "12-AUF0001";
+                              if(count.length == 1){
+                                task.name = "AUF00000" + count.toString();
+                              }
+                              else if(count.length == 2){
+                                task.name = "AUF0000" + count.toString();
+                              }
+                              else if(count.length == 3){
+                                task.name = "AUF000" + count.toString();
+                              }
+                              else if(count.length == 4){
+                                task.name = "AUF00" + count.toString();
+                              }
+                              else if(count.length == 5){
+                                task.name = "AUF0" + count.toString();
+                              }
+                              else{
+                                task.name = "AUF" + count.toString();
+                              }
 
                               task.Anfahrt = Anfahrt;
 

@@ -15,12 +15,16 @@ Future<void> startUp(String _uidUser)async {
   // create path ..app/User/xxx
   final _pathUser = Directory(_directory.path + "/User/$_uidUser");
   // create path ..app/User/Task/xxx
-  final _pathTask = Directory(_directory.path + "/User/$_uidUser/Tasks");
+  final _pathTask = Directory(_directory.path + "/User/$_uidUser/tasks");
   // create path ..app/User/Customer/xxx
   final _pathCustomer = Directory(_directory.path + "/User/$_uidUser/Customer");
   final _pathCustomerPath = _directory.path + "/User/$_uidUser/Customer";
   //file Path
   final File _customerFile = File('$_pathCustomerPath/Customer.csv');
+
+  final countpath = _pathUser.path +"/tasks/extern/count.txt";
+
+  final File _countFile =  File(countpath);
 
   if ((await _pathUser.exists())){
     print("user already exists");
@@ -44,5 +48,12 @@ Future<void> startUp(String _uidUser)async {
     print("CustomerPath already exists");
   }else{
     await _customerFile.create(recursive: true);
+  }
+
+  if ((await _countFile.exists())){
+    print("Countfile already exists");
+  }else{
+    await _countFile.create(recursive: true);
+    _countFile.writeAsString("0");
   }
 }

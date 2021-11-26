@@ -156,6 +156,7 @@ class DisplayPictureScreen extends StatefulWidget {
 
 class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
 
+  String user = FirebaseAuth.instance.currentUser!.uid;
   late String folderName = "";
   late String fileName = "";
   late int itemCount = 0;
@@ -174,10 +175,10 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   checkifFolderExists() async {
     String taskname = task.name;
     final directory = await _localPath;
-    bool existsTask = await Directory(directory+"tasks/extern/$taskname").exists();
+    bool existsTask = await Directory(directory+"/User/$user/tasks/extern/$taskname").exists();
 
     if(!existsTask){
-      new Directory(directory+"/tasks/extern/$taskname").create();
+      new Directory(directory+"/User/$user/tasks/extern/$taskname").create();
     }
   }
 
@@ -210,7 +211,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
 
   createFolder()async{
 
-    String user = FirebaseAuth.instance.currentUser!.uid;
+
     String taskname = task.name;
 
     late TimeOfDay time = TimeOfDay.now();
@@ -219,7 +220,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
     final min = time.minute.toString().padLeft(2, '0');
 
     final directory = await _localPath;
-    folderName = directory + "/tasks/extern/$taskname/";
+    folderName = directory + "/User/$user/tasks/extern/$taskname/";
 
     final directory1 = Directory(folderName);
 

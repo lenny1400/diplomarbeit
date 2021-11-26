@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
+import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 
@@ -101,15 +103,16 @@ class _SignatureAppState extends State<SignatureApp> {
 
                       Image.memory(data!);
 
+                      String user = FirebaseAuth.instance.currentUser!.uid;
                       String name = task.name;//id vom Auftag maybe?
 
                       Directory? directory = await getApplicationDocumentsDirectory();
                       String path = directory.path;
                       print(path);
 
-                      await Directory('$path/tasks/extern/$name').create(recursive: true);
+                      await Directory('$path/User/$user/tasks/extern/$name').create(recursive: true);
 
-                      File('$path/tasks/extern/$name/signature.png')
+                      File('$path/User/$user/tasks/extern/$name/signature.png')
                           .writeAsBytesSync(data.buffer.asInt8List());
 
                       var count = 0;
@@ -124,15 +127,17 @@ class _SignatureAppState extends State<SignatureApp> {
 
                       content += "Kunde: " + task.customer.company + "\n";
 
+                      content += "Kundennummer: " + task.customer.number.toString() + "\n";
+
                       content += "Zeitaufwand: " + task.time + "\n" + "Arbeit: " + task.text + "\n" + "Materiel: " + task.material + "\n";
 
-                      final File file =  File('$path/tasks/extern/$name/task.txt');
+                      final File file =  File('$path/User/$user/tasks/extern/$name/task.txt');
 
                       file.writeAsString(content);
 
+                      saveCount();
 
                       Navigator.popUntil(context, (route) {return count++ == pop;});
-
                     }
                   },
                   child: Icon(Icons.save),
