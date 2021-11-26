@@ -120,13 +120,13 @@ class _TimePageState extends State<TimePage> {
   int _start = 0;
 
   void timeEdit(){
-      timeSec = int.parse(data.split(":")[2]);
-      timeMin = int.parse(data.split(":")[1]);
-      timeHour = int.parse(data.split(":")[0]);
+    timeSec = int.parse(data.split(":")[2]);
+    timeMin = int.parse(data.split(":")[1]);
+    timeHour = int.parse(data.split(":")[0]);
 
-      //if (_start <= timeSec){  //Example: You change minutes, while the Timer is still on. Seconds will be overwritten
-        _start = timeSec;
-      //}
+    //if (_start <= timeSec){  //Example: You change minutes, while the Timer is still on. Seconds will be overwritten
+    _start = timeSec;
+    //}
   }
 
   void timeWorkUpdate() {
@@ -191,7 +191,10 @@ class _TimePageState extends State<TimePage> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    var t = _timer;
+    if(t != null) {
+      t.cancel();
+    }
     super.dispose();
   }
 
@@ -526,6 +529,9 @@ class _EditTimeState extends State<EditTime> {
                                   height: MediaQuery.of(context).size.height*0.1,
                                   child: TextFormField(
                                     keyboardType: TextInputType.datetime,
+                                    inputFormatters:[
+                                      LengthLimitingTextInputFormatter(3),
+                                    ],
                                     controller: myhour,
                                     textAlign: TextAlign.center,
                                   ),
@@ -551,6 +557,9 @@ class _EditTimeState extends State<EditTime> {
                                   height: MediaQuery.of(context).size.height*0.1,
                                   child: TextFormField(
                                     keyboardType: TextInputType.datetime,
+                                    inputFormatters:[
+                                      LengthLimitingTextInputFormatter(2),
+                                    ],
                                     controller: mymin,
                                     textAlign: TextAlign.center,
                                   ),
@@ -576,6 +585,9 @@ class _EditTimeState extends State<EditTime> {
                                   height: MediaQuery.of(context).size.height*0.1,
                                   child: TextFormField(
                                     keyboardType: TextInputType.datetime,
+                                    inputFormatters:[
+                                      LengthLimitingTextInputFormatter(2),
+                                    ],
                                     controller: mysec,
                                     textAlign: TextAlign.center,
                                   ),
