@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class User_customer{
 
   String company;
-  int number;
+  String number;
   String Anrede;
   String name1;
   late String name2;

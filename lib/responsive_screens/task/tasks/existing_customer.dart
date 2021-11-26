@@ -59,6 +59,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
   List<String> list = [];
   bool Anfahrt = false;
   late List<List<dynamic>> list1;
+  List<String> numberlist = [];
 
   Future<void> csvReader() async{
 
@@ -82,6 +83,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
       List<String> elems = list1[i].toString().split(";");
       if(i != 0){
         list.add(elems[0].split("[")[1]);
+        numberlist.add(elems[1]);
       }
     }
     dropdownValue = list.first;
@@ -708,7 +710,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
                               String count = await File('$path/User/$user/tasks/extern/count.txt').readAsString();
 
-                              User_customer customer = User_customer("company", 0000,"Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
+                              User_customer customer = User_customer("company", "0000","Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
                               User_task task = User_task("AUF0000",false, customer, "time", "text", "Material");
 
                               int hours = time2.hour.toInt() - time.hour.toInt();
@@ -734,6 +736,13 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                 task.name = "AUF" + count.toString();
                               }
 
+                              task.customer.company = dropdownValue;
+
+                              for(int i =0;i<list.length;i++){
+                                if(task.customer.company == list[i]){
+                                  task.customer.number = numberlist[i];
+                                }
+                              }
                               task.Anfahrt = Anfahrt;
 
                               if(Anfahrt){
@@ -744,8 +753,6 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                int e = int.parse(ende);
                                task.km= e-a;
                               }
-
-                              task.customer = customer;
 
                               task.time = hours.toString() + " Stunden und " + minutes.toString() + " Minuten!";
 

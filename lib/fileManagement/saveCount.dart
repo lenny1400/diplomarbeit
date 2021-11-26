@@ -24,5 +24,4 @@ void saveCount () async {
   File('$path/User/$user/tasks/extern/count.txt').writeAsString(count.toString());
 
   print(count);
-
 }
