@@ -55,7 +55,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
   late int var1;
   late int var2;
 
-  String dropdownValue = "";
+  String dropdownValue = "Keine Kunden";
   List<String> list = [];
   bool Anfahrt = false;
   late List<List<dynamic>> list1;
@@ -73,9 +73,9 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
     await Directory('$path/User/$user/Customer/').create(recursive: true);
 
-    String csv = await File('$path/User/$user/Customer/Customers.csv').readAsString();
+    String csv1 = await File('$path/User/$user/Customer/Customer.csv').readAsString();
 
-    list1 = const CsvToListConverter().convert(csv);
+    list1 = const CsvToListConverter().convert(csv1);
 
     String csvString = list1.toString();
 
@@ -86,7 +86,12 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
         numberlist.add(elems[1]);
       }
     }
-    dropdownValue = list.first;
+    if(list.isEmpty){
+      list.add("Keine Kunden");
+    }
+    else{
+      dropdownValue = list.first;
+    }
     print("Still Here");
     setState(() {
     });
