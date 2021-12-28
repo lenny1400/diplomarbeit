@@ -33,10 +33,15 @@ class _LoginRegisterState extends State<LoginRegister> {
     currentTheme.addListener(() {
       if(this.mounted) { // check whether the state object is in tree
         setState(() {
-          // make changes here
+          print("LoginRegister Widget");
         });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -61,7 +66,8 @@ class LoginRegisterPage extends StatefulWidget {
 
 class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
-  bool buildIt = false;
+  //logged out is set to false, so the white screen is shown first, after checkUser() it will show login/register screen
+  bool _isLoggedOut = false;
 
   @override
   void initState() {
@@ -76,7 +82,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
         .listen((User? user) {
       if (user == null) {
         print('User is currently signed out!');
-        buildIt = false;
+        _isLoggedOut = true;
       } else {
         print('User is signed in!');
         print(user.uid.toString());
@@ -92,18 +98,9 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       body: Center(
-        child: (buildIt)
+        child: (_isLoggedOut)
+        //if user is logged out, this will be shown
             ? FittedBox(
-                fit: BoxFit.fitHeight,
-                alignment: Alignment.center,
-                child: Container(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
-                  width: MediaQuery.of(context).size.width*1,
-                  height: MediaQuery.of(context).size.height*1,
-                  color: theme.primaryColor,
-                ),
-            )
-            : FittedBox(
                 fit: BoxFit.fitHeight,
                 alignment: Alignment.center,
                 child: Container(
@@ -205,6 +202,16 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                       ],
                     ),
                   ),
+                ),
+            )
+            : FittedBox(
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
+                  width: MediaQuery.of(context).size.width*1,
+                  height: MediaQuery.of(context).size.height*1,
+                  color: theme.primaryColor,
                 ),
             )
       ),

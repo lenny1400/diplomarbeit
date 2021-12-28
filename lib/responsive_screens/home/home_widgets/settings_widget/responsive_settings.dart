@@ -39,12 +39,24 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
   void initState() {
     super.initState();
 
-    if(switchData.read('isSwitched') != null)
-    {
-      setState(() {
-        isSwitched = switchData.read('isSwitched');
-      });
-    }
+    currentTheme.addListener(() {
+      if(this.mounted) { // check whether the state object is in tree
+        setState(() {
+          if(switchData.read('isSwitched') != null)
+          {
+            setState(() {
+              isSwitched = switchData.read('isSwitched');
+            });
+          }
+        });
+      }
+    });
+
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   final List locales =[
@@ -108,19 +120,18 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
     Get.updateLocale(locale);
   }
 
-  void signOut(){
+  void signOut() {
 
     FirebaseAuth.instance
         .authStateChanges()
         .listen((User? user) async {
       if (user == null) {
         print('User is currently signed out!');
+        Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false,);
       } else {
         print('User is signed in!');
         await FirebaseAuth.instance.signOut();
-        setState(() {
-          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false,);
-        });
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false);
       }
     });
   }

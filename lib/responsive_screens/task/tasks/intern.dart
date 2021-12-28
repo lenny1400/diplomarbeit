@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_nav_bar/user_firebase_tasks/intern_upload.dart';
 
 import '../../../themes.dart';
 
@@ -526,6 +527,7 @@ class _InternPageState extends State<InternPage> {
                                   if(errorText == "Done"){
                                     //Navigator.pop(context);
                                     saveToStorage();
+                                    uploadInternTask(myControllerText.text, _selectedDate, getText(), getText2());
                                   }
                                 });
                               },

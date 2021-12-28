@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:simple_nav_bar/user_startup/startup.dart';
+import 'package:simple_nav_bar/user_startup/user_register_database.dart';
 
 import '../nav.dart';
 import 'login.dart';
@@ -99,7 +101,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
+        //Create Startup Files for User
         startUp(FirebaseAuth.instance.currentUser!.uid);
+        //Push values to database
+        setValuesDatabase(FirebaseAuth.instance.currentUser!.uid, myEmail.text, myName.text);
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });

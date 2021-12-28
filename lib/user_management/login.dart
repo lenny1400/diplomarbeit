@@ -102,6 +102,10 @@ class _LoginMainPageState extends State<LoginMainPage> {
     Firebase.initializeApp();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,8 +220,6 @@ class _LoginMainPageState extends State<LoginMainPage> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         onPressed: () {
-                          print(myEmail.text);
-                          print(myPassword.text);
                           loginUser(myEmail.text,myPassword.text);
                         },
                         child: Text(
