@@ -38,7 +38,7 @@ class Languages extends Translations {
       'ti_hours':'Hours',
       'ti_minutes':'Minutes',
       'ti_seconds':'Seconds',
-      'ti_buttonText2':'Check Time',
+      'ti_buttonText2':'Save',
 
     },
     'de_DE': {
@@ -76,7 +76,7 @@ class Languages extends Translations {
       'ti_hours':'Stunden',
       'ti_minutes':'Minuten',
       'ti_seconds':'Sekunden',
-      'ti_buttonText2':'Uhrzeit kontrollieren',
+      'ti_buttonText2':'Speichern',
     }
   };
 }

@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:simple_nav_bar/user_startup/user_customer.dart';
+import 'package:simple_nav_bar/user_startup/user_task.dart';
+/*
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
@@ -28,23 +31,29 @@ Future<void> main() async {
     ),
   );
 }
-
+*/
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
     Key? key,
     required this.camera,
+    required this.task
   }) : super(key: key);
 
+  final User_task task;
   final CameraDescription camera;
-
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  TakePictureScreenState createState() => TakePictureScreenState(this.task);
 }
 
 class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+
+  User_task task;
+
+  TakePictureScreenState(this.task);
+
 
   @override
   void initState() {
@@ -116,6 +125,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                     // Pass the automatically generated path to
                     // the DisplayPictureScreen widget.
                     imagePath: image.path,
+                    task: task,
                   ),
                 ),
               );
@@ -135,21 +145,27 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatefulWidget {
   final String imagePath;
+  final User_task task;
 
-  const DisplayPictureScreen({Key? key, required this.imagePath})
+  const DisplayPictureScreen({Key? key, required this.imagePath, required this.task})
       : super(key: key);
 
   @override
-  _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
+  _DisplayPictureScreenState createState() => _DisplayPictureScreenState(this.task);
 }
 
 class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
 
+  String user = FirebaseAuth.instance.currentUser!.uid;
   late String folderName = "";
   late String fileName = "";
   late int itemCount = 0;
   List<FileSystemEntity> file = [];
   bool done = false;
+
+  final User_task task;
+
+  _DisplayPictureScreenState(this.task);
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
@@ -157,11 +173,12 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   }
 
   checkifFolderExists() async {
+    String taskname = task.name;
     final directory = await _localPath;
-    bool existsTask = await Directory(directory+"/Tasks").exists();
+    bool existsTask = await Directory(directory+"/User/$user/tasks/extern/$taskname").exists();
 
     if(!existsTask){
-      new Directory(directory+"/Tasks").create();
+      new Directory(directory+"/User/$user/tasks/extern/$taskname").create();
     }
   }
 
@@ -189,47 +206,30 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
     File file = File(widget.imagePath);
     file.copy('$folderName/$fileName');
 
-    _deleteImage();
+    //_deleteImage();
   }
 
   createFolder()async{
-    var now = new DateTime.now();
-    var formatter = new DateFormat('dd-MM-yyyy');
-    String formattedDate = formatter.format(now);
+
+
+    String taskname = task.name;
 
     late TimeOfDay time = TimeOfDay.now();
 
     final hours = time.hour.toString().padLeft(2, '0');
     final min = time.minute.toString().padLeft(2, '0');
-    String newformattedDate = formattedDate + "-" + hours.toString() + "-" + min.toString();
 
     final directory = await _localPath;
-    folderName = directory + "/Tasks/" + newformattedDate;
-    fileName = newformattedDate + ".jpg";
+    folderName = directory + "/User/$user/tasks/extern/$taskname/";
 
-    bool exists = await Directory(folderName).exists();
+    final directory1 = Directory(folderName);
 
-    if(!exists){
-      new Directory(folderName).create()
-      // The created directory is returned as a Future.
-          .then((Directory directory) {
-            file = Directory(folderName).listSync();
-            itemCount = file.length;
-            if(itemCount == 0){
-              fileName = newformattedDate + ".jpg";
-            }else if(itemCount >= 1){
-              fileName = newformattedDate+"_"+itemCount.toString() + ".jpg";
-            }
-      });
-    }else{
-      file = Directory(folderName).listSync();
-      itemCount = file.length;
-      if(itemCount == 0){
-        fileName = newformattedDate + ".jpg";
-      }else if(itemCount >= 1){
-        fileName = newformattedDate +"_"+itemCount.toString() + ".jpg";
-      }
-    }
+    int count = await directory1.list().length + 1;
+
+    fileName = "picture_" + count.toString() + ".jpg";
+
+    //bool exists = await Directory(folderName).exists();
+
     saveImage();
   }
 
@@ -277,6 +277,8 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
                 createFolder();
 
                 await Future.delayed(Duration(milliseconds: 300));
+
+
 
                 var count = 0;
                 Navigator.popUntil(context, (route) {

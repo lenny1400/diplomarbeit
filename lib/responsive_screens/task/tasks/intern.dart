@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -174,6 +175,40 @@ class _InternPageState extends State<InternPage> {
 
   Future<void> saveToStorage() async {
     //get time of Input
+
+    String user = FirebaseAuth.instance.currentUser!.uid;
+
+    final directory = await getApplicationDocumentsDirectory();
+    String path = directory.path + "/User/$user/tasks/intern";
+    await Directory(path).create(recursive: true);
+
+    final timeSave = getText(); // Time start
+    final time2Save = getText2(); // Time end
+    final text = myControllerText.text;
+
+    final directory1 = Directory(path);
+
+    if(await directory1.exists()){
+      int _countFilesinFolder = (await directory1.list().length)+1; //Folder Name
+
+      String _fileName = "intern_" + _countFilesinFolder.toString() +  ".txt";
+
+      final File file = File('$path/$_fileName');
+      await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     final timeSave = getText(); // Time start
     final time2Save = getText2(); // Time end
     final _yearName = DateTime.now().year.toString(); //Year
@@ -266,6 +301,8 @@ class _InternPageState extends State<InternPage> {
         }
       }
     }
+    /
+   */
   }
 
   @override
@@ -530,6 +567,7 @@ class _InternPageState extends State<InternPage> {
                                     uploadInternTask(myControllerText.text, _selectedDate, getText(), getText2());
                                   }
                                 });
+                                Navigator.pop(context);
                               },
                               child: Text(
                                 'Speichern',

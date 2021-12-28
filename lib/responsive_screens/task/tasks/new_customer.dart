@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
 import 'package:flutter/material.dart';
@@ -76,15 +77,19 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   final myControllerCountry = TextEditingController();
   final myControllerPhone = TextEditingController();
   final myControllerEmail = TextEditingController();
+  final myControllerFax = TextEditingController();
+  final myControllerNumber = TextEditingController();
+  final myControllerTitle = TextEditingController();
 
   bool _validateCompany = false;
   bool _validateFirstName = false;
-  bool _validateLastName = false;
   bool _validateStreet = false;
   bool _validateStreetNr = false;
   bool _validateProvince = false;
   bool _validateZipCode = false;
   bool _validateCountry = false;
+  bool _validateNumber = false;
+  bool _validateTitle = false;
 
   bool _isEverythingOkay = false;
 
@@ -94,13 +99,29 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   void ctrlTxtFields(){
     final _company = myControllerCompany.text;
     final _firstname = myControllerFirstName.text;
-    final _lastname = myControllerLastName.text;
     final _street = myControllerStreet.text;
     final _streetnr = myControllerStreetNr.text;
     final _province= myControllerProvince.text;
     final _zipcode = myControllerZipCode.text;
     final _country = myControllerCountry.text;
+    final _number = myControllerNumber.text;
+    final _title = myControllerTitle.text;
 
+
+    //number
+    if(_number.isEmpty){
+      _validateNumber = false;
+      errorText = "Number cant be empty";
+    }else{
+      _validateNumber = true;
+    }
+    //title
+    if(_title.isEmpty){
+      _validateTitle = false;
+      errorText = "Title cant be empty";
+    }else{
+      _validateTitle = true;
+    }
     //Country
     if(_country.isEmpty){
       _validateCountry = false;
@@ -136,13 +157,6 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     }else{
       _validateStreet = true;
     }
-    //Last Name
-    if(_lastname.isEmpty){
-      _validateLastName = false;
-      errorText = "Last Name cant be empty";
-    }else{
-      _validateLastName = true;
-    }
     //First Name
     if(_firstname.isEmpty){
       _validateFirstName = false;
@@ -158,7 +172,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
       _validateCompany = true;
     }
     //check everything
-    if(_validateCompany&&_validateFirstName&&_validateLastName&&_validateStreet&&_validateStreetNr&&_validateProvince&&_validateProvince&&_validateZipCode&&_validateCountry){
+    if(_validateCompany&&_validateFirstName&&_validateStreet&&_validateStreetNr&&_validateProvince&&_validateProvince&&_validateZipCode&&_validateCountry&&_validateTitle&&_validateNumber){
       _isEverythingOkay = true;
       errorText = "Data is Okay";
     }
@@ -178,41 +192,24 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     final _country = myControllerCountry.text;
     final _email = myControllerPhone.text;
     final _phone = myControllerEmail.text;
+    final _fax = myControllerFax.text;
+    final _title = myControllerTitle.text;
+    final _number = myControllerNumber.text;
 
-    String fileInput = formatFile(_company, _firstname, _lastname, _street, _streetnr, _province, _zipcode, _country, _email, _phone);
-    String fileName = _lastname+"_"+_firstname+".csv";
+    String user = FirebaseAuth.instance.currentUser!.uid;
 
-    //get directory of Device
-    final directory = await getApplicationDocumentsDirectory();
-    // create path Year
-    final _path= Directory(directory.path.toString() + "/Kunden");
-    final _pathString = _path.path.toString();
-    final _pathCustomer= File(_path.toString() + "/" + fileName);
+    Directory? directory = await getApplicationDocumentsDirectory();
+    String path = directory.path;
+    print(path);
 
-    if ((await _path.exists())){
-      if((await _pathCustomer.exists())){
-        errorText = "Customer already exists";
-        _isEverythingOkay = false;
-        return null;
-      }else{
-        errorText = "Customer saved";
-        _isEverythingOkay = true;
-        final File file = File('$_pathString/$fileName');
-        await file.writeAsString(fileInput);
-      }
-    }else{
-      _path.create(recursive: true);
-      if((await _pathCustomer.exists())){
-        errorText = "Customer already exists";
-        _isEverythingOkay = false;
-        return null;
-      }else{
-        errorText = "Customer saved";
-        _isEverythingOkay = true;
-        final File file = File('$_pathString/$fileName');
-        await file.writeAsString(fileInput);
-      }
-    }
+    String input = await File('$path/User/$user/Customer/Customer.csv').readAsString();
+
+    input += "\r\n" + _company+";" + _number +";" + _title +";" +_firstname + ";"+_lastname + ";"+_street+ ";"+_streetnr+ ";"+_country+ ";"+_zipcode+ ";"+_province+ ";"+_phone+ ";"+_fax+ ";"+_email+ ";"+_number;
+
+    await File('$path/User/$user/Customer/Customer.csv').writeAsString(input);
+
+    print(input);
+
     setState(() {});
   }
 
@@ -235,6 +232,9 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     myControllerProvince.dispose();
     myControllerZipCode.dispose();
     myControllerCountry.dispose();
+    myControllerTitle.dispose();
+    myControllerNumber.dispose();
+    myControllerFax.dispose();
     super.dispose();
   }
 
@@ -303,6 +303,77 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                 Padding(
                   padding: EdgeInsets.only(top: mdHeight*0.02),
                   child: Container(
+                    width: mdWidth,
+                    height: boxHeight,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: mdWidth*0.65,
+                            child: TextField(
+                              controller: myControllerNumber,
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: theme.dividerColor,
+                              ),
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: BorderSide(color: theme.dividerColor),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: BorderSide(color: theme.dividerColor),
+                                  ),
+                                  labelText: "Customer Number (required)",
+                                  labelStyle: TextStyle(
+                                      color: theme.dividerColor
+                                  ),
+                                  hintText: "Enter Customer Number"
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: mdWidth*0.05),
+                            child: Container(
+                              width: mdWidth*0.3,
+                              child: TextField(
+                                controller: myControllerTitle,
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: theme.dividerColor,
+                                ),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(15),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide: BorderSide(color: theme.dividerColor),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide: BorderSide(color: theme.dividerColor),
+                                    ),
+                                    labelText: "Title*",
+                                    labelStyle: TextStyle(
+                                        color: theme.dividerColor
+                                    ),
+                                    hintText: "Title"
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
                       width: mdWidth,
                       height: boxHeight,
                       child: Align(
@@ -324,7 +395,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "First Name (required)",
+                                labelText: "Firstname (required)",
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
@@ -358,7 +429,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Last Name (required)",
+                                labelText: "Lastname",
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
@@ -620,6 +691,40 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                 Padding(
                   padding: EdgeInsets.only(top: mdHeight*0.02),
                   child: Container(
+                      width: mdWidth,
+                      height: boxHeight,
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextField(
+                            controller: myControllerFax,
+                            textAlign: TextAlign.left,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: theme.dividerColor,
+                            ),
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top: 15,left: 20,bottom: 10),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: theme.dividerColor),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: theme.dividerColor),
+                                ),
+                                labelText: "Fax",
+                                labelStyle: TextStyle(
+                                    color: theme.dividerColor
+                                ),
+                                hintText: "Enter Fax number"
+                            ),
+                          )
+                      )
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: mdHeight*0.02),
+                  child: Container(
                     child: Align(
                         alignment: Alignment.center,
                         child: (_isEverythingOkay)
@@ -689,6 +794,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                       ),
                       onPressed: () {
                           saveToStorage();
+                          Navigator.pop(context);
                       },
                       heroTag: "ChecknSave",
                     )
