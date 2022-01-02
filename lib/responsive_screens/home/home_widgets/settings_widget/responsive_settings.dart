@@ -120,20 +120,9 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
     Get.updateLocale(locale);
   }
 
-  void signOut() {
-
-    FirebaseAuth.instance
-        .authStateChanges()
-        .listen((User? user) async {
-      if (user == null) {
-        print('User is currently signed out!');
-        Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false,);
-      } else {
-        print('User is signed in!');
-        await FirebaseAuth.instance.signOut();
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false);
-      }
-    });
+  void signOut() async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginRegister()),(route) => false,);
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/main_screens/home_screen.dart';
 import 'package:simple_nav_bar/main_screens/task_screen.dart';
 import 'package:simple_nav_bar/main_screens/time_screen.dart';
+import 'package:simple_nav_bar/user_management/login_register.dart';
 
 import 'main_screens/data_screen.dart';
 import 'package:simple_nav_bar/themes.dart';
@@ -35,6 +36,13 @@ class _NavState extends State<Nav> {
         });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    LoginRegister();
+    super.dispose();
   }
 
   @override

@@ -71,12 +71,21 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
   @override
   void initState() {
+    print("LoginRegister is loaded" + _isLoggedOut.toString());
     // TODO: implement initState
     super.initState();
-    Firebase.initializeApp().whenComplete(() => checkUser());
+    setState(() {
+      Firebase.initializeApp().whenComplete(() => checkUser());
+    });
   }
 
-  void checkUser(){
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  void checkUser() {
     FirebaseAuth.instance
         .authStateChanges()
         .listen((User? user) {
@@ -84,6 +93,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
         print('User is currently signed out!');
         _isLoggedOut = true;
       } else {
+        _isLoggedOut = false;
         print('User is signed in!');
         print(user.uid.toString());
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
@@ -211,7 +221,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
                   width: MediaQuery.of(context).size.width*1,
                   height: MediaQuery.of(context).size.height*1,
-                  color: theme.primaryColor,
+                  color: theme.backgroundColor,
                 ),
             )
       ),
