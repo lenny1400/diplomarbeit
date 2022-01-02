@@ -75,7 +75,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      Firebase.initializeApp().whenComplete(() => checkUser());
+      Firebase.initializeApp().whenComplete(() => checkUser()).whenComplete(() => refreshPage());
     });
   }
 
@@ -83,6 +83,10 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  void refreshPage(){
+    setState(() {});
   }
 
   void checkUser() {
