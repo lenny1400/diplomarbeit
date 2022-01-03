@@ -16,15 +16,19 @@ Future<void> uploadInternTask(String _doneTask, String _date, String _timeStart,
   _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child(_date).push().set(_timeStart+"-"+_timeEnd);
   _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child(_date).child(_timeStart+"-"+_timeEnd).child("Task").push().set(_doneTask);
 */
-
-  //Get the number of the intern task through the folder
   String user = FirebaseAuth.instance.currentUser!.uid;
-  final directory = await getApplicationDocumentsDirectory();
-  String path = directory.path + "/User/$user/tasks/intern";
-  final directory1 = Directory(path);
-  int _countFilesinFolder = (await directory1.list().length)+1; //Folder Name
-  String _fileName = "intern_" + _countFilesinFolder.toString();
+  String _fileName;
+  DataSnapshot snapshot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
 
+  print(snapshot.value);
+
+  if(snapshot.value!=null) {
+    int number = snapshot.value + 1;
+    _fileName = "intern_" + number.toString();
+  }
+  else{
+    _fileName = "intern_1";
+  }
 
 try{
 

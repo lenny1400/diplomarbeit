@@ -4,6 +4,7 @@ import 'package:csv/csv.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 import 'package:simple_nav_bar/themes.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -709,11 +710,11 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
                               String user = FirebaseAuth.instance.currentUser!.uid;
 
-                              final directory = await getApplicationDocumentsDirectory();
+                              int counts = await CountExtern();
 
-                              String path =directory.path;
+                              print(counts.toString());
 
-                              String count = await File('$path/User/$user/tasks/extern/count.txt').readAsString();
+                              String count = counts.toString();
 
                               User_customer customer = User_customer("company", "0000","Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
                               User_task task = User_task("AUF0000",false, customer, "time", "text", "Material");

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 import 'package:simple_nav_bar/user_firebase_tasks/intern_upload.dart';
 
 import '../../../themes.dart';
@@ -177,6 +178,9 @@ class _InternPageState extends State<InternPage> {
     //get time of Input
 
     String user = FirebaseAuth.instance.currentUser!.uid;
+    int number = await CountIntern();
+    String _fileName = "intern_" + number.toString() +  ".txt";
+
 
     final directory = await getApplicationDocumentsDirectory();
     String path = directory.path + "/User/$user/tasks/intern";
@@ -189,14 +193,9 @@ class _InternPageState extends State<InternPage> {
     final directory1 = Directory(path);
 
     if(await directory1.exists()){
-      int _countFilesinFolder = (await directory1.list().length)+1; //Folder Name
-
-      String _fileName = "intern_" + _countFilesinFolder.toString() +  ".txt";
-
       final File file = File('$path/$_fileName');
       await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
     }
-
 
 
 
