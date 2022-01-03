@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
 import 'package:simple_nav_bar/fileManagement/saveCount.dart';
+import 'package:simple_nav_bar/user_firebase_tasks/extern_upload.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 
@@ -122,7 +123,7 @@ class _SignatureAppState extends State<SignatureApp> {
                       String content = "Auftrag: " + task.name + "\n";
 
                       if(task.Anfahrt){
-                        content += "Eine Anfahrt von: " + task.km.toString()+ "\n";;
+                        content += "Eine Anfahrt von: " + task.km.toString()+ " km"+"\n";;
                       }
 
                       content += "Kunde: " + task.customer.company + "\n";
@@ -136,6 +137,8 @@ class _SignatureAppState extends State<SignatureApp> {
                       file.writeAsString(content);
 
                       saveCount();
+
+                      uploadExternTask(task);
 
                       Navigator.popUntil(context, (route) {return count++ == pop;});
                     }
