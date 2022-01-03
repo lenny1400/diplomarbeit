@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:simple_nav_bar/main.dart';
+import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/help.dart';
+import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/notifications.dart';
+import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/support.dart';
 import 'package:simple_nav_bar/user_management/login_register.dart';
 
 import '../../../../themes.dart';
@@ -424,7 +427,9 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     child: Container(
                       height: _cons5,
                       child: TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationsPageWidget()));
+                        },
                         style: TextButton.styleFrom(
                             onSurface: theme.backgroundColor,
                             primary: theme.backgroundColor
@@ -495,7 +500,9 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     child: Container(
                       height: _cons5,
                       child: TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportWidgetPage()));
+                        },
                         style: TextButton.styleFrom(
                             onSurface: theme.backgroundColor,
                             primary: theme.backgroundColor
@@ -566,7 +573,9 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     child: Container(
                       height: _cons5,
                       child: TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => const HelpWidgetPage()));
+                        },
                         style: TextButton.styleFrom(
                             onSurface: theme.backgroundColor,
                             primary: theme.backgroundColor
