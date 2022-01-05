@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
@@ -56,13 +57,14 @@ Future<void> uploadExternTask(User_task task)async {
   Directory? directory = await getApplicationDocumentsDirectory();
   String path = directory.path;
   File Signature =  File('$path/User/$user/tasks/extern/$name/signature.png');
+  final DateTime now = DateTime.now();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+  final String formatted = formatter.format(now);
+
 
   if(Signature.existsSync()) {
 
-    FirebaseStorage firebaseStorage = FirebaseStorage.instance;
-
-    Reference storageReference = FirebaseStorage.instance.ref().child(
-        "gs://rocomp-app-d6d31.appspot.com/$name");
+    Reference storageReference = FirebaseStorage.instance.ref("${FirebaseAuth.instance.currentUser!.uid}/${formatted}/${task.name}").child("signature");
 
     final UploadTask uploadTask = storageReference.putFile(Signature);
 
@@ -72,6 +74,36 @@ Future<void> uploadExternTask(User_task task)async {
 
     print(url);
 
+  }
+
+  Directory? directory1 = Directory('$path/User/$user/tasks/extern/$name');
+
+
+
+  for(int i = 0; i<directory1.listSync().length;i++){
+
+    List<String> string = directory1.listSync()[i].toString().split("/").last.split(".");
+
+    if(string[1] == "jpg'"){
+      String picturename = string[0].split("'")[0];
+
+      print(picturename);
+
+      File picture =  File('$path/User/$user/tasks/extern/$name/${picturename}.jpg');
+
+      print(picture);
+
+      Reference storageReference = FirebaseStorage.instance.ref("${FirebaseAuth.instance.currentUser!.uid}/${formatted}/${task.name}").child("${picturename}");
+
+      final UploadTask uploadTask = storageReference.putFile(picture);
+
+      final TaskSnapshot downloadUrl = (await uploadTask);
+
+      final String url = await downloadUrl.ref.getDownloadURL();
+
+      print(url);
+
+    }
   }
 
 }
