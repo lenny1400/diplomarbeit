@@ -136,8 +136,6 @@ class _SignatureAppState extends State<SignatureApp> {
 
                       file.writeAsString(content);
 
-                      saveCount();
-
                       uploadExternTask(task);
 
                       Navigator.popUntil(context, (route) {return count++ == pop;});

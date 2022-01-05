@@ -76,10 +76,4 @@ Future<void> startUp(String _uidUser)async {
     _customerFile.writeAsString(input);
   }
 
-  if ((await _countFile.exists())){
-    print("Countfile already exists");
-  }else{
-    await _countFile.create(recursive: true);
-    _countFile.writeAsString("0");
-  }
 }

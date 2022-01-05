@@ -178,7 +178,7 @@ class _InternPageState extends State<InternPage> {
     //get time of Input
 
     String user = FirebaseAuth.instance.currentUser!.uid;
-    int number = await CountIntern();
+    int number = await getCountIntern();
     String _fileName = "intern_" + number.toString() +  ".txt";
 
 

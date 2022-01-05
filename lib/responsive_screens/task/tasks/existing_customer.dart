@@ -710,9 +710,9 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
                               String user = FirebaseAuth.instance.currentUser!.uid;
 
-                              int counts = await CountExtern();
+                              int counts = await getAndSaveCountExtern();
 
-                              print(counts.toString());
+                              print("---------------------------------"+counts.toString());
 
                               String count = counts.toString();
 

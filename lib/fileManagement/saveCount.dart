@@ -10,29 +10,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
-void saveCount () async {
-
-  String user = FirebaseAuth.instance.currentUser!.uid;
-
-  final directory = await getApplicationDocumentsDirectory();
-
-  String path =directory.path;
-
-  int count = int.parse(await File('$path/User/$user/tasks/extern/count.txt').readAsString());
-
-  count += 1;
-
-  File('$path/User/$user/tasks/extern/count.txt').writeAsString(count.toString());
-
-  print(count);
-}
-
 
 final String user = FirebaseAuth.instance.currentUser!.uid;
 final DatabaseReference _refIntern = FirebaseDatabase(databaseURL: "https://rocomp-app-d6d31-default-rtdb.europe-west1.firebasedatabase.app/").reference().child("Intern");
 final DatabaseReference _refExtern = FirebaseDatabase(databaseURL: "https://rocomp-app-d6d31-default-rtdb.europe-west1.firebasedatabase.app/").reference().child("Extern");
 
-Future<int> CountIntern() async {
+Future<int> saveCountIntern() async {
 
   DataSnapshot _snpShot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
 
@@ -50,11 +33,30 @@ Future<int> CountIntern() async {
     return 1;
   }
 }
-Future<int> CountExtern() async {
+
+Future<int> getCountIntern () async {
+
+  DataSnapshot _snpShot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
+
+  print(_snpShot.value);
+
+  if(_snpShot.value!=null) {
+    final snapshot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
+    int value = snapshot.value + 1;
+    return value;
+  }
+  else{
+    _refIntern.set( FirebaseAuth.instance.currentUser!.uid);
+    _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").set(1);
+    return 1;
+  }
+}
+
+Future<int> getAndSaveCountExtern () async {
 
   DataSnapshot _snpShot = await _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
 
-  print(_snpShot.value);
+  print("----------------------------" + _snpShot.value.toString() + "---------------------------");
 
   if(_snpShot.value!=null) {
     final snapshot = await _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();

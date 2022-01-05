@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 
 final DatabaseReference _refIntern = FirebaseDatabase(databaseURL: "https://rocomp-app-d6d31-default-rtdb.europe-west1.firebasedatabase.app/").reference().child("Intern");
 
@@ -17,18 +18,8 @@ Future<void> uploadInternTask(String _doneTask, String _date, String _timeStart,
   _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child(_date).child(_timeStart+"-"+_timeEnd).child("Task").push().set(_doneTask);
 */
   String user = FirebaseAuth.instance.currentUser!.uid;
-  String _fileName;
-  DataSnapshot snapshot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
-
-  print(snapshot.value);
-
-  if(snapshot.value!=null) {
-    int number = snapshot.value + 1;
-    _fileName = "intern_" + number.toString();
-  }
-  else{
-    _fileName = "intern_1";
-  }
+  int number = await saveCountIntern();
+  String _fileName = "intern_" + number.toString();
 
 try{
 
