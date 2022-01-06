@@ -10,56 +10,6 @@ import 'package:simple_nav_bar/themes.dart';
 import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
-// Future main() async {
-//
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await SystemChrome.setPreferredOrientations([
-//     DeviceOrientation.portraitUp,
-//     DeviceOrientation.portraitDown,
-//   ]);
-//
-//   runApp(ExistingCustomerSecondPage());
-//
-// }
-/*
-class ExistingCustomerSecondPage extends StatefulWidget {
-  final int pop;
-  const ExistingCustomerSecondPage({Key? key, required this.pop}) : super(key: key);
-
-  @override
-  _ExistingCustomerSecondPageState createState() => _ExistingCustomerSecondPageState(pop);
-}
-
-class _ExistingCustomerSecondPageState extends State<ExistingCustomerSecondPage> {
-
-  int pop;
-  _ExistingCustomerSecondPageState(this.pop);
-
-  @override
-  void initState() {
-    super.initState();
-    currentTheme.addListener(() {
-      if (this.mounted) { // check whether the state object is in tree
-        setState(() {
-          // make changes here
-        });
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: CreateTask(title: 'Existing Customer',pop: pop),
-      title: 'Flutter Theme Demo',
-      debugShowCheckedModeBanner: false,
-      theme: CustomTheme.lightTheme,
-      darkTheme: CustomTheme.darkTheme,
-      themeMode: currentTheme.currentTheme,
-    );
-  }
-}
-*/
 class CreateTask extends StatefulWidget {
   const CreateTask({Key? key, required this.title,required this.pop, required this.task}) : super(key: key);
 
@@ -370,14 +320,11 @@ class _CreateTaskState extends State<CreateTask> {
                                   _isEverythingOkayColor = Colors.green;
                                 }
 
-
                                 if(errorText == "Done"){
 
                                   pop = pop + 1;
 
                                   Navigator.push(context, MaterialPageRoute(builder: (_) => SignatureApp(pop: pop, task: task)));
-                                  //var count = 0;
-                                  //Navigator.popUntil(context, (route) {return count++ == pop;});
                                 }
 
                               });

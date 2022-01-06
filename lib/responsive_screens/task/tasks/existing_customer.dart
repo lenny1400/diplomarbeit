@@ -64,8 +64,6 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
   Future<void> csvReader() async{
 
-    print("Im Here");
-
     String user = FirebaseAuth.instance.currentUser!.uid;
 
     Directory? directory = await getApplicationDocumentsDirectory();
@@ -77,8 +75,6 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
     String csv1 = await File('$path/User/$user/Customer/Customer.csv').readAsString();
 
     list1 = const CsvToListConverter().convert(csv1);
-
-    String csvString = list1.toString();
 
     for(int i = 0; i<list1.length; i++){
       List<String> elems = list1[i].toString().split(";");
@@ -93,32 +89,23 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
     else{
       dropdownValue = list.first;
     }
-    print("Still Here");
     setState(() {
     });
   }
 
 
   String getText() {
-    // if (time == null) {
-    //   return 'Select Time';
-    // } else {
     final hours = time.hour.toString().padLeft(2, '0');
     final minutes = time.minute.toString().padLeft(2, '0');
 
     return '$hours:$minutes';
-    // }
   }
 
   String getText2() {
-    // if (time == null) {
-    //   return 'Select Time';
-    // } else {
     final hours = time2.hour.toString().padLeft(2, '0');
     final minutes = time2.minute.toString().padLeft(2, '0');
 
     return '$hours:$minutes';
-    // }
   }
 
   Future pickTime(BuildContext context) async {
@@ -708,11 +695,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                             ),
                             onPressed: ()  async {
 
-                              String user = FirebaseAuth.instance.currentUser!.uid;
-
                               int counts = await getAndSaveCountExtern();
-
-                              print("---------------------------------"+counts.toString());
 
                               String count = counts.toString();
 

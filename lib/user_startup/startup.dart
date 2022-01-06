@@ -45,12 +45,6 @@ Future<void> startUp(String _uidUser)async {
 
   String input = "kurzbez" + ";" + "kundnr" + ";" +"anrede" + ";" +"name1" + ";"+"name2" + ";"+"strasse" + ";"+"land" + ";"+"land" + ";"+"plz" + ";"+"ort" + ";"+"telefon1" + ";"+"faxnr1" + ";"+"email1" + ";"+"ktofibu";
 
-  //String input = const ListToCsvConverter().convert(csv);
-  
-  final countpath = _pathUser.path +"/tasks/extern/count.txt";
-
-  final File _countFile =  File(countpath);
-
   if ((await _pathUser.exists())){
     print("user already exists");
   }else{

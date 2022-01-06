@@ -96,6 +96,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   String errorText = "";
   Color errorTextColor = Colors.red;
 
+  //Checks if Text fields are Empty
   void ctrlTxtFields(){
     final _company = myControllerCompany.text;
     final _firstname = myControllerFirstName.text;
@@ -180,7 +181,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     setState(() {});
   }
 
-
+  //Saving File to Storage
   Future<void> saveToStorage() async {
     final _company = myControllerCompany.text;
     final _firstname = myControllerFirstName.text;
@@ -199,8 +200,8 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     String user = FirebaseAuth.instance.currentUser!.uid;
 
     Directory? directory = await getApplicationDocumentsDirectory();
+
     String path = directory.path;
-    print(path);
 
     String input = await File('$path/User/$user/Customer/Customer.csv').readAsString();
 
@@ -208,19 +209,8 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
 
     await File('$path/User/$user/Customer/Customer.csv').writeAsString(input);
 
-    print(input);
-
     setState(() {});
   }
-
-  String formatFile(String company, String fname, String lname, String street, String streetNr,String province, String zip, String country, String phone, String email){
-    String output =
-        "Company,Firstname,Lastname,Street,Street Nr,Province,Zip Code,Country,Email,Phone Nr\n" + "$company,$fname,$lname,$street,$streetNr,$province,$zip,$country,$phone,$email"
-    ;
-
-    return output;
-  }
-
 
   @override
   void dispose() {
@@ -814,7 +804,6 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
               )
             ]
         )
-
     );
   }
 }

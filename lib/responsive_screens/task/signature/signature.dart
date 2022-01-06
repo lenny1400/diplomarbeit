@@ -105,7 +105,7 @@ class _SignatureAppState extends State<SignatureApp> {
                       Image.memory(data!);
 
                       String user = FirebaseAuth.instance.currentUser!.uid;
-                      String name = task.name;//id vom Auftag maybe?
+                      String name = task.name;
 
                       Directory? directory = await getApplicationDocumentsDirectory();
                       String path = directory.path;

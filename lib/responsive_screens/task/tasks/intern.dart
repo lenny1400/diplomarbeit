@@ -93,25 +93,17 @@ class _InternPageState extends State<InternPage> {
   late TimeOfDay time2 = TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 1)));
 
   String getText() {
-    // if (time == null) {
-    //   return 'Select Time';
-    // } else {
       final hours = time.hour.toString().padLeft(2, '0');
       final minutes = time.minute.toString().padLeft(2, '0');
 
       return '$hours:$minutes';
-    // }
   }
 
   String getText2() {
-    // if (time2 == null) {
-    //   return 'Select Time';
-    // } else {
       final hours = time2.hour.toString().padLeft(2, '0');
       final minutes = time2.minute.toString().padLeft(2, '0');
 
       return '$hours:$minutes';
-    // }
   }
 
   Future pickTime(BuildContext context) async {
@@ -173,9 +165,8 @@ class _InternPageState extends State<InternPage> {
 
   }
 
-
+  //Save File to Storage
   Future<void> saveToStorage() async {
-    //get time of Input
 
     String user = FirebaseAuth.instance.currentUser!.uid;
     int number = await getCountIntern();
@@ -196,112 +187,6 @@ class _InternPageState extends State<InternPage> {
       final File file = File('$path/$_fileName');
       await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
     }
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    final timeSave = getText(); // Time start
-    final time2Save = getText2(); // Time end
-    final _yearName = DateTime.now().year.toString(); //Year
-    //get text
-    final text = myControllerText.text;
-    //create folder Name 'MMdd'
-    final _monthName = (_selectedDate.split(" "))[0]; //Month Name
-    final _dayName = (((_selectedDate.split(","))[0]).split(" "))[1];
-
-    //get directory of Device
-    final directory = await getApplicationDocumentsDirectory();
-    // create path Year
-    final _pathYearFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName");
-    // create path Month
-    final _pathMonthFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName);
-    // create path Day
-    final _pathDayFolder= Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName);
-
-    //checks if folder $Year exists
-    if ((await _pathYearFolder.exists())){
-      //checks if folder $Month exists
-      if ((await _pathMonthFolder.exists())){
-        //checks if folder $Day exists
-        if ((await _pathDayFolder.exists())){
-          // TODO: save file to storage
-          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
-          String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
-
-          final File file = File('$_pathFileSave/$_fileName');
-          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
-        }else{
-          //create folder
-          await _pathDayFolder.create(recursive: true);
-        }
-      }else{
-        // if not exists creates Folder $Year
-        await _pathMonthFolder.create(recursive: true);
-      }
-    }else{
-      //create year folder
-      await _pathYearFolder.create(recursive: true);
-      if ((await _pathMonthFolder.exists())){
-        //checks if folder $Day exists
-        if ((await _pathDayFolder.exists())){
-          // TODO: save file to storage
-          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
-          String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
-
-          final File file = File('$_pathFileSave/$_fileName');
-          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
-        }else{
-          //create folder
-          await _pathDayFolder.create(recursive: true);
-          // TODO: save file to storage
-          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
-          String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
-
-          final File file = File('$_pathFileSave/$_fileName');
-          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
-        }
-      }else{
-        // if not exists creates Folder $Year
-        await _pathMonthFolder.create(recursive: true);
-        if ((await _pathDayFolder.exists())){
-          // TODO: save file to storage
-          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
-          String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
-
-          final File file = File('$_pathFileSave/$_fileName');
-          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
-        }else{
-          //create folder
-          await _pathDayFolder.create(recursive: true);
-          // TODO: save file to storage
-          int _countFilesinFolder = (await _pathDayFolder.list().length)+1; //Folder Name
-          String _fileName = _countFilesinFolder.toString() + ".txt";
-          await Directory(directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString()).create(recursive: true);
-          final _pathFileSave = directory.path + "/Aufträge/Intern/" + "$_yearName" +"/"+_monthName+"/"+_dayName+"/"+_countFilesinFolder.toString();
-
-          final File file = File('$_pathFileSave/$_fileName');
-          await file.writeAsString("Date of Task: " + _selectedDate + "\n" + "Task started: " + timeSave + "\n" + "Task ended: " + time2Save + "\n" + "Done Task: " + text + "\n");
-        }
-      }
-    }
-    /
-   */
   }
 
   @override
@@ -561,7 +446,6 @@ class _InternPageState extends State<InternPage> {
                                 setState(() {
                                   checkEverything();
                                   if(errorText == "Done"){
-                                    //Navigator.pop(context);
                                     saveToStorage();
                                     uploadInternTask(myControllerText.text, _selectedDate, getText(), getText2());
                                   }

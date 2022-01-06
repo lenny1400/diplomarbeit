@@ -19,8 +19,6 @@ Future<int> saveCountIntern() async {
 
   DataSnapshot _snpShot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
 
-  print(_snpShot.value);
-
   if(_snpShot.value!=null) {
     final snapshot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
     int value = snapshot.value + 1;
@@ -38,8 +36,6 @@ Future<int> getCountIntern () async {
 
   DataSnapshot _snpShot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
 
-  print(_snpShot.value);
-
   if(_snpShot.value!=null) {
     final snapshot = await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
     int value = snapshot.value + 1;
@@ -55,8 +51,6 @@ Future<int> getCountIntern () async {
 Future<int> getAndSaveCountExtern () async {
 
   DataSnapshot _snpShot = await _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
-
-  print("----------------------------" + _snpShot.value.toString() + "---------------------------");
 
   if(_snpShot.value!=null) {
     final snapshot = await _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
