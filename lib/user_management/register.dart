@@ -282,7 +282,15 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         ),
                         onPressed: () {
                           if(myPassword.text == myPasswordConfirm.text){
-                            registerUser(myEmail.text, myPasswordConfirm.text);
+                            if(myEmail.text.split("@")[1] == "rocomp.at"){
+                              registerUser(myEmail.text, myPasswordConfirm.text);
+                            }else if(myEmail.text.split("@")[1] == "ROCOMP.AT"){
+                              registerUser(myEmail.text, myPasswordConfirm.text);
+                            }else if(myEmail.text.split("@")[1] == "Rocomp.at"){
+                              registerUser(myEmail.text, myPasswordConfirm.text);
+                            }else{
+                              print("email not allowed");
+                            }
                           }
                         },
                         child: Text(

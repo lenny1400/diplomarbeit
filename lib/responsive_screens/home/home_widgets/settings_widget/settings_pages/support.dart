@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../themes.dart';
 
@@ -46,13 +49,25 @@ class SupportWidgetPage extends StatefulWidget {
 class _SupportWidgetPageState extends State<SupportWidgetPage> {
 
   final myControllerText = TextEditingController();
+  final DatabaseReference _refSupp = FirebaseDatabase(databaseURL: "https://rocomp-app-d6d31-default-rtdb.europe-west1.firebasedatabase.app/").reference().child("Support");
+
+  void uploadProblem() async{
+    String _problem = myControllerText.text;
+    String user = await FirebaseAuth.instance.currentUser!.uid.toString();
+    DateTime now = DateTime.now();
+    String date = DateFormat('yyyy-MM-dd - kk:mm:ss').format(now);
+
+    _refSupp.child(user).child(date).child("Problem").set(_problem).then((value) => Navigator.pop(context));
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.backgroundColor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        elevation: 0,
         title: Text("Support",
           style: theme.textTheme.caption,
         ),
@@ -80,10 +95,10 @@ class _SupportWidgetPageState extends State<SupportWidgetPage> {
                 Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.01),
                   child: Container(
-                    height: MediaQuery.of(context).size.height*0.15,
+                    height: MediaQuery.of(context).size.height*0.2,
                     child: TextField(
                       controller: myControllerText,
-                      maxLines: 5,
+                      maxLines: 7,
                       style: TextStyle(
                           color: theme.shadowColor
                       ),
@@ -117,7 +132,9 @@ class _SupportWidgetPageState extends State<SupportWidgetPage> {
                           ),
                         ),
                         onPressed: () {
-
+                          if(myControllerText.text.isNotEmpty){
+                            uploadProblem();
+                          }
                         },
                         child: Text(
                           "Send",
@@ -143,7 +160,7 @@ class _SupportWidgetPageState extends State<SupportWidgetPage> {
                 Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.01),
                   child: Text(
-                    "+4369910016902",
+                    "Tel: +43 5576 98234",
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.height*0.02,
                     ),
@@ -162,7 +179,7 @@ class _SupportWidgetPageState extends State<SupportWidgetPage> {
                 Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.01),
                   child: Text(
-                    "support@rocomp.at",
+                    "office@rocomp.at",
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height*0.02,
                     ),

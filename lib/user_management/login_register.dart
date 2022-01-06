@@ -79,12 +79,6 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
     });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   void refreshPage(){
     setState(() {});
   }

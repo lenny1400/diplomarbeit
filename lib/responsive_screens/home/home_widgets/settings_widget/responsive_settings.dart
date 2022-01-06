@@ -153,7 +153,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: _cons4,left: _cons3),
+                padding: EdgeInsets.only(top: _cons4+25,left: _cons3),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -240,7 +240,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                   )
               ),
               Padding(
-                padding: EdgeInsets.only(top: _cons3,left: _cons3),
+                padding: EdgeInsets.only(top: _cons3+25,left: _cons3),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -421,7 +421,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     ),
                   )
               ),
-              Flexible(
+              /*Flexible(
                   child: Padding(
                     padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
                     child: Container(
@@ -493,7 +493,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                       ),
                     ),
                   )
-              ),
+              ),*/
               Flexible(
                   child: Padding(
                     padding: EdgeInsets.only(left: _cons2, right: _cons2,top: _cons1,),

@@ -13,7 +13,7 @@ class Languages extends Translations {
       'se_select':'English',
       'se_subtitle3':'Notifications',
       'se_subtitle4':'Support',
-      'se_subtitle5':'Help',
+      'se_subtitle5':'FAQ',
       'se_logout':'Log out',
       'se_dialogText':'Choose your language',
 

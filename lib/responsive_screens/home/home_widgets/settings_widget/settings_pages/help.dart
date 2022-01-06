@@ -49,6 +49,7 @@ class _HelpWidgetPageState extends State<HelpWidgetPage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
+        elevation: 0,
         title: Text("Help",
         style: theme.textTheme.caption,
         ),
