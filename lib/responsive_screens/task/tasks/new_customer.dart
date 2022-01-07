@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:csv/csv.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
@@ -81,105 +82,10 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
   final myControllerNumber = TextEditingController();
   final myControllerTitle = TextEditingController();
 
-  bool _validateCompany = false;
-  bool _validateFirstName = false;
-  bool _validateStreet = false;
-  bool _validateStreetNr = false;
-  bool _validateProvince = false;
-  bool _validateZipCode = false;
-  bool _validateCountry = false;
-  bool _validateNumber = false;
-  bool _validateTitle = false;
-
-  bool _isEverythingOkay = false;
+   bool customerexists = false;
 
   String errorText = "";
   Color errorTextColor = Colors.red;
-
-  //Checks if Text fields are Empty
-  void ctrlTxtFields(){
-    final _company = myControllerCompany.text;
-    final _firstname = myControllerFirstName.text;
-    final _street = myControllerStreet.text;
-    final _streetnr = myControllerStreetNr.text;
-    final _province= myControllerProvince.text;
-    final _zipcode = myControllerZipCode.text;
-    final _country = myControllerCountry.text;
-    final _number = myControllerNumber.text;
-    final _title = myControllerTitle.text;
-
-
-    //number
-    if(_number.isEmpty){
-      _validateNumber = false;
-      errorText = "Number cant be empty";
-    }else{
-      _validateNumber = true;
-    }
-    //title
-    if(_title.isEmpty){
-      _validateTitle = false;
-      errorText = "Title cant be empty";
-    }else{
-      _validateTitle = true;
-    }
-    //Country
-    if(_country.isEmpty){
-      _validateCountry = false;
-      errorText = "Country cant be empty";
-    }else{
-      _validateCountry = true;
-    }
-    //ZipCode
-    if(_zipcode.isEmpty){
-      _validateZipCode = false;
-      errorText = "Zip Code cant be empty";
-    }else{
-      _validateZipCode = true;
-    }
-    //Province
-    if(_province.isEmpty){
-      _validateProvince = false;
-      errorText = "Province cant be empty";
-    }else{
-      _validateProvince = true;
-    }
-    //StreetNr
-    if(_streetnr.isEmpty){
-      _validateStreetNr = false;
-      errorText = "Street Nr cant be empty";
-    }else{
-      _validateStreetNr = true;
-    }
-    //Street
-    if(_street.isEmpty){
-      _validateStreet = false;
-      errorText = "Street cant be empty";
-    }else{
-      _validateStreet = true;
-    }
-    //First Name
-    if(_firstname.isEmpty){
-      _validateFirstName = false;
-      errorText = "Firstname cant be empty";
-    }else{
-      _validateFirstName = true;
-    }
-    //Company Name
-    if(_company.isEmpty){
-      _validateCompany = false;
-      errorText = "Company cant be empty";
-    }else{
-      _validateCompany = true;
-    }
-    //check everything
-    if(_validateCompany&&_validateFirstName&&_validateStreet&&_validateStreetNr&&_validateProvince&&_validateProvince&&_validateZipCode&&_validateCountry&&_validateTitle&&_validateNumber){
-      _isEverythingOkay = true;
-      errorText = "Data is Okay";
-    }
-
-    setState(() {});
-  }
 
   //Saving File to Storage
   Future<void> saveToStorage() async {
@@ -208,6 +114,41 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
     input += "\r\n" + _company+";" + _number +";" + _title +";" +_firstname + ";"+_lastname + ";"+_street+ ";"+_streetnr+ ";"+_country+ ";"+_zipcode+ ";"+_province+ ";"+_phone+ ";"+_fax+ ";"+_email+ ";"+_number;
 
     await File('$path/User/$user/Customer/Customer.csv').writeAsString(input);
+
+    setState(() {});
+  }
+
+  Future<void> checkCustomerexists() async{
+
+    String user = FirebaseAuth.instance.currentUser!.uid;
+
+    Directory? directory = await getApplicationDocumentsDirectory();
+
+    String path = directory.path;
+
+    await Directory('$path/User/$user/Customer/').create(recursive: true);
+
+    String csv1 = await File('$path/User/$user/Customer/Customer.csv').readAsString();
+
+    var list1 = const CsvToListConverter().convert(csv1);
+
+
+    bool test = true;
+
+    for(int i = 0; i<list1.length; i++){
+      List<String> elems = list1[i].toString().split(";");
+      if(i != 0){
+        if(elems[0].split("[")[1] == myControllerCompany.text){
+          errorText = "Kunde mit diesem Name existert bereits";
+          test = false;
+          break;
+        }
+      }
+    }
+    if(test){
+      customerexists = true;
+      errorText = "Data is Okay";
+    }
 
     setState(() {});
   }
@@ -280,7 +221,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Company Name (required)",
+                                labelText: "Company Name",
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
@@ -318,7 +259,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Customer Number (required)",
+                                  labelText: "Customer Number",
                                   labelStyle: TextStyle(
                                       color: theme.dividerColor
                                   ),
@@ -347,7 +288,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                       borderSide: BorderSide(color: theme.dividerColor),
                                     ),
-                                    labelText: "Title*",
+                                    labelText: "Title",
                                     labelStyle: TextStyle(
                                         color: theme.dividerColor
                                     ),
@@ -385,7 +326,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Firstname (required)",
+                                labelText: "Firstname",
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
@@ -457,7 +398,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Street (required)",
+                                  labelText: "Street",
                                   labelStyle: TextStyle(
                                       color: theme.dividerColor
                                   ),
@@ -486,7 +427,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                       borderSide: BorderSide(color: theme.dividerColor),
                                     ),
-                                    labelText: "Nr*",
+                                    labelText: "Nr",
                                     labelStyle: TextStyle(
                                         color: theme.dividerColor
                                     ),
@@ -528,7 +469,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Province (required)",
+                                  labelText: "Province",
                                   labelStyle: TextStyle(
                                       color: theme.dividerColor
                                   ),
@@ -560,7 +501,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                       borderSide: BorderSide(color: theme.dividerColor),
                                     ),
-                                    labelText: "Zip Code*",
+                                    labelText: "Zip Code",
                                     labelStyle: TextStyle(
                                         color: theme.dividerColor
                                     ),
@@ -599,7 +540,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Country (required)",
+                                labelText: "Country",
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
@@ -717,7 +658,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                   child: Container(
                     child: Align(
                         alignment: Alignment.center,
-                        child: (_isEverythingOkay)
+                        child: (customerexists)
                             ? Align(
                                 alignment: Alignment.center,
                                 child: Text(
@@ -751,30 +692,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 10,bottom: 10),
-                child: Container(
-                  height: mdHeight*0.07,
-                  width: mdHeight*0.07,
-                  child: (_isEverythingOkay)
-                    ? FloatingActionButton(
-                        backgroundColor: theme.cardColor,
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: theme.primaryColor,
-                          size: mdHeight*0.07/2,
-                        ),
-                        onPressed: () {},
-                        heroTag: "Next",
-                    )
-                      : SizedBox(),
-                ),
-              ),
-              Padding(
                 padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
                 child: Container(
                   height: mdHeight*0.07,
                   width: mdHeight*0.07,
-                  child: (_isEverythingOkay)
+                  child: (customerexists)
                     ? FloatingActionButton(
                       backgroundColor: theme.cardColor,
                       child: Icon(
@@ -796,7 +718,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                         size: mdHeight*0.07/2,
                       ),
                       onPressed: () {
-                        ctrlTxtFields();
+                        checkCustomerexists();
                       },
                       heroTag: "ChecknSave",
                       ),
