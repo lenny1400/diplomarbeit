@@ -248,11 +248,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
               heroTag: "Save",
               onPressed: ()async{
                 createFolder();
-
                 await Future.delayed(Duration(milliseconds: 300));
-
-
-
                 var count = 0;
                 Navigator.popUntil(context, (route) {
                   return count++ == 2;

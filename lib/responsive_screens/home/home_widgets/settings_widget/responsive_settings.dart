@@ -152,7 +152,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
+              /*Padding(
                 padding: EdgeInsets.only(top: _cons4+25,left: _cons3),
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -238,9 +238,9 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                       ),
                     ),
                   )
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _cons3+25,left: _cons3),
+              ),*/
+              /*Padding(
+                padding: EdgeInsets.only(top: _cons3+35,left: _cons3),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -252,10 +252,10 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1+35),
                     child: Container(
                       height: _cons5,
                       child: TextButton(
@@ -339,7 +339,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1+15),
                     child: Container(
                       height: _cons5,
                       child: TextButton(
@@ -496,7 +496,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
               ),*/
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: _cons2, right: _cons2,top: _cons1,),
+                    padding: EdgeInsets.only(left: _cons2, right: _cons2,top: _cons1+15,),
                     child: Container(
                       height: _cons5,
                       child: TextButton(
@@ -569,7 +569,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
               ),
               Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
+                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1+15),
                     child: Container(
                       height: _cons5,
                       child: TextButton(

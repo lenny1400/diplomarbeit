@@ -67,11 +67,13 @@ class _SignatureAppState extends State<SignatureApp> {
                 padding: const EdgeInsets.all(0),
                 children: <Widget>[
                   //SIGNATURE CANVAS
-                  Center(child: Signature(
-                    controller: _controller,
-                    height: 500,
-                    backgroundColor: Colors.white,
-                  )),
+                  Center(
+                      child: Signature(
+                        controller: _controller,
+                        height: 500,
+                        backgroundColor: Colors.white,
+                    )
+                  ),
                 ],
               ),
             ),
