@@ -1,6 +1,11 @@
+
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
 import 'package:simple_nav_bar/responsive_screens/task/camera/camera.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,7 +52,6 @@ class _CreateTaskState extends State<CreateTask> {
       _isEverythingOkayColor = Colors.red;
     }else{
       _isTextFieldMAOkay = true;
-      errorText = "";
     }
 
     if(myControllerDoneTask.text.isEmpty){
@@ -56,11 +60,12 @@ class _CreateTaskState extends State<CreateTask> {
       _isEverythingOkayColor = Colors.red;
     }else{
       _isTextFieldDTOkay = true;
-      errorText = "";
     }
 
     if(_isTextFieldDTOkay && _isTextFieldMAOkay){
       _isEverythingOkay = true;
+      errorText = "";
+      _isEverythingOkayColor = Colors.green;
     }
 
   }
@@ -86,6 +91,23 @@ class _CreateTaskState extends State<CreateTask> {
 
     camera = firstCamera;
   }
+
+
+  Future<void> safePicture(io.File file) async{
+
+    final directory = await getApplicationDocumentsDirectory();
+
+    String user = FirebaseAuth.instance.currentUser!.uid;
+
+    final directory1 = await Directory(directory.path + "/User/$user/tasks/extern/${task.name}/").create(recursive: true);
+
+    int count = await directory1.list().length + 1;
+
+    String fileName = "picture_" + count.toString() + ".jpg";
+
+    file.copy('${directory1.path}/$fileName');
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +266,24 @@ class _CreateTaskState extends State<CreateTask> {
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: IconButton(
-                                        onPressed: (){
-                                          print("Show Picture");
+                                        onPressed: () async {
+
+                                          FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                            type: FileType.custom,
+                                            allowedExtensions: ['jpg', 'jpeg', 'png'],
+                                          );
+
+                                          if (result != null) {
+                                            io.File file = io.File(result.files.single.path.toString());
+                                            safePicture(file);
+                                            errorText = "File Saved";
+                                            _isEverythingOkayColor = Colors.green;
+                                          } else {
+                                            // User canceled the picker
+                                            errorText ="No Files Selected";
+                                            _isEverythingOkayColor = Colors.red;
+                                          }
+                                          setState(() {});
                                         },
                                         icon: Icon(CupertinoIcons.photo),
                                         iconSize: 50,

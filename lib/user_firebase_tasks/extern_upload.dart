@@ -15,6 +15,11 @@ final DatabaseReference _refExtern = FirebaseDatabase(databaseURL: "https://roco
 //This Function saves Extern Tasks to our Firebase Database
 Future<void> uploadExternTask(User_task task)async {
 
+  //count up
+  final snapshot = await _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").once();
+  int value = snapshot.value + 1;
+  _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").set(value);
+
   try{
     _refExtern.set( FirebaseAuth.instance.currentUser!.uid);
     var _snpShot;
@@ -37,6 +42,7 @@ Future<void> uploadExternTask(User_task task)async {
       _refExtern.child( FirebaseAuth.instance.currentUser!.uid).child(task.name).child("Zeit").set(task.time);
       _refExtern.child( FirebaseAuth.instance.currentUser!.uid).child(task.name).child("Arbeit").set(task.text);
       _refExtern.child( FirebaseAuth.instance.currentUser!.uid).child(task.name).child("Material").set(task.material);
+
     }
   }on Exception catch (Exception){
     print("Exception: " + Exception.toString());

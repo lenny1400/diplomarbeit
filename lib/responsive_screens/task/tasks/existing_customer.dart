@@ -79,8 +79,10 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
     for(int i = 0; i<list1.length; i++){
       List<String> elems = list1[i].toString().split(";");
       if(i != 0){
-        list.add(elems[0].split("[")[1]);
-        numberlist.add(elems[1]);
+        if(!list.contains(elems[0].split("[")[1])){
+          list.add(elems[0].split("[")[1]);
+          numberlist.add(elems[1]);
+        }
       }
     }
     if(list.isEmpty){
@@ -695,7 +697,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                             ),
                             onPressed: ()  async {
 
-                              int counts = await getAndSaveCountExtern();
+                              int counts = await getCountExtern();
 
                               String count = counts.toString();
 
