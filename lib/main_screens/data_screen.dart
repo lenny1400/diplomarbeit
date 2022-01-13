@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importfiles.dart';
+import 'package:simple_nav_bar/responsive_screens/data/data_screens/taskmanagement/taskmanagement.dart';
 import 'dart:io' as io;
 import '../themes.dart';
 import '../responsive_screens/data/data_screens/export/exportfiles.dart';
@@ -45,7 +46,6 @@ class _DataState extends State<Data> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DataPage(title: 'Data'),
-      title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -107,8 +107,9 @@ class _DataPageState extends State<DataPage> {
                       ),
                     )
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 30),),
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 0.90,
                     height: MediaQuery.of(context).size.height*0.07,
@@ -129,7 +130,29 @@ class _DataPageState extends State<DataPage> {
                         style: theme.textTheme.bodyText1,
                       ),
                     )
-                )
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    height: MediaQuery.of(context).size.height*0.07,
+                    child: FloatingActionButton(
+                      elevation: 0,
+                      heroTag: "btnManageTasks",
+                      backgroundColor: theme.cardColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ManagementPage(title: "Manage Tasks")));
+                      },
+                      child: Text(
+                        'Manage Tasks',
+                        style: theme.textTheme.bodyText1,
+                      ),
+                    )
+                ),
               ],
             ),
           ),
