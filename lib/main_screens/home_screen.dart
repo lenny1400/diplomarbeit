@@ -7,6 +7,7 @@ import '../responsive_screens/home/all_tasks.dart';
 import '../responsive_screens/home/settings.dart';
 import '../responsive_screens/home/home_widgets/responsive_mobile.dart';
 import 'package:get/get.dart';
+import 'package:simple_nav_bar/custom_widgets/preferences_service.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    _populateFields();
     currentTheme.addListener(() {
       if (mounted) { // check whether the state object is in tree
         setState(() {
@@ -37,6 +39,27 @@ class _HomeState extends State<Home> {
         });
       }
     });
+  }
+
+  final _preferencesService = PreferenceService();
+  bool isSwitched = false;
+
+  void _populateFields() async{ //To get the State of the Switch (Dark or Light Mode)
+    final settings = await _preferencesService.getSettings();
+    setState(() {
+      isSwitched = settings.isSwitched;
+    });
+    ThemeCheck();
+  }
+
+  void ThemeCheck() { //Query whether the active theme is Dark or Light
+    if (isSwitched == true &&
+        CustomTheme().currentTheme.toString() == "ThemeMode.light") {
+      currentTheme.toggleTheme();
+    } else if (isSwitched == false &&
+        CustomTheme().currentTheme.toString() == "ThemeMode.dark") {
+      currentTheme.toggleTheme();
+    }
   }
 
   @override

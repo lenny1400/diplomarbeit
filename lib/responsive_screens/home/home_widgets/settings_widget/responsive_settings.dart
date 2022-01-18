@@ -2,14 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:simple_nav_bar/main.dart';
+import 'package:simple_nav_bar/custom_widgets/preferences_service.dart';
 import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/help.dart';
 import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/notifications.dart';
 import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/support.dart';
 import 'package:simple_nav_bar/user_management/login_register.dart';
-
 import '../../../../themes.dart';
+import '../../../../custom_widgets/models.dart';
 
 class ResponsiveSettings extends StatefulWidget {
   const ResponsiveSettings({
@@ -35,26 +34,36 @@ class ResponsiveSettings extends StatefulWidget {
 
 class _ResponsiveSettingsState extends State<ResponsiveSettings> {
 
-  final switchData = GetStorage();
+  final _preferencesService = PreferenceService();
   bool isSwitched = false;
 
   @override
   void initState() {
     super.initState();
-
+    _populateFields(); //Activates the Function to load the Shared Preferences
     currentTheme.addListener(() {
       if(this.mounted) { // check whether the state object is in tree
         setState(() {
-          if(switchData.read('isSwitched') != null)
-          {
-            setState(() {
-              isSwitched = switchData.read('isSwitched');
-            });
-          }
+          // make changes here
         });
       }
     });
+  }
 
+  //Saves the objects for the Shared Preferences
+  void _saveSettings(){
+    final newSettings = Settings(
+      //language: locales.toString(),
+        isSwitched: isSwitched);
+    _preferencesService.saveSettings(newSettings);
+  }
+
+  //Reloads & Uploads the state of the switch
+  void _populateFields() async{
+    final settings = await _preferencesService.getSettings();
+    setState(() {
+      isSwitched = settings.isSwitched;
+    });
   }
 
   @override
@@ -152,107 +161,6 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              /*Padding(
-                padding: EdgeInsets.only(top: _cons4+25,left: _cons3),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'se_title1'.tr,
-                    style: TextStyle(
-                      fontSize: _cons2,
-                      color: theme.dividerColor,
-                      fontWeight: FontWeight.w500
-                    ),
-                  ),
-                ),
-              ),
-              Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: _cons2, right: _cons2, top: _cons1),
-                    child: Container(
-                      height: _cons5,
-                      child: TextButton(
-                        onPressed: (){
-                          //Navigator.push(context, MaterialPageRoute(builder: (_) => LoginRegister()));
-                        },
-                        style: TextButton.styleFrom(
-                            onSurface: theme.backgroundColor,
-                            primary: theme.backgroundColor
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: IconTheme(
-                                    data: new IconThemeData(
-                                        color: theme.cardColor,
-                                        size: _cons4
-                                    ),
-                                    child: Icon(CupertinoIcons.person_alt),
-                                  ),
-                                ),
-                              ),
-                              flex: 1,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(left: _cons1),
-                                        child: Text(
-                                          "Romeo Colic",
-                                          style: TextStyle(
-                                            color: theme.dividerColor,
-                                            fontSize: _cons2,
-                                            fontWeight: FontWeight.w500
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconTheme(
-                                        data: new IconThemeData(
-                                            color: theme.cardColor,
-                                            size: _cons3
-                                        ),
-                                        child: Icon(Icons.keyboard_arrow_right_sharp),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              flex: 3,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-              ),*/
-              /*Padding(
-                padding: EdgeInsets.only(top: _cons3+35,left: _cons3),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'se_title2'.tr,
-                    style: TextStyle(
-                        fontSize: _cons2,
-                        color: theme.dividerColor,
-                        fontWeight: FontWeight.w500
-                    ),
-                  ),
-                ),
-              ),*/
               Flexible(
                   child: Padding(
                     padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1+35),
@@ -318,7 +226,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                                             onChanged: (value){
                                               setState(() {
                                                 isSwitched = value;
-                                                switchData.write('isSwitched', isSwitched);
+                                                _saveSettings();
                                                 currentTheme.toggleTheme();
                                               });
                                             },
