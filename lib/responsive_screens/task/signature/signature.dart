@@ -126,13 +126,15 @@ class _SignatureAppState extends State<SignatureApp> {
 
                       if(task.Anfahrt){
                         content += "Eine Anfahrt von: " + task.km.toString()+ " km"+"\n";;
+                      }else{
+                        content += "Keine Anfahrt" + "\n";
                       }
 
                       content += "Kunde: " + task.customer.company + "\n";
 
                       content += "Kundennummer: " + task.customer.number.toString() + "\n";
 
-                      content += "Zeitaufwand: " + task.time + "\n" + "Arbeit: " + task.text + "\n" + "Materiel: " + task.material + "\n";
+                      content += "Zeitaufwand: " + task.time + "\n" + "Arbeit: " + task.text + "\n" + "Material: " + task.material + "\n";
 
                       final File file =  File('$path/User/$user/tasks/extern/$name/task.txt');
 

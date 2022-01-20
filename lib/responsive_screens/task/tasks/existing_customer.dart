@@ -283,11 +283,12 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                         alignment: Alignment.centerLeft,
                         child: Container(
                             child: DropdownButton<String>(
+                              dropdownColor: Colors.blueGrey,
                               value: dropdownValue,
                               icon: const Icon(Icons.arrow_downward),
                               iconSize: 24,
                               elevation: 16,
-                              style: const TextStyle(color: Colors.black, fontSize: 18),
+                              style: theme.textTheme.headline6,
                               underline: Container(
                                 height: 2,
                                 color: theme.cardColor,
@@ -704,10 +705,6 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                               User_customer customer = User_customer("company", "0000","Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
                               User_task task = User_task("AUF0000",false, customer, "time", "text", "Material");
 
-                              int hours = time2.hour.toInt() - time.hour.toInt();
-
-                              int minutes =  time2.minute.toInt() - time.minute.toInt();
-
                               if(count.length == 1){
                                 task.name = "AUF00000" + count.toString();
                               }
@@ -745,7 +742,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                task.km= e-a;
                               }
 
-                              task.time = hours.toString() + " Stunden und " + minutes.toString() + " Minuten!";
+                              task.time = "Von " + time.hour.toString() + ":" + time.minute.toString() +  " bis " + time2.hour.toString() + ":" + time2.minute.toString();
 
                               setState(()  {
                                 getText();
