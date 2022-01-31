@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:simple_nav_bar/custom_widgets/models.dart';
 import '../themes.dart';
 import '../responsive_screens/time/my_flutter_app_icons.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:simple_nav_bar/custom_widgets/preferences_service.dart';
 
 void main() {
   // add these lines
@@ -60,7 +62,6 @@ class _TimeState extends State<Time> {
   }
 }
 
-
 class TimePage extends StatefulWidget {
   TimePage({Key? key, required this.title}) : super(key: key);
 
@@ -71,6 +72,11 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
+  //service call
+  final _preferencesService = PreferenceService();
+
+  //database call
+  final _firebase = FirebaseDatabase.instance;
 
   //variables for View
   var hour;
@@ -102,6 +108,68 @@ class _TimePageState extends State<TimePage> {
   int timeHour = 0;
   //after time edit
   var data;
+  //used for Time Edit
+  String newCurrentlyWorking ="";
+  //Time Now
+  int setTimestamp = 0;
+  int diffTimestamp = 0;
+  var timestampIn;
+  var timestampOut;
+  var checkTimestamp;
+  var transfer;
+
+
+  //Saves the objects for the Shared Preferences
+  void _saveTime(){
+    final newTimeStuff = TimeStuff(
+        timestampIn: timestampIn
+    );
+    _preferencesService.saveTime(newTimeStuff);
+  }
+
+  //Reloads & Uploads the state of the switch
+  void _populateFields() async{
+    final timeStuff = await _preferencesService.getTimeStuff();
+    setState(() {
+      timestampIn = timeStuff.timestampIn;
+    });
+    print('Populate Fields - TimestampIn $timestampIn');
+    if(timestampIn != ""){
+      currentWorkTime(timestampIn);
+    }
+  }
+
+  void currentWorkTime(String editTimestamp){
+    var nowTimestamp = new DateTime.now();
+    var newTimestamp = DateTime.parse(DateFormat(editTimestamp).format(nowTimestamp));
+
+    currentlyWorking = nowTimestamp.difference(newTimestamp).toString().split(".").first.padLeft(8,"0");
+    print('Currentworktime $currentlyWorking');
+
+    timeHour = int.parse(currentlyWorking.split(":")[0]);
+    timeMin = int.parse(currentlyWorking.split(":")[1]);
+    timeSec = int.parse(currentlyWorking.split(":")[2]);
+
+    if(timestampIn != null){
+      if (this.mounted) {
+        setState(() {
+          btnArrive = false;
+        });
+      }
+    }
+
+    if (this.mounted) {
+      setState(() {
+        _start = timeSec;
+        timeWorkUpdate();
+        if(!btnArrive && btnLeave){
+          btnArrive = true;
+          btnLeave = false;
+          startTimer(btnArrive);
+        }
+      });
+    }
+  }
 
   void time(){
     hour = DateTime.now().hour;
@@ -119,14 +187,40 @@ class _TimePageState extends State<TimePage> {
   Timer? _timer;
   int _start = 0;
 
-  void timeEdit(){
-    timeSec = int.parse(data.split(":")[2]);
-    timeMin = int.parse(data.split(":")[1]);
-    timeHour = int.parse(data.split(":")[0]);
+  void timeEdit(String saveTimestamp ){
+    var nowTimestamp = new DateTime.now();
+    var newTimestamp = DateTime.parse(DateFormat('yyyy-MM-dd $saveTimestamp').format(nowTimestamp));
 
-    //if (_start <= timeSec){  //Example: You change minutes, while the Timer is still on. Seconds will be overwritten
+    setState(() {
+      timestampIn = newTimestamp.toString().split(".")[0];
+      _saveTime();
+    });
+
+    data = nowTimestamp.difference(newTimestamp).toString().split(".")[0];
+
+    timeHour = int.parse(data.split(":")[0]);
+    timeMin = int.parse(data.split(":")[1]);
+    timeSec = int.parse(data.split(":")[2]);
+
     _start = timeSec;
-    //}
+  }
+
+  void leaveBtnTime(){
+    var timestampLeave = new DateTime.now(); //Timestamp when the worker has finished the work
+    var timestampArrive = DateTime.parse(DateFormat(timestampIn).format(timestampLeave)); //Timestamp when the worker started the work
+    var requiredTime;
+
+    //Calculation of the required time
+    requiredTime = timestampLeave.difference(timestampArrive).toString().split(".").first.padLeft(8,"0");
+    print('Worktime $requiredTime');
+
+    setState(() {
+      timestampOut = timestampLeave.toString().split(".")[0];
+      print('TimestampOut $timestampOut');
+      timestampIn = "";
+      //print(timestampIn);
+      _saveTime();
+    });
   }
 
   void timeWorkUpdate() {
@@ -160,8 +254,6 @@ class _TimePageState extends State<TimePage> {
     } else {
       hour = timeHour.toString();
     }
-
-
     currentlyWorking = hour + ":" + min + ":" + sec;
   }
 
@@ -182,10 +274,33 @@ class _TimePageState extends State<TimePage> {
     );
   }
 
+  void readTimestamp(int setTimestamp) {
+    var now = new DateTime.now();
+    checkTimestamp = new DateTime.fromMicrosecondsSinceEpoch(setTimestamp * 1000);
+    print('ReadTimestamp $setTimestamp');
+    print('checkTimestamp $checkTimestamp');
+    var diff = checkTimestamp.difference(now);
+
+    print('timestamp $checkTimestamp');
+    if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0 || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
+      setState(() {
+        transfer = checkTimestamp.toString().split(".")[0];
+        timestampIn = transfer;
+        print('timestamp after split $timestampIn');
+        _saveTime();
+      });
+    }
+  }
+
+  void saveFirebase(){
+
+  }
+
   @override
   void initState() {
     super.initState();
     initializeDateFormatting(defaultLocale);
+    _populateFields();
     time();
   }
 
@@ -195,7 +310,10 @@ class _TimePageState extends State<TimePage> {
     if(t != null) {
       t.cancel();
     }
+
+    //_timer?.cancel();
     super.dispose();
+
   }
 
 
@@ -281,6 +399,8 @@ class _TimePageState extends State<TimePage> {
                                         btnLeave = false;
                                         startTimer(btnArrive);
                                       }
+                                      setTimestamp = new DateTime.now().millisecondsSinceEpoch;
+                                      readTimestamp(setTimestamp);
                                     },
                                     icon: Icon(
                                       MyFlutterApp.box_arrow_in_down,
@@ -334,6 +454,8 @@ class _TimePageState extends State<TimePage> {
                                         btnLeave = true;
                                         _timer?.cancel();
                                       }
+                                      leaveBtnTime();
+                                      print('Timestamp abschicken!');
                                     },
                                     icon: Icon(
                                       MyFlutterApp.box_arrow_in_up,
@@ -398,11 +520,11 @@ class _TimePageState extends State<TimePage> {
                         child: FloatingActionButton(
                           elevation: 0,
                           onPressed: () async {
-                            data = await Navigator.push(context,MaterialPageRoute(builder: (context) => EditTime(time: currentlyWorking,)),
+                            transfer = timestampIn + "|" + currentlyWorking;
+                            data = await Navigator.push(context,MaterialPageRoute(builder: (context) => EditTime(time: transfer,)),
                             );
                             if(data != null){
-                              timeEdit();
-                              //print(data); //For testing
+                              timeEdit(data);
                             }
                           },
                           child: Text("ti_buttonText1".tr,style: TextStyle(fontSize: MediaQuery.of(context).size.height*0.02),),
@@ -439,15 +561,21 @@ class _EditTimeState extends State<EditTime> {
   TextEditingController mymin = TextEditingController();
   TextEditingController mysec = TextEditingController();
   TextEditingController myhour = TextEditingController();
-
+  TextEditingController currentlyWorkingHour = TextEditingController();
+  TextEditingController currentlyWorkingMin = TextEditingController();
+  TextEditingController currentlyWorkingSec = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
+    myhour.text = widget.time.split(":")[0].split(" ")[1];
     mymin.text = widget.time.split(":")[1];
-    mysec.text = widget.time.split(":")[2];
-    myhour.text = widget.time.split(":")[0];
+    mysec.text = widget.time.split(":")[2].split("|")[0];
+
+    currentlyWorkingHour.text = widget.time.split(":")[2].split("|")[1];
+    currentlyWorkingMin.text = widget.time.split(":")[3];
+    currentlyWorkingSec.text = widget.time.split(":")[4];
 
     currentTheme.addListener(() {
       if (this.mounted) { // check whether the state object is in tree
@@ -462,7 +590,7 @@ class _EditTimeState extends State<EditTime> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    String newCurrentlyWorking ="";
+    String newCurrentlyWorking;
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
@@ -500,7 +628,7 @@ class _EditTimeState extends State<EditTime> {
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            widget.time,
+                            widget.time.split("|")[1],
                             style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height*0.06
                             ),

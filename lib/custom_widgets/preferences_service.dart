@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models.dart';
 
@@ -7,9 +8,11 @@ class PreferenceService{
     final preferences = await SharedPreferences.getInstance();
 
     await preferences.setBool('isSwitched', settings.isSwitched);
-    //await preferences.setString('language', settings.language);
-
-    //print('saved settings');
+    /*await preferences.setStringList('language', settings.language
+        .map((e) => e.indexOf('language'/*settings.language.toString()*/).toString())
+        .toList());
+     */
+    print('saved settings');
   }
 
   //Print Function for the Color Theme or more with language ... maybe in progress
@@ -17,11 +20,30 @@ class PreferenceService{
     final preferences = await SharedPreferences.getInstance();
 
     final bool isSwitched = preferences.getBool('isSwitched')!;
-    //final String language = preferences.getString('language')!;
+    //final List<String> language = preferences.getStringList('language')!;
 
     return Settings(
         //language: language,
         isSwitched: isSwitched
+    );
+  }
+
+  Future saveTime(TimeStuff timeStuff) async{
+    final preferences = await SharedPreferences.getInstance();
+
+    await preferences.setString('timestampIn', timeStuff.timestampIn);
+
+    print('saved time');
+  }
+
+  //Print Function for the Color Theme or more with language ... maybe in progress
+  Future<TimeStuff> getTimeStuff() async{
+    final preferences = await SharedPreferences.getInstance();
+
+    final String timestampIn = preferences.getString('timestampIn')!;
+
+    return TimeStuff(
+        timestampIn: timestampIn
     );
   }
 }

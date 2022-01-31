@@ -37,6 +37,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
   final _preferencesService = PreferenceService();
   bool isSwitched = false;
 
+
   @override
   void initState() {
     super.initState();
@@ -53,7 +54,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
   //Saves the objects for the Shared Preferences
   void _saveSettings(){
     final newSettings = Settings(
-      //language: locales.toString(),
+        //language: locales['locale'],
         isSwitched: isSwitched);
     _preferencesService.saveSettings(newSettings);
   }
@@ -81,7 +82,6 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
       'locale': Locale('de', 'DE')
     },
   ];
-
 
   showLocaleDialog(BuildContext context) {
     final theme = Theme.of(context);
