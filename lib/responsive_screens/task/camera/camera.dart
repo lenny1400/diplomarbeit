@@ -160,23 +160,12 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
     }
   }
 
-  checkImageExists() async {
-    final path = widget.imagePath;
-    bool isExist = await File(path).exists();
-    if (isExist) {
-      return true;
-    }else{
-      return false;
-    }
-  }
-
   _deleteImage() async {
     final path = widget.imagePath;
     bool ifExist = await Directory(path).exists();
     if (ifExist) {
       await File(path).delete();
     }
-
     done = true;
   }
 
@@ -188,11 +177,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   }
 
   createFolder()async{
-
-
     String taskname = task.name;
-
-    late TimeOfDay time = TimeOfDay.now();
 
     final directory = await _localPath;
     folderName = directory + "/User/$user/tasks/extern/$taskname/";

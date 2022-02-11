@@ -448,9 +448,9 @@ class _InternPageState extends State<InternPage> {
                                   if(errorText == "Done"){
                                     saveToStorage();
                                     uploadInternTask(myControllerText.text, _selectedDate, getText(), getText2());
+                                    Navigator.pop(context);
                                   }
                                 });
-                                Navigator.pop(context);
                               },
                               child: Text(
                                 'Speichern',

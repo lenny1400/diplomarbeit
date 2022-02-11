@@ -80,7 +80,7 @@ Future<void> uploadExternTask(User_task task)async {
 
     List<String> string = directory1.listSync()[i].toString().split("/").last.split(".");
     //Check if file is a Picture
-    if(string[1] == "jpg'"){
+    if(string[1] == "jpg'" ||string[1] == "jpeg'" ){
       String picturename = string[0].split("'")[0];
 
       File picture =  File('$path/User/$user/tasks/extern/$name/${picturename}.jpg');

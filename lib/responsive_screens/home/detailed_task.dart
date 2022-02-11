@@ -92,56 +92,56 @@ class _detailedTaskState extends State<detailedTask> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![0],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![1],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![2],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![3],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![4],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![5],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![6],
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       "Unterschrift des Kunden:",
-                                      style: theme.textTheme.caption
+                                      style: theme.textTheme.headline3
                                   ),
                                 ),
                                 FutureBuilder(

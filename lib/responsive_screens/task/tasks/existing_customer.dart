@@ -30,6 +30,8 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
   int pop;
   _ExistingCustomerPageState(this.pop);
 
+  bool customerCheck = false;
+
   bool isCheckedYes = false;
   bool isCheckedNo = false;
 
@@ -137,9 +139,11 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
       if(myControllerKMStandA.text.isEmpty == false && myControllerKMStandB.text.isEmpty == false){
         if(_validateUhrzeit){
           if(_validateKMStandA && _validateKMStandB){
-            errorText = "Passt";
-            _isEverythingOkayColor = Colors.green;
-            _isEverythingOkay = true;
+            if(customerCheck){
+              errorText = "Passt";
+              _isEverythingOkayColor = Colors.green;
+              _isEverythingOkay = true;
+            }
           }
         }
       }
@@ -205,6 +209,11 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
       }
     }
 
+    if(dropdownValue == "Keine Kunden"){
+      errorText = "Keine Kunden vorhanden";
+    }else{
+      customerCheck = true;
+    }
     checkEverything();
 
   }
@@ -705,6 +714,8 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                               User_customer customer = User_customer("company", "0000","Anrede", "name1", "street", "country", 0000, "province", "phone", "fax", "email");
                               User_task task = User_task("AUF0000",false, customer, "time", "text", "Material");
 
+                              //Check lenght of the task number for the Format
+
                               if(count.length == 1){
                                 task.name = "AUF00000" + count.toString();
                               }
@@ -726,12 +737,19 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
                               task.customer.company = dropdownValue;
 
-                              for(int i =0;i<list.length;i++){
-                                if(task.customer.company == list[i]){
-                                  task.customer.number = numberlist[i];
+                              //Find customernumber for the customer
+
+                              if(dropdownValue != "Keine Kunden"){
+                                for(int i =0;i<list.length;i++){
+                                  if(task.customer.company == list[i]){
+                                    task.customer.number = numberlist[i];
+                                  }
                                 }
                               }
+
                               task.Anfahrt = Anfahrt;
+
+                              //Calcuate kilometers
 
                               if(Anfahrt){
                                String anfang = myControllerKMStandA.text.toString();
@@ -742,7 +760,28 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                task.km= e-a;
                               }
 
-                              task.time = "Von " + time.hour.toString() + ":" + time.minute.toString() +  " bis " + time2.hour.toString() + ":" + time2.minute.toString();
+                              //For better looks
+
+                              String minutes = time.minute.toString();
+                              String hours = time.hour.toString();
+                              String minutes1 = time2.minute.toString();
+                              String hours1 = time2.hour.toString();
+
+                              if(time.minute.toString().length == 1){
+                                minutes = "0"+minutes;
+                              }
+                              if(time.hour.toString().length == 1){
+                                hours = "0"+hours;
+                              }
+                              if(time2.minute.toString().length == 1){
+                                minutes1 = "0"+minutes1;
+                              }
+                              if(time2.hour.toString().length == 1){
+                                hours1 = "0"+hours1;
+                              }
+                              task.time = "Von " + hours + ":" + minutes +  " bis " + hours1 + ":" + minutes1;
+
+                              //Next page
 
                               setState(()  {
                                 getText();
