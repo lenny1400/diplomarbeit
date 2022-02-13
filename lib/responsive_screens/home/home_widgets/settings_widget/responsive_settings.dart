@@ -54,7 +54,6 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
   //Saves the objects for the Shared Preferences
   void _saveSettings(){
     final newSettings = Settings(
-        //language: locales['locale'],
         isSwitched: isSwitched);
     _preferencesService.saveSettings(newSettings);
   }

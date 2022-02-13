@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/intern.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/new_customer.dart';
@@ -49,7 +50,7 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                     child: Padding(
                       padding: EdgeInsets.only(top: _cons1,),
                       child: Text(
-                        'New Task',
+                        'ta_title1'.tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: _cons4,
@@ -75,7 +76,7 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => InternPage(title: 'Intern',)));
                       },
                       child: Text(
-                        'Intern',
+                        'ta_buttonIntern'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     ),
@@ -94,10 +95,10 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => NewCustomerPage(title: 'New Customer',)));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => NewCustomerPage(title: 'ta_appbar3'.tr,)));
                       },
                       child: Text(
-                        'Neuer Kunde',
+                        'ta_buttonNewCustomer'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     ),
@@ -117,10 +118,10 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                       ),
                       onPressed: () {
                         int pop = 1;
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'Existing Customer',pop: pop,)));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'ta_appbar4'.tr,pop: pop,)));
                       },
                       child: Text(
-                        'Bestehender Kunde',
+                        'ta_buttonOldCustomer'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     ),

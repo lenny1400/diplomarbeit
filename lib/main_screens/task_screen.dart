@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_nav_bar/responsive_screens/task/task_widget/responsive_task.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/intern.dart';
@@ -41,7 +42,7 @@ class _TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TasksPage(title: 'Tasks'),
+      home: TasksPage(title: 'ta_appbar1'.tr),
       title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,

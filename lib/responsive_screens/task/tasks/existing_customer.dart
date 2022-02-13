@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/fileManagement/saveCount.dart';
-import 'package:simple_nav_bar/themes.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:simple_nav_bar/user_startup/user_customer.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
@@ -273,7 +272,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Kunde",
+                          "ta_titleKunde".tr,
                           style: theme.textTheme.headline6,
                         ),
                       ),
@@ -331,7 +330,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Anfahrt",
+                          "ta_titleApproach".tr,
                           style: theme.textTheme.headline6,
                         ),
                       ),
@@ -374,7 +373,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                 width: MediaQuery.of(context).size.width*0.01,
                               ),
                               Text(
-                                "Ja",
+                                "ta_yes".tr,
                                 style: theme.textTheme.headline5,
                               ),
                               SizedBox(
@@ -406,7 +405,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                 width: MediaQuery.of(context).size.width*0.01,
                               ),
                               Text(
-                                "Nein",
+                                "ta_no".tr,
                                 style: theme.textTheme.headline5,
                               ),
                             ],
@@ -426,7 +425,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Kilometerstand",
+                          "ta_titleMileage".tr,
                           style: theme.textTheme.headline6,
                         ),
                       ),
@@ -468,11 +467,11 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                         borderSide: BorderSide(color: theme.shadowColor),
                                       ),
-                                      labelText: "Anfang",
+                                      labelText: "ta_start".tr,
                                       labelStyle: TextStyle(
                                           color: theme.shadowColor,
                                       ),
-                                      hintText: "Kilometer",
+                                      hintText: "ta_hintstart".tr,
                                       hintStyle: TextStyle(
                                         color: theme.shadowColor,
                                       )
@@ -505,11 +504,11 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                         borderSide: BorderSide(color: theme.shadowColor),
                                       ),
-                                      labelText: "Ende",
+                                      labelText: "ta_stop".tr,
                                       labelStyle: TextStyle(
                                           color: theme.shadowColor
                                       ),
-                                      hintText: "Kilometer",
+                                      hintText: "ta_hintstop".tr,
                                       hintStyle: TextStyle(
                                         color: theme.shadowColor,
                                       )
@@ -533,7 +532,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Uhrzeit",
+                          "ta_titleTime".tr,
                           style: theme.textTheme.headline6,
                         ),
                       ),
@@ -589,7 +588,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                       });
                                     },
                                     child: Text(
-                                      "Jetzt",
+                                      "ta_buttonNow".tr,
                                       style: TextStyle(
                                         fontSize: 23,
                                         decoration: TextDecoration.underline,
@@ -643,7 +642,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                       });
                                     },
                                     child: Text(
-                                      "Jetzt",
+                                      "ta_buttonNow".tr,
                                       style: TextStyle(
                                         fontSize: 23,
                                         decoration: TextDecoration.underline,
@@ -794,7 +793,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                               });
                             },
                             child: Text(
-                              "Next",
+                              "ta_buttonNext".tr,
                               style: theme.textTheme.bodyText1,
                             ),
                           ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class _NewCustomerState extends State<NewCustomer> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: NewCustomerPage(title: 'New Customer'),
+      home: NewCustomerPage(title: 'ta_appbar3'.tr),
       title: 'Flutter Theme Demo',
       routes: {
         '/existing_cust': (context) => ExistingCustomerPage(title: 'Existing Customer', pop: 0),
@@ -221,11 +222,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Company Name",
+                                labelText: "ta_fieldCName".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter company name"
+                                hintText: "ta_hintCName".tr
                             ),
                           )
                       )
@@ -259,11 +260,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Customer Number",
+                                  labelText: "ta_fieldCNumber".tr,
                                   labelStyle: TextStyle(
                                       color: theme.dividerColor
                                   ),
-                                  hintText: "Enter Customer Number"
+                                  hintText: "ta_hintCNumber".tr
                               ),
                             ),
                           ),
@@ -288,11 +289,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                       borderSide: BorderSide(color: theme.dividerColor),
                                     ),
-                                    labelText: "Title",
+                                    labelText: "ta_fieldCTitle".tr,
                                     labelStyle: TextStyle(
                                         color: theme.dividerColor
                                     ),
-                                    hintText: "Title"
+                                    hintText: "ta_hintCTitle".tr,
                                 ),
                               ),
                             ),
@@ -326,11 +327,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Firstname",
+                                labelText: "ta_fieldFirst".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter first name"
+                                hintText: "ta_hintFirst".tr
                             ),
                           )
                       )
@@ -360,11 +361,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Lastname",
+                                labelText: "ta_fieldLast".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter last name"
+                                hintText: "ta_hintLast".tr
                             ),
                           )
                       )
@@ -398,11 +399,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Street",
+                                  labelText: "ta_fieldStreet".tr,
                                   labelStyle: TextStyle(
                                       color: theme.dividerColor
                                   ),
-                                  hintText: "Enter street name"
+                                  hintText: "ta_hintStreet".tr
                               ),
                             ),
                           ),
@@ -427,11 +428,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                       borderSide: BorderSide(color: theme.dividerColor),
                                     ),
-                                    labelText: "Nr",
+                                    labelText: "ta_fieldNr".tr,
                                     labelStyle: TextStyle(
                                         color: theme.dividerColor
                                     ),
-                                    hintText: "Nr"
+                                    hintText: "ta_hintNr".tr
                                 ),
                               ),
                             ),
@@ -469,11 +470,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     borderSide: BorderSide(color: theme.dividerColor),
                                   ),
-                                  labelText: "Province",
+                                  labelText: "ta_fieldProvince".tr,
                                   labelStyle: TextStyle(
                                       color: theme.dividerColor
                                   ),
-                                  hintText: "Enter province name"
+                                  hintText: "ta_hintProvince".tr
                               ),
                             ),
                           ),
@@ -501,11 +502,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                       borderSide: BorderSide(color: theme.dividerColor),
                                     ),
-                                    labelText: "Zip Code",
+                                    labelText: "ta_fieldZip".tr,
                                     labelStyle: TextStyle(
                                         color: theme.dividerColor
                                     ),
-                                    hintText: "Zip"
+                                    hintText: "ta_hintZip".tr
                                 ),
                               ),
                             ),
@@ -540,11 +541,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Country",
+                                labelText: "ta_fieldCountry".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter country"
+                                hintText: "ta_hintCountry".tr
                             ),
                           )
                       )
@@ -575,11 +576,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Phone Number",
+                                labelText: "ta_fieldPhone".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter phone number"
+                                hintText: "ta_hintPhone".tr
                             ),
                           )
                       )
@@ -609,11 +610,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Email",
+                                labelText: "ta_fieldEmail".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter email address"
+                                hintText: "ta_hintEmail".tr
                             ),
                           )
                       )
@@ -643,11 +644,11 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   borderSide: BorderSide(color: theme.dividerColor),
                                 ),
-                                labelText: "Fax",
+                                labelText: "ta_fieldFax".tr,
                                 labelStyle: TextStyle(
                                     color: theme.dividerColor
                                 ),
-                                hintText: "Enter Fax number"
+                                hintText: "ta_hintFax".tr
                             ),
                           )
                       )

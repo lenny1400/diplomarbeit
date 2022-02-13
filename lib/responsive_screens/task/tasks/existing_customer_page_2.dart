@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
 import 'package:simple_nav_bar/responsive_screens/task/camera/camera.dart';
@@ -144,7 +145,7 @@ class _CreateTaskState extends State<CreateTask> {
                         child: Padding(
                           padding: EdgeInsets.only(left: 40,),
                           child: Text(
-                            "Durchgeführte Tätigkeit",
+                            "ta_titleActivity".tr,
                             style: theme.textTheme.headline5,
                           ),
                         )
@@ -191,7 +192,7 @@ class _CreateTaskState extends State<CreateTask> {
                         child: Padding(
                           padding: EdgeInsets.only(left: 40,),
                           child: Text(
-                            "Materialaufwand",
+                            "ta_titleMaterial".tr,
                             style: theme.textTheme.headline5,
                           ),
                         )
@@ -245,7 +246,7 @@ class _CreateTaskState extends State<CreateTask> {
                             Padding(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                "Bilder",
+                                "ta_titlePictures".tr,
                                 style: theme.textTheme.caption,
                               ),
                             ),
@@ -369,7 +370,7 @@ class _CreateTaskState extends State<CreateTask> {
 
                             },
                             child: Text(
-                              "Next",
+                              "ta_buttonNext".tr,
                               style: theme.textTheme.bodyText1,
                             ),
                           ),

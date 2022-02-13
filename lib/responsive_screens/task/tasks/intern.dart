@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/fileManagement/saveCount.dart';
@@ -44,7 +45,7 @@ class _InternState extends State<Intern> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: InternPage(title: 'Intern'),
+      home: InternPage(title: 'ta_appbar2'.tr),
       title: 'Flutter Theme Demo',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
@@ -229,7 +230,7 @@ class _InternPageState extends State<InternPage> {
                           child: Padding(
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005,),
                             child: Text(
-                              "Durchgeführte Tätigkeit",
+                              "ta_title2Activity".tr,
                               style: theme.textTheme.headline3,
                             ),
                           )
@@ -268,7 +269,7 @@ class _InternPageState extends State<InternPage> {
                           child: Padding(
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005,),
                             child: Text(
-                              "Datum und Uhrzeit",
+                              "ta_title3Date".tr,
                               style: theme.textTheme.headline3,
                             ),
                           )
@@ -453,7 +454,7 @@ class _InternPageState extends State<InternPage> {
                                 });
                               },
                               child: Text(
-                                'Speichern',
+                                'ta_buttonSave'.tr,
                                 style: theme.textTheme.bodyText1,
                               ),
                             ),
