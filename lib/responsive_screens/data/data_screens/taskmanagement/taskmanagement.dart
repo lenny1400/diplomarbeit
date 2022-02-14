@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import '../../../../themes.dart';
 
@@ -27,7 +28,7 @@ class _TaskManagementState extends State<TaskManagement> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ManagementPage(title: 'Manage Tasks'),
+      home: ManagementPage(title: 'da_appbarManage'.tr),
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -63,7 +64,7 @@ class _ManagementPageState extends State<ManagementPage> {
           fit: BoxFit.fitHeight,
           alignment: Alignment.center,
           child: Container(
-            child: Text("Tasks"),
+            child: Text("da_titleManage".tr),
           ),
         ),
       ),

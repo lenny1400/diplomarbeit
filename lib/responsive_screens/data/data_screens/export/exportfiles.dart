@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../themes.dart';
@@ -76,7 +77,7 @@ class _ExportFilesPageState extends State<ExportFilesPage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-          title: Text("Export Data",
+          title: Text("da_appbarExport".tr,
             style: theme.textTheme.caption,
           ),
           elevation: 0,

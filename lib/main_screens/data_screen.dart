@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importfiles.dart';
@@ -45,7 +46,7 @@ class _DataState extends State<Data> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DataPage(title: 'Data'),
+      home: DataPage(title: 'da_appbarData'.tr),
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -102,7 +103,7 @@ class _DataPageState extends State<DataPage> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => ImportFiles()));
                       },
                       child: Text(
-                        'Import Data',
+                        'da_import'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     )
@@ -126,7 +127,7 @@ class _DataPageState extends State<DataPage> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => ExportFiles()));
                       },
                       child: Text(
-                        'Export Data',
+                        'da_export'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     )
@@ -145,10 +146,10 @@ class _DataPageState extends State<DataPage> {
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => ManagementPage(title: "Manage Tasks")));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ManagementPage(title: "da_appbarManage".tr)));
                       },
                       child: Text(
-                        'Manage Tasks',
+                        'da_manage'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     )

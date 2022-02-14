@@ -86,7 +86,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
         appBar: AppBar(
-          title: Text(widget.title,
+          title: Text(widget.title.tr,
           style: theme.textTheme.caption,
             ),
           elevation: 0,

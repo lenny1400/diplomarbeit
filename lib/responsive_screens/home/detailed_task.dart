@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 import 'package:simple_nav_bar/user_firebase_tasks/extern_upload.dart';
@@ -68,7 +69,7 @@ class _detailedTaskState extends State<detailedTask> {
     return Scaffold(
         backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text("Task",style: theme.textTheme.caption),
+        title: Text("ho_appbarDetailedTask".tr,style: theme.textTheme.caption),
       ),
       body: Center(
         child: FutureBuilder(
@@ -140,7 +141,7 @@ class _detailedTaskState extends State<detailedTask> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                      "Unterschrift des Kunden:",
+                                      "ho_signature".tr,
                                       style: theme.textTheme.headline3
                                   ),
                                 ),
@@ -175,7 +176,7 @@ class _detailedTaskState extends State<detailedTask> {
                                             Navigator.pop(context);
                                           },
                                           child: Text(
-                                            "Back",
+                                            "ho_buttonBack".tr,
                                             style: theme.textTheme.bodyText1,
                                           ),
                                         ),

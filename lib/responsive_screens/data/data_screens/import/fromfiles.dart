@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:io' as io;
 
 import '../../../../themes.dart';
@@ -41,7 +42,7 @@ class _FromFileState extends State<FromFile> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FromFilePage(title: 'From Files'),
+      home: FromFilePage(title: 'da_appbarFromFiles'.tr),
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -90,7 +91,7 @@ class _FromFilePageState extends State<FromFilePage> {
                   },
                   color: theme.cardColor,
                   padding: EdgeInsets.all(15),
-                  child: Text('Pick File', style: theme.textTheme.bodyText1,),
+                  child: Text('da_pick'.tr, style: theme.textTheme.bodyText1,),
                 ),
               ),
             ),
@@ -127,9 +128,9 @@ class _SelectedState extends State<Selected> {
 
   late final bool isMultiPath;
 
-  final String name = 'File';
-  final String sizename = 'Size';
-  final String datename = 'Date added';
+  final String name = 'da_File'.tr;
+  final String sizename = 'da_Size'.tr;
+  final String datename = 'da_Date'.tr;
 
   late final String filesize;
   final String date = new DateTime.now().toString();
@@ -225,7 +226,7 @@ class _SelectedState extends State<Selected> {
       return Scaffold(
         backgroundColor: widget.theme.backgroundColor,
         appBar: AppBar(
-          title: Text("Selected File",
+          title: Text("da_appbarSelectedFile".tr,
             style: widget.theme.textTheme.caption,
           ),
           elevation: 0,
@@ -308,7 +309,7 @@ class _SelectedState extends State<Selected> {
       return Scaffold(
           backgroundColor: widget.theme.backgroundColor,
           appBar: AppBar(
-            title: Text("No File found",
+            title: Text("da_appbarNoFile".tr,
               style: widget.theme.textTheme.caption,
             ),
             elevation: 0,
@@ -323,7 +324,7 @@ class _SelectedState extends State<Selected> {
                 },
                 color: widget.theme.cardColor,
                 padding: EdgeInsets.all(15),
-                child: Text("Go back"),
+                child: Text("da_goBack".tr),
               ),
             )
           ),

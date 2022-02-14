@@ -107,7 +107,7 @@ class _MobileHomeState extends State<MobileHome> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Tasks:",
+                    "ho_titleTasks".tr,
                     style: TextStyle(
                         color: theme.dividerColor,
                         fontSize: _cons3,
@@ -129,7 +129,7 @@ class _MobileHomeState extends State<MobileHome> {
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "No tasks :(",
+                            "ho_noTasks".tr,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: _cons3,

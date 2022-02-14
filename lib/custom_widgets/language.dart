@@ -23,6 +23,13 @@ class Languages extends Translations {
       'ho_title1':'Not finished',
       'ho_title2':'Finished',
       'ho_subtitle1':'See all',
+      'ho_titleTasks':'Tasks:',
+      'ho_noTasks':'No tasks :(',
+      //detailedTask
+      'ho_appbarDetailedTask':'Task',
+      'ho_signature':'Signature of the customer:',
+      'ho_buttonBack':'Back',
+
 
       //AllTasks
       'at_appbar1':'All Tasks',
@@ -96,6 +103,32 @@ class Languages extends Translations {
       'ta_titleActivity':'Performed Activity',
       'ta_titleMaterial':'Material expenses',
       'ta_titlePictures':'Pictures',
+
+      //Data
+      'da_appbarData':'Data',
+      'da_import':'Import Data',
+      'da_appbarImportFiles':'Import Files',
+      'da_device':'From Device',
+      'da_database':'From Database',
+      'da_appbarFromFiles':'From Files',
+      'da_pick':'Pick File',
+      'da_appbarSelectedFile':'Selected File',
+      'da_File':'File',
+      'da_Size':'Size',
+      'da_Date':'Date added',
+      'da_appbarNoFile':'No File Found',
+      'da_goBack':'Go Back',
+
+      'da_export':'Export Data',
+      'da_appbarExport':'Export Data',
+      'da_appbarOptions':'Export Options',
+      'da_titleExport':'Select a period of time',
+      'da_EnterDate':'Enter Date',
+      'da_ErrorDate':'Date is not selected',
+
+      'da_manage':'Manage Tasks',
+      'da_appbarManage':'Manage Tasks',
+      'da_titleManage':'Tasks',
     },
     'de_DE': {
       //Settings
@@ -117,6 +150,13 @@ class Languages extends Translations {
       'ho_title1':'Nicht abgeschlossen',
       'ho_title2':'Abgeschlossen',
       'ho_subtitle1':'Alle anzeigen',
+      'ho_titleTasks':'Aufgaben:',
+      'ho_noTasks':'Keine Aufgaben :(',
+      //detailedTask
+      'ho_appbarDetailedTask':'Aufgabe',
+      'ho_signature':'Unterschrift des Kunden:',
+      'ho_buttonBack':'Zurück',
+
 
       //AllTasks
       'at_appbar1':'Alle Aufgaben',
@@ -190,6 +230,32 @@ class Languages extends Translations {
       'ta_titleActivity':'Durchgeführte Tätigkeit',
       'ta_titleMaterial':'Materialaufwand',
       'ta_titlePictures':'Bilder',
+
+      //Data
+      'da_appbarData':'Daten',
+      'da_import':'Daten importieren',
+      'da_appbarImportFiles':'Importieren von Daten',
+      'da_device':'Vom Gerät aus',
+      'da_database':'Von der Datenbank aus',
+      'da_appbarFromFiles':'Aus den Dateien',
+      'da_pick':'Datei auswählen',
+      'da_appbarSelectedFile':'Ausgewählte Datei',
+      'da_File':'Datei',
+      'da_Size':'Größe',
+      'da_Date':'Hinzugefügtes Datum',
+      'da_appbarNoFile':'Datei nicht gefunden',
+      'da_goBack':'Zurückgehen',
+
+      'da_export':'Daten exportieren',
+      'da_appbarExport':'Exportieren von Daten',
+      'da_appbarOptions':'Optionen für den Export',
+      'da_titleExport':'Wählen Sie einen Zeitraum',
+      'da_EnterDate':'Datum eingeben',
+      'da_ErrorDate':'Das Datum ist nicht ausgewählt',
+
+      'da_manage':'Aufgaben verwalten',
+      'da_appbarManage':'Aufgaben verwalten',
+      'da_titleManage':'Aufgaben',
     }
   };
 }

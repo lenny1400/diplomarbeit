@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../themes.dart';
@@ -65,7 +66,7 @@ class _ExportOptionsState extends State<ExportOptions> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-          title: Text("Export Options",
+          title: Text("da_appbarOptions".tr,
             style: theme.textTheme.caption,
           ),
           elevation: 0,
@@ -77,7 +78,7 @@ class _ExportOptionsState extends State<ExportOptions> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  'Select a period of time', style: TextStyle(color: theme.shadowColor,fontSize: 25),
+                  'da_titleExport'.tr, style: TextStyle(color: theme.shadowColor,fontSize: 25),
                 ),
                 SizedBox(
                   height: 10,
@@ -97,7 +98,7 @@ class _ExportOptionsState extends State<ExportOptions> {
                     hoverColor: theme.shadowColor,
                     fillColor: theme.shadowColor,
                     icon: Icon(Icons.calendar_today,color: theme.shadowColor,), //icon of text field
-                    labelText: "Enter Date",
+                    labelText: "da_EnterDate".tr,
                     labelStyle: TextStyle(color: theme.shadowColor,fontSize: 20), //label text of field
                   ),
                   readOnly: true,  //set it true, so that user will not able to edit text
@@ -118,7 +119,7 @@ class _ExportOptionsState extends State<ExportOptions> {
                         dateinput.text = formattedDate; //set output date to TextField value.
                       });
                     }else{
-                      print("Date is not selected");
+                      print("da_ErrorDate".tr);
                     }
                   },
                 ),
@@ -140,7 +141,7 @@ class _ExportOptionsState extends State<ExportOptions> {
                     hoverColor: theme.shadowColor,
                     fillColor: theme.shadowColor,
                     icon: Icon(Icons.calendar_today,color: theme.shadowColor,), //icon of text field
-                    labelText: "Enter Date",
+                    labelText: "da_EnterDate".tr,
                     labelStyle: TextStyle(color: theme.shadowColor,fontSize: 20), //label text of field
                   ),
                   readOnly: true,  //set it true, so that user will not able to edit text
@@ -161,7 +162,7 @@ class _ExportOptionsState extends State<ExportOptions> {
                         dateinput2.text = formattedDate; //set output date to TextField value.
                       });
                     }else{
-                      print("Date is not selected");
+                      print("da_ErrorDate".tr);
                     }
                   },
                 ),

@@ -516,7 +516,7 @@ class _TimePageState extends State<TimePage> {
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height*0.05,
-                        width: MediaQuery.of(context).size.width*0.18,
+                        width: MediaQuery.of(context).size.width*0.21,
                         child: FloatingActionButton(
                           elevation: 0,
                           onPressed: () async {

@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage(title: 'Settings',)));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage(title: "se_appbar1")));
                 },
                 child: const Icon(
                     Icons.settings

@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/fromfiles.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importedfiles.dart';
 import 'dart:io' as io;
@@ -43,7 +44,7 @@ class _ImportFilesState extends State<ImportFiles> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ImportFilesPage(title: 'Import Files'),
+      home: ImportFilesPage(title: 'da_appbarImportFiles'.tr),
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
@@ -101,7 +102,7 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => FromFile()));
                       },
                       child: Text(
-                        'From Device',
+                        'da_device'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     )
@@ -129,7 +130,7 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                         //Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'Existing Customer',pop: pop,)));
                       },
                       child: Text(
-                        'From Database',
+                        'da_database'.tr,
                         style: theme.textTheme.bodyText1,
                       ),
                     )
