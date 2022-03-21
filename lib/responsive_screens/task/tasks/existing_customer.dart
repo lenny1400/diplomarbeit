@@ -734,6 +734,12 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                 task.name = "AUF" + count.toString();
                               }
 
+                              Directory? directory = await getApplicationDocumentsDirectory();
+                              String path = directory.path;
+                              final dir = Directory('$path/User/$user/tasks/extern/${task.name}');
+                              if(dir.existsSync()){
+                                dir.deleteSync(recursive: true);
+                              }
                               task.customer.company = dropdownValue;
 
                               //Find customernumber for the customer
