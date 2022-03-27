@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_nav_bar/responsive_screens/data/data_screens/export/export_task.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importfiles.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/taskmanagement/taskmanagement.dart';
 import 'dart:io' as io;
@@ -124,7 +125,7 @@ class _DataPageState extends State<DataPage> {
                       onPressed: () {
                         //int pop = 1;
                         //Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'Existing Customer',pop: pop,)));
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => ExportFiles()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => export_task()));
                       },
                       child: Text(
                         'da_export'.tr,
