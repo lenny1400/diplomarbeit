@@ -22,10 +22,13 @@ class _export_taskState extends State<export_task> {
       String user = FirebaseAuth.instance.currentUser!.uid;
       Directory? directory = await getApplicationDocumentsDirectory();
       String path = directory.path;
+
       var encoder = ZipFileEncoder();
       encoder.create("/storage/emulated/0/Documents/tasks.zip");
       encoder.addDirectory(Directory("$path/User/$user/tasks/extern/"));
       encoder.close();
+
+
     }
     on Exception catch (_) {
 
