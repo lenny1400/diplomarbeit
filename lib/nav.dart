@@ -31,7 +31,7 @@ class _NavState extends State<Nav> {
     currentTheme.addListener(() {
       if (this.mounted) { // check whether the state object is in tree
         setState(() {
-          // make changes here
+          // make changes here "New"
         });
       }
     });
