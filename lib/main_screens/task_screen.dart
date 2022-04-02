@@ -70,6 +70,7 @@ class _TasksPageState extends State<TasksPage> {
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
+      // Add Settings
       appBar: AppBar(
         title: Text(widget.title,
           style: theme.textTheme.headline6,
