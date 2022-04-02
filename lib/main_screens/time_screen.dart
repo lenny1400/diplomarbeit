@@ -45,7 +45,6 @@ class _TimeState extends State<Time> {
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting();
-
     return MaterialApp(
       home: TimePage(title: 'ti_appbar1'.tr),
       title: 'Flutter Theme Demo',
@@ -75,8 +74,6 @@ class _TimePageState extends State<TimePage> {
   //service call
   final _preferencesService = PreferenceService();
 
-  //database call
-  final _firebase = FirebaseDatabase.instance;
 
   //variables for View
   var hour;
@@ -227,7 +224,6 @@ class _TimePageState extends State<TimePage> {
     String sec = "";
     String min = "";
     String hour = "";
-
     timeSec = _start;
 
     if (timeSec > 59) {
@@ -292,10 +288,6 @@ class _TimePageState extends State<TimePage> {
     }
   }
 
-  void saveFirebase(){
-
-  }
-
   @override
   void initState() {
     super.initState();
@@ -313,7 +305,6 @@ class _TimePageState extends State<TimePage> {
 
     //_timer?.cancel();
     super.dispose();
-
   }
 
 

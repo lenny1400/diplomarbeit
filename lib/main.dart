@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
       translations: Languages(),
+      fallbackLocale: Locale('en','US'),
       locale: Get.deviceLocale,
     );
   }

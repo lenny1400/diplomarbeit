@@ -138,6 +138,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
 
   @override
   Widget build(BuildContext context) {
+
     final theme = Theme.of(context);
     final mdHeight = MediaQuery.of(context).size.height*1;
     final mdWidth = MediaQuery.of(context).size.width*1;
@@ -328,79 +329,6 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                     ),
                   )
               ),
-              /*Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: _cons2,right: _cons2,top: _cons1),
-                    child: Container(
-                      height: _cons5,
-                      child: TextButton(
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationsPageWidget()));
-                        },
-                        style: TextButton.styleFrom(
-                            onSurface: theme.backgroundColor,
-                            primary: theme.backgroundColor
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: IconTheme(
-                                    data: new IconThemeData(
-                                        color: theme.cardColor,
-                                        size: _cons4
-                                    ),
-                                    child: Icon(CupertinoIcons.bell_fill),
-                                  ),
-                                ),
-                              ),
-                              flex: 1,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(left: _cons2, right: _cons1,top: _cons1,bottom: _cons1),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(left: _cons1),
-                                        child: Text(
-                                          "se_subtitle3".tr,
-                                          style: TextStyle(
-                                              color: theme.dividerColor,
-                                              fontSize: _cons2,
-                                              fontWeight: FontWeight.w500
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconTheme(
-                                        data: new IconThemeData(
-                                            color: theme.cardColor,
-                                            size: _cons3
-                                        ),
-                                        child: Icon(Icons.keyboard_arrow_right_sharp),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              flex: 3,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-              ),*/
               Flexible(
                   child: Padding(
                     padding: EdgeInsets.only(left: _cons2, right: _cons2,top: _cons1+15,),
