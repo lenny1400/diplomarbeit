@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/export/export_task.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importfiles.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/taskmanagement/taskmanagement.dart';
+import 'package:simple_nav_bar/responsive_screens/home/settings.dart';
 import 'dart:io' as io;
 import '../themes.dart';
 import '../responsive_screens/data/data_screens/export/exportfiles.dart';
@@ -73,10 +74,28 @@ class _DataPageState extends State<DataPage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text(widget.title,
+        title: Text("da_appbarData".tr,
           style: theme.textTheme.caption,
         ),
         elevation: 0,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage(title: "se_appbar1")));
+                },
+                child: const Icon(
+                    Icons.settings
+                ),
+              )
+          ),
+        ],
+        actionsIconTheme: IconThemeData(
+            size: 30.0,
+            color: theme.shadowColor,
+            opacity: 12.0
+        ),
       ),
       body: Center(
         child: FittedBox(

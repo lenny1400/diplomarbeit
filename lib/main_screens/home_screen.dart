@@ -9,16 +9,6 @@ import '../responsive_screens/home/home_widgets/responsive_mobile.dart';
 import 'package:get/get.dart';
 import 'package:simple_nav_bar/custom_widgets/preferences_service.dart';
 
-Future main()async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
-  runApp(const Home());
-}
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -27,6 +17,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final _preferencesService = PreferenceService();
+  bool isSwitched = false;
 
   @override
   void initState() {
@@ -41,15 +34,16 @@ class _HomeState extends State<Home> {
     });
   }
 
-  final _preferencesService = PreferenceService();
-  bool isSwitched = false;
-
   void _populateFields() async{ //To get the State of the Switch (Dark or Light Mode)
-    final settings = await _preferencesService.getSettings();
-    setState(() {
-      isSwitched = settings.isSwitched;
-    });
-    ThemeCheck();
+    try{
+      final settings = await _preferencesService.getSettings();
+      setState(() {
+        isSwitched = settings.isSwitched;
+      });
+      ThemeCheck();
+    }catch(Exceptions){
+      print("Exception: " + Exceptions.toString() + " at HomeScreen Page");
+    }
   }
 
   void ThemeCheck() { //Query whether the active theme is Dark or Light
@@ -64,6 +58,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // _pageName = ModalRoute.of(context)?.settings.name;
     return MaterialApp(
       home: const MyHomePage(title: 'Home'),
       routes: {

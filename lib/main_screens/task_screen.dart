@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:simple_nav_bar/responsive_screens/home/settings.dart';
 import 'package:simple_nav_bar/responsive_screens/task/task_widget/responsive_task.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/intern.dart';
@@ -71,10 +72,28 @@ class _TasksPageState extends State<TasksPage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text(widget.title,
-          style: theme.textTheme.headline6,
+        title: Text("ta_appbar1".tr,
+          style: theme.textTheme.caption,
         ),
         elevation: 0,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage(title: "se_appbar1")));
+                },
+                child: const Icon(
+                    Icons.settings
+                ),
+              )
+          ),
+        ],
+        actionsIconTheme: IconThemeData(
+            size: 30.0,
+            color: theme.shadowColor,
+            opacity: 12.0
+        ),
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints){

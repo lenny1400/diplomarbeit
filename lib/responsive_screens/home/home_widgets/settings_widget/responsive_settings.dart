@@ -59,11 +59,15 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
   }
 
   //Reloads & Uploads the state of the switch
-  void _populateFields() async{
-    final settings = await _preferencesService.getSettings();
-    setState(() {
-      isSwitched = settings.isSwitched;
-    });
+  void _populateFields() async {
+    try{
+      final settings = await _preferencesService.getSettings();
+      setState(() {
+        isSwitched = settings.isSwitched;
+      });
+    }catch(Exceptions){
+      print("Exception: " + Exceptions.toString() + " at ResponsiveSettings Page");
+    }
   }
 
   @override

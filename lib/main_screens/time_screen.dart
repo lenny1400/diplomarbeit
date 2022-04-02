@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_nav_bar/custom_widgets/models.dart';
+import 'package:simple_nav_bar/responsive_screens/home/settings.dart';
 import '../themes.dart';
 import '../responsive_screens/time/my_flutter_app_icons.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -315,10 +316,28 @@ class _TimePageState extends State<TimePage> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text(widget.title,
-        style: theme.textTheme.caption,
+        title: Text("ti_appbar1".tr,
+          style: theme.textTheme.caption,
         ),
         elevation: 0,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsPage(title: "se_appbar1")));
+                },
+                child: const Icon(
+                    Icons.settings
+                ),
+              )
+          ),
+        ],
+        actionsIconTheme: IconThemeData(
+            size: 30.0,
+            color: theme.shadowColor,
+            opacity: 12.0
+        ),
       ),
       body: Center(
         child: FittedBox(

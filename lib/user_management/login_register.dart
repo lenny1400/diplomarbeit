@@ -71,7 +71,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
   @override
   void initState() {
-    print("LoginRegister is loaded" + _isLoggedOut.toString());
+    print("LoginRegister is loaded: " + _isLoggedOut.toString());
     // TODO: implement initState
     super.initState();
     setState(() {
@@ -93,7 +93,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
       } else {
         _isLoggedOut = false;
         print('User is signed in!');
-        print(user.uid.toString());
+        print("User: " + user.uid.toString());
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });
