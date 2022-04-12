@@ -92,8 +92,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
         _isLoggedOut = true;
       } else {
         _isLoggedOut = false;
-        print('User is signed in!');
-        print("User: " + user.uid.toString());
+        print('User is signed in!' + "\t User: " + user.uid.toString());
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Nav()),(route) => false,);
       }
     });

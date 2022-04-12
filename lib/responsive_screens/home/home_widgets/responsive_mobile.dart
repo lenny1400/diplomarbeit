@@ -131,7 +131,6 @@ class _MobileHomeState extends State<MobileHome> {
                           child: Text(
                             "ho_noTasks".tr,
                             style: TextStyle(
-                                color: Colors.black,
                                 fontSize: _cons3,
                             ),
                           ),
