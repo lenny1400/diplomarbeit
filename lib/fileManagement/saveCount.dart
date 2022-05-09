@@ -60,7 +60,7 @@ Future<int> getCountExtern () async {
   }
   else{
     _refExtern.set( FirebaseAuth.instance.currentUser!.uid);
-    _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").set(1);
+    _refExtern.child(FirebaseAuth.instance.currentUser!.uid).child("count").set(0);
     return 1;
   }
 }
