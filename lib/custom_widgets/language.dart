@@ -24,7 +24,7 @@ class Languages extends Translations {
       'ho_title2':'Finished',
       'ho_subtitle1':'See all',
       'ho_titleTasks':'Tasks:',
-      'ho_noTasks':'No tasks :(',
+      'ho_noTasks':'No tasks',
       //detailedTask
       'ho_appbarDetailedTask':'Task',
       'ho_signature':'Signature of the customer:',

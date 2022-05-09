@@ -89,10 +89,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final currentWidth = (MediaQuery.of(context).size.width.toString()).split(".")[0];
+    final currentHeight = (MediaQuery.of(context).size.height.toString()).split(".")[0];
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text("ho_appbar1".tr,
+        title: Text("ho_appbar1".tr /*+ " " + currentWidth+"x"+currentHeight*/,
           style: theme.textTheme.caption,
         ),
         elevation: 0,

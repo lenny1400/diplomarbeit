@@ -71,10 +71,15 @@ class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final currentWidth = (MediaQuery.of(context).size.width.toString()).split(".")[0];
+    final currentHeight = (MediaQuery.of(context).size.height + (MediaQuery.of(context).padding.top + kToolbarHeight)).toString().split(".")[0];
+    final _bodyHeight = MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight);
+    final _bottomNavBarHeight = MediaQuery.of(context).size.height - _bodyHeight;
+    print("Navbar: " + _bottomNavBarHeight.toString());
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       appBar: AppBar(
-        title: Text("da_appbarData".tr,
+        title: Text("da_appbarData".tr + " " + currentWidth+"x"+currentHeight,
           style: theme.textTheme.caption,
         ),
         elevation: 0,
@@ -102,24 +107,25 @@ class _DataPageState extends State<DataPage> {
           fit: BoxFit.fitHeight,
           alignment: Alignment.center,
           child: Container(
-            height: MediaQuery.of(context).size.height*1,
+            height: _bodyHeight,
             width: MediaQuery.of(context).size.width*1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
+                  width: MediaQuery.of(context).size.width*1,
+                  height: _bodyHeight*0.07,
+                ),
+                SizedBox(
                     width: MediaQuery.of(context).size.width * 0.90,
-                    height: MediaQuery.of(context).size.height*0.07,
+                    height: _bodyHeight*0.07,
                     child: FloatingActionButton(
                       elevation: 0,
-                      heroTag: "btnImport",
                       backgroundColor: theme.cardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       onPressed: () {
-                        //int pop = 1;
-                        //Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'Existing Customer',pop: pop,)));
                         Navigator.push(context, MaterialPageRoute(builder: (_) => ImportFiles()));
                       },
                       child: Text(
@@ -129,21 +135,18 @@ class _DataPageState extends State<DataPage> {
                     )
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: _bodyHeight*0.03),
                 ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 0.90,
-                    height: MediaQuery.of(context).size.height*0.07,
+                    height: _bodyHeight*0.07,
                     child: FloatingActionButton(
                       elevation: 0,
-                      heroTag: "btnExport",
                       backgroundColor: theme.cardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       onPressed: () {
-                        //int pop = 1;
-                        //Navigator.push(context, MaterialPageRoute(builder: (_) => ExistingCustomerPage(title: 'Existing Customer',pop: pop,)));
                         Navigator.push(context, MaterialPageRoute(builder: (_) => export_task()));
                       },
                       child: Text(
@@ -153,14 +156,13 @@ class _DataPageState extends State<DataPage> {
                     )
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: _bodyHeight*0.03),
                 ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 0.90,
-                    height: MediaQuery.of(context).size.height*0.07,
+                    height: _bodyHeight*0.07,
                     child: FloatingActionButton(
                       elevation: 0,
-                      heroTag: "btnManageTasks",
                       backgroundColor: theme.cardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
