@@ -116,7 +116,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       body: Center(
         child: FittedBox(
@@ -133,7 +133,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       height: MediaQuery.of(context).size.height*0.1,
                       child: Text(
                         "Register",
-                        style: theme.textTheme.bodyText2,
+                        style: theme.textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -295,7 +295,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         },
                         child: Text(
                           'Sign up',
-                          style: theme.textTheme.bodyText1,
+                          style: theme.textTheme.bodyLarge,
                         ),
                       ),
                     ),
@@ -308,7 +308,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       },
                       child: Text(
                         'Already have an Account?',
-                        style: theme.textTheme.headline1,
+                        style: theme.textTheme.displayLarge,
                       ),
                     ),
                   ),

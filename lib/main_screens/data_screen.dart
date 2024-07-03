@@ -1,6 +1,5 @@
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -10,9 +9,7 @@ import 'package:simple_nav_bar/responsive_screens/data/data_screens/export/expor
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importfiles.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/taskmanagement/taskmanagement.dart';
 import 'package:simple_nav_bar/responsive_screens/home/settings.dart';
-import 'dart:io' as io;
 import '../themes.dart';
-import '../responsive_screens/data/data_screens/export/exportfiles.dart';
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,10 +74,10 @@ class _DataPageState extends State<DataPage> {
     final _bottomNavBarHeight = MediaQuery.of(context).size.height - _bodyHeight;
     print("Navbar: " + _bottomNavBarHeight.toString());
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text("da_appbarData".tr + " " + currentWidth+"x"+currentHeight,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
         actions: [
@@ -130,7 +127,7 @@ class _DataPageState extends State<DataPage> {
                       },
                       child: Text(
                         'da_import'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     )
                 ),
@@ -151,7 +148,7 @@ class _DataPageState extends State<DataPage> {
                       },
                       child: Text(
                         'da_export'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     )
                 ),
@@ -172,7 +169,7 @@ class _DataPageState extends State<DataPage> {
                       },
                       child: Text(
                         'da_manage'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     )
                 ),

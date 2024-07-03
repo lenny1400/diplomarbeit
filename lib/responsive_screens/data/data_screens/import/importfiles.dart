@@ -1,12 +1,9 @@
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/fromfiles.dart';
-import 'package:simple_nav_bar/responsive_screens/data/data_screens/import/importedfiles.dart';
-import 'dart:io' as io;
 
 import '../../../../themes.dart';
 
@@ -69,10 +66,10 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
       ),
@@ -103,7 +100,7 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                       },
                       child: Text(
                         'da_device'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     )
                 ),
@@ -131,7 +128,7 @@ class _ImportFilesPageState extends State<ImportFilesPage> {
                       },
                       child: Text(
                         'da_database'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     )
                 )

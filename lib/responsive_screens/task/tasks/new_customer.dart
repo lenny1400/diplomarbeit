@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../themes.dart';
-import 'existing_customer.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -180,10 +179,10 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.headline6,
+          style: theme.textTheme.titleLarge,
         ),
         elevation: 0,
       ),

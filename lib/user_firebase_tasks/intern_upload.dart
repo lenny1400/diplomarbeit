@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -17,15 +16,13 @@ Future<void> uploadInternTask(String _doneTask, String _date, String _timeStart,
     var _snpShot;
     await _refIntern.child(FirebaseAuth.instance.currentUser!.uid).child(_fileName).once().then((value)=>_snpShot);
 
-    if(_snpShot==null){
-      //hierarchy
-      _refIntern.set( FirebaseAuth.instance.currentUser!.uid);
-      _refIntern.child( FirebaseAuth.instance.currentUser!.uid).push().set(_fileName);
-      _refIntern.child( FirebaseAuth.instance.currentUser!.uid).child(_fileName).child("Date").set(_date);
-      _refIntern.child( FirebaseAuth.instance.currentUser!.uid).child(_fileName).child("Time").set(_timeStart+"-"+_timeEnd);
-      _refIntern.child( FirebaseAuth.instance.currentUser!.uid).child(_fileName).child("Task").set(_doneTask);
-    }
-  }on Exception catch (Exception){
+    //hierarchy
+    _refIntern.set( FirebaseAuth.instance.currentUser!.uid);
+    _refIntern.child( FirebaseAuth.instance.currentUser!.uid).push().set(_fileName);
+    _refIntern.child( FirebaseAuth.instance.currentUser!.uid).child(_fileName).child("Date").set(_date);
+    _refIntern.child( FirebaseAuth.instance.currentUser!.uid).child(_fileName).child("Time").set(_timeStart+"-"+_timeEnd);
+    _refIntern.child( FirebaseAuth.instance.currentUser!.uid).child(_fileName).child("Task").set(_doneTask);
+    }on Exception catch (Exception){
     print("Exception: " + Exception.toString());
   }
 }

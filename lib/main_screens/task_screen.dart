@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_nav_bar/responsive_screens/home/settings.dart';
 import 'package:simple_nav_bar/responsive_screens/task/task_widget/responsive_task.dart';
-import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
-import 'package:simple_nav_bar/responsive_screens/task/tasks/intern.dart';
-import 'package:simple_nav_bar/responsive_screens/task/tasks/new_customer.dart';
 
 import '../themes.dart';
 
@@ -71,10 +68,10 @@ class _TasksPageState extends State<TasksPage> {
     final currentWidth = (MediaQuery.of(context).size.width.toString()).split(".")[0];
     final currentHeight = (MediaQuery.of(context).size.height.toString()).split(".")[0];
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text("ta_appbar1".tr /*+ " " + currentWidth+"x"+currentHeight*/,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
         actions: [

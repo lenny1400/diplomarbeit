@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -64,12 +63,12 @@ class _SupportWidgetPageState extends State<SupportWidgetPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         title: Text("Support",
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
       ),
       body: Center(
@@ -125,8 +124,7 @@ class _SupportWidgetPageState extends State<SupportWidgetPage> {
                       width: MediaQuery.of(context).size.width*0.25,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: theme.cardColor,
-                          onPrimary: theme.cardColor,
+                          foregroundColor: theme.cardColor, backgroundColor: theme.cardColor,
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(10.0),
                           ),

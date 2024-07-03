@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TaskItem extends StatelessWidget {
@@ -22,8 +21,7 @@ class TaskItem extends StatelessWidget {
               alignment: Alignment.center,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    onPrimary: theme.canvasColor,
-                    primary: theme.backgroundColor,
+                    foregroundColor: theme.canvasColor, backgroundColor: theme.colorScheme.surface,
                     side: BorderSide(
                       width: 1,
                       color: theme.shadowColor,
@@ -43,7 +41,7 @@ class TaskItem extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             title,
-                            style: theme.textTheme.headline3,
+                            style: theme.textTheme.displaySmall,
                           ),
                         ),
                       ),

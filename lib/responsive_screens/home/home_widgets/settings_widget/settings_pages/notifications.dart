@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../themes.dart';
@@ -49,10 +48,10 @@ class _NotificationsPageWidgetState extends State<NotificationsPageWidget> {
     final theme = Theme.of(context);
     final bool _switchNotif = false;
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text("Notifications",
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
       ),
       body: Center(

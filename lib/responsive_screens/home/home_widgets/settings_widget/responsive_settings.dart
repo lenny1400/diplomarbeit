@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_nav_bar/custom_widgets/preferences_service.dart';
 import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/help.dart';
-import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/notifications.dart';
 import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/settings_pages/support.dart';
 import 'package:simple_nav_bar/user_management/login_register.dart';
 import '../../../../themes.dart';
@@ -92,7 +91,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
     showDialog(context: context,
 
       builder: (_) => AlertDialog(
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.colorScheme.surface,
         title: Text(
           "se_dialogText".tr,
           style: TextStyle(
@@ -173,8 +172,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                       child: TextButton(
                         onPressed: (){},
                         style: TextButton.styleFrom(
-                            onSurface: theme.backgroundColor,
-                            primary: theme.backgroundColor
+                            foregroundColor: theme.colorScheme.surface, disabledForegroundColor: theme.colorScheme.surface.withOpacity(0.38)
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,8 +255,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                       child: TextButton(
                         onPressed: () => showLocaleDialog(context),
                         style: TextButton.styleFrom(
-                            onSurface: theme.backgroundColor,
-                            primary: theme.backgroundColor
+                            foregroundColor: theme.colorScheme.surface, disabledForegroundColor: theme.colorScheme.surface.withOpacity(0.38)
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -343,8 +340,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                           Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportWidgetPage()));
                         },
                         style: TextButton.styleFrom(
-                            onSurface: theme.backgroundColor,
-                            primary: theme.backgroundColor
+                            foregroundColor: theme.colorScheme.surface, disabledForegroundColor: theme.colorScheme.surface.withOpacity(0.38)
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -416,8 +412,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                           Navigator.push(context, MaterialPageRoute(builder: (_) => const HelpWidgetPage()));
                         },
                         style: TextButton.styleFrom(
-                            onSurface: theme.backgroundColor,
-                            primary: theme.backgroundColor
+                            foregroundColor: theme.colorScheme.surface, disabledForegroundColor: theme.colorScheme.surface.withOpacity(0.38)
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -490,8 +485,7 @@ class _ResponsiveSettingsState extends State<ResponsiveSettings> {
                         height: _cons4,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.cardColor,
-                            onPrimary: theme.cardColor,
+                            foregroundColor: theme.cardColor, backgroundColor: theme.cardColor,
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0),
                             ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../themes.dart';
@@ -47,11 +46,11 @@ class _HelpWidgetPageState extends State<HelpWidgetPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
         title: Text("Help",
-        style: theme.textTheme.caption,
+        style: theme.textTheme.bodySmall,
         ),
       ),
       body: Center(

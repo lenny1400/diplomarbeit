@@ -103,7 +103,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       body: Center(
         child: (_isLoggedOut)
         //if user is logged out, this will be shown
@@ -141,7 +141,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                           height: MediaQuery.of(context).size.height*0.2,
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Image.asset(
-                            theme.backgroundColor == Colors.white
+                            theme.colorScheme.surface == Colors.white
                                 ? 'assets/logo_black_login.png'
                                 : 'assets/logo_white_login.png',
                           ),
@@ -153,7 +153,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             width: MediaQuery.of(context).size.width*0.7,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: theme.cardColor,
+                                    backgroundColor: theme.cardColor,
                                     fixedSize: Size.fromHeight(50),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                                     textStyle: TextStyle(
@@ -165,7 +165,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                                 },
                                 child: Text(
                                   "Login",
-                                  style: theme.textTheme.bodyText1,
+                                  style: theme.textTheme.bodyLarge,
                                 )
                             ),
                           ),
@@ -177,7 +177,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             width: MediaQuery.of(context).size.width*0.7,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: theme.cardColor,
+                                    backgroundColor: theme.cardColor,
                                     fixedSize: Size.fromHeight(50),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
                                     textStyle: TextStyle(
@@ -189,7 +189,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                                 },
                                 child: Text(
                                   "Register",
-                                  style: theme.textTheme.bodyText1,
+                                  style: theme.textTheme.bodyLarge,
                                 )
                             ),
                           ),
@@ -200,7 +200,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             height: MediaQuery.of(context).size.height*0.06,
                             width: MediaQuery.of(context).size.width*0.5,
                             child: Image.asset(
-                              theme.backgroundColor == Colors.white
+                              theme.colorScheme.surface == Colors.white
                                   ? 'assets/rocomp_black.png'
                                   : 'assets/rocomp_white.png',
                             ),
@@ -218,7 +218,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
                   width: MediaQuery.of(context).size.width*1,
                   height: MediaQuery.of(context).size.height*1,
-                  color: theme.backgroundColor,
+                  color: theme.colorScheme.surface,
                 ),
             )
       ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/custom_widgets/task_item.dart';
 import '../../themes.dart';
@@ -52,10 +51,10 @@ class _AllTasksPageState extends State<AllTasksPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
       ),
       body: Center(

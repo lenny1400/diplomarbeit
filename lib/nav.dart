@@ -87,7 +87,7 @@ class _NavbarState extends State<Navbar> {
     final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

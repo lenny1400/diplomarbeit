@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
@@ -51,11 +50,11 @@ class _ManagementPageState extends State<ManagementPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
       ),

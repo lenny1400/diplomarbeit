@@ -66,10 +66,10 @@ class _FromFilePageState extends State<FromFilePage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
       ),
@@ -91,7 +91,7 @@ class _FromFilePageState extends State<FromFilePage> {
                   },
                   color: theme.cardColor,
                   padding: EdgeInsets.all(15),
-                  child: Text('da_pick'.tr, style: theme.textTheme.bodyText1,),
+                  child: Text('da_pick'.tr, style: theme.textTheme.bodyLarge,),
                 ),
               ),
             ),
@@ -224,10 +224,10 @@ class _SelectedState extends State<Selected> {
   Widget build(BuildContext context) {
     if(selectedFile){
       return Scaffold(
-        backgroundColor: widget.theme.backgroundColor,
+        backgroundColor: widget.theme.colorScheme.surface,
         appBar: AppBar(
           title: Text("da_appbarSelectedFile".tr,
-            style: widget.theme.textTheme.caption,
+            style: widget.theme.textTheme.bodySmall,
           ),
           elevation: 0,
         ),
@@ -307,10 +307,10 @@ class _SelectedState extends State<Selected> {
       );
     }else{
       return Scaffold(
-          backgroundColor: widget.theme.backgroundColor,
+          backgroundColor: widget.theme.colorScheme.surface,
           appBar: AppBar(
             title: Text("da_appbarNoFile".tr,
-              style: widget.theme.textTheme.caption,
+              style: widget.theme.textTheme.bodySmall,
             ),
             elevation: 0,
           ),

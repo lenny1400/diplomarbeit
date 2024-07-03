@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_nav_bar/user_startup/user_customer.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 // A screen that allows users to take a picture using a given camera.

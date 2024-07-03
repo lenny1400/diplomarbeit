@@ -202,11 +202,11 @@ class _InternPageState extends State<InternPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.headline6,
+          style: theme.textTheme.titleLarge,
         ),
         elevation: 0,
       ),
@@ -231,7 +231,7 @@ class _InternPageState extends State<InternPage> {
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005,),
                             child: Text(
                               "ta_title2Activity".tr,
-                              style: theme.textTheme.headline3,
+                              style: theme.textTheme.displaySmall,
                             ),
                           )
                       ),
@@ -270,7 +270,7 @@ class _InternPageState extends State<InternPage> {
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.005,),
                             child: Text(
                               "ta_title3Date".tr,
-                              style: theme.textTheme.headline3,
+                              style: theme.textTheme.displaySmall,
                             ),
                           )
                       ),
@@ -357,7 +357,7 @@ class _InternPageState extends State<InternPage> {
                                     child: Text(
                                       getText(),
                                       textAlign: TextAlign.center,
-                                      style: theme.textTheme.headline5,
+                                      style: theme.textTheme.headlineSmall,
                                     ),
                                     onTap: (){
                                       pickTime(context);
@@ -389,7 +389,7 @@ class _InternPageState extends State<InternPage> {
                                     child: Text(
                                       getText2(),
                                       textAlign: TextAlign.center,
-                                      style: theme.textTheme.headline5,
+                                      style: theme.textTheme.headlineSmall,
                                     ),
                                     onTap: (){
                                       pickTime2(context);
@@ -455,7 +455,7 @@ class _InternPageState extends State<InternPage> {
                               },
                               child: Text(
                                 'ta_buttonSave'.tr,
-                                style: theme.textTheme.bodyText1,
+                                style: theme.textTheme.bodyLarge,
                               ),
                             ),
                           )

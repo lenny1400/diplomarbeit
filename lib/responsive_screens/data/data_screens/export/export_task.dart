@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:io';
@@ -40,10 +39,10 @@ class _export_taskState extends State<export_task> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.colorScheme.surface,
         appBar: AppBar(
         title: Text("da_appbarExport".tr,
-        style: theme.textTheme.caption,
+        style: theme.textTheme.bodySmall,
     ),
     elevation: 0,
     ),
@@ -64,7 +63,7 @@ class _export_taskState extends State<export_task> {
                 },
                 child: Text(
                   'Export as Zip'.tr,
-                  style: theme.textTheme.bodyText1,
+                  style: theme.textTheme.bodyLarge,
                 ),
               )
           ),

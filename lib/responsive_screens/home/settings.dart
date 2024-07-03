@@ -1,15 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/main_screens/data_screen.dart';
 import 'package:simple_nav_bar/responsive_screens/home/home_widgets/settings_widget/responsive_settings.dart';
-import 'package:simple_nav_bar/user_management/login.dart';
-import 'package:simple_nav_bar/user_management/login_register.dart';
-import 'package:simple_nav_bar/user_management/register.dart';
-import 'package:simple_nav_bar/main_screens/task_screen.dart';
-import 'package:simple_nav_bar/main_screens/time_screen.dart';
-import '../../nav.dart';
 import '../../themes.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
@@ -84,10 +76,10 @@ class _SettingsPageState extends State<SettingsPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
         appBar: AppBar(
           title: Text(widget.title.tr,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
             ),
           elevation: 0,
         ),

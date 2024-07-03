@@ -227,11 +227,11 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
+    Color getColor(Set<WidgetState> states) {
+      const Set<WidgetState> interactiveStates = <WidgetState>{
+        WidgetState.pressed,
+        WidgetState.hovered,
+        WidgetState.focused,
       };
       if (states.any(interactiveStates.contains)) {
         return Colors.white;
@@ -241,10 +241,10 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.headline6,
+          style: theme.textTheme.titleLarge,
         ),
         elevation: 0,
       ),
@@ -273,7 +273,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "ta_titleKunde".tr,
-                          style: theme.textTheme.headline6,
+                          style: theme.textTheme.titleLarge,
                         ),
                       ),
                     ),
@@ -296,7 +296,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                               icon: const Icon(Icons.arrow_downward),
                               iconSize: 24,
                               elevation: 16,
-                              style: theme.textTheme.headline6,
+                              style: theme.textTheme.titleLarge,
                               underline: Container(
                                 height: 2,
                                 color: theme.cardColor,
@@ -331,7 +331,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "ta_titleApproach".tr,
-                          style: theme.textTheme.headline6,
+                          style: theme.textTheme.titleLarge,
                         ),
                       ),
                     ),
@@ -354,7 +354,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                 child: Checkbox(
                                   activeColor: theme.shadowColor,
                                   checkColor: theme.primaryColor,
-                                  fillColor: MaterialStateProperty.all(theme.shadowColor),
+                                  fillColor: WidgetStateProperty.all(theme.shadowColor),
                                   value: isCheckedYes,
                                   onChanged: (newValue){
                                     setState(() {
@@ -374,7 +374,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                               ),
                               Text(
                                 "ta_yes".tr,
-                                style: theme.textTheme.headline5,
+                                style: theme.textTheme.headlineSmall,
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width*0.05,
@@ -384,7 +384,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                 child: Checkbox(
                                   activeColor: theme.shadowColor,
                                   checkColor: theme.primaryColor,
-                                  fillColor: MaterialStateProperty.all(theme.shadowColor),
+                                  fillColor: WidgetStateProperty.all(theme.shadowColor),
                                   value: isCheckedNo,
                                   onChanged: (newValue){
                                     setState(() {
@@ -406,7 +406,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                               ),
                               Text(
                                 "ta_no".tr,
-                                style: theme.textTheme.headline5,
+                                style: theme.textTheme.headlineSmall,
                               ),
                             ],
                           )
@@ -426,7 +426,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "ta_titleMileage".tr,
-                          style: theme.textTheme.headline6,
+                          style: theme.textTheme.titleLarge,
                         ),
                       ),
                     ),
@@ -533,7 +533,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "ta_titleTime".tr,
-                          style: theme.textTheme.headline6,
+                          style: theme.textTheme.titleLarge,
                         ),
                       ),
                     ),
@@ -569,7 +569,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                           child: Text(
                                             getText(),
                                             textAlign: TextAlign.center,
-                                            style: theme.textTheme.headline5,
+                                            style: theme.textTheme.headlineSmall,
                                           ),
                                           onTap: (){
                                             pickTime(context);
@@ -623,7 +623,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                                           child: Text(
                                             getText2(),
                                             textAlign: TextAlign.center,
-                                            style: theme.textTheme.headline5,
+                                            style: theme.textTheme.headlineSmall,
                                           ),
                                           onTap: (){
                                             pickTime2(context);
@@ -800,7 +800,7 @@ class _ExistingCustomerPageState extends State<ExistingCustomerPage> {
                             },
                             child: Text(
                               "ta_buttonNext".tr,
-                              style: theme.textTheme.bodyText1,
+                              style: theme.textTheme.bodyLarge,
                             ),
                           ),
                         )

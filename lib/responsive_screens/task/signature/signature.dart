@@ -2,12 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
-import 'package:simple_nav_bar/fileManagement/saveCount.dart';
 import 'package:simple_nav_bar/user_firebase_tasks/extern_upload.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
@@ -52,9 +50,9 @@ class _SignatureAppState extends State<SignatureApp> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
           appBar: AppBar(
-            title: Text("Unterschrift:",  style: theme.textTheme.headline6,),
+            title: Text("Unterschrift:",  style: theme.textTheme.titleLarge,),
           ),
           body: Align(
             alignment: Alignment.center,

@@ -2,15 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_nav_bar/fileManagement/saveCount.dart';
-import 'package:simple_nav_bar/user_firebase_tasks/extern_upload.dart';
-import 'package:simple_nav_bar/user_startup/user_customer.dart';
-import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 class detailedTask extends StatefulWidget {
   const detailedTask({Key? key, required this.taskName}) : super(key: key);
@@ -67,9 +62,9 @@ class _detailedTaskState extends State<detailedTask> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        title: Text("ho_appbarDetailedTask".tr,style: theme.textTheme.caption),
+        title: Text("ho_appbarDetailedTask".tr,style: theme.textTheme.bodySmall),
       ),
       body: Center(
         child: FutureBuilder(
@@ -93,56 +88,56 @@ class _detailedTaskState extends State<detailedTask> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![0],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![1],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![2],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![3],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![4],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![5],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       snapshot.data![6],
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       "ho_signature".tr,
-                                      style: theme.textTheme.headline3
+                                      style: theme.textTheme.displaySmall
                                   ),
                                 ),
                                 FutureBuilder(
@@ -177,7 +172,7 @@ class _detailedTaskState extends State<detailedTask> {
                                           },
                                           child: Text(
                                             "ho_buttonBack".tr,
-                                            style: theme.textTheme.bodyText1,
+                                            style: theme.textTheme.bodyLarge,
                                           ),
                                         ),
                                       )

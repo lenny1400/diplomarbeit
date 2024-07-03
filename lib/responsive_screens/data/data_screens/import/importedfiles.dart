@@ -1,7 +1,5 @@
-import 'dart:math';
 
 import 'package:csv/csv.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -89,10 +87,10 @@ class _ImportedFilesPageState extends State<ImportedFilesPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
       ),
@@ -115,7 +113,7 @@ class _ImportedFilesPageState extends State<ImportedFilesPage> {
                               padding: const EdgeInsets.all(8),
                               child: Text(
                                 row.toString(),
-                                style: theme.textTheme.headline4,
+                                style: theme.textTheme.headlineMedium,
                               ),
                             )
                         );

@@ -66,19 +66,19 @@ class _ExportFilesPageState extends State<ExportFilesPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {sizeofCSVSP();});
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {getCSVSharedPreferences();});
-    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {sizeofCSVSP();});
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {getCSVSharedPreferences();});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
           title: Text("da_appbarExport".tr,
-            style: theme.textTheme.caption,
+            style: theme.textTheme.bodySmall,
           ),
           elevation: 0,
       ),
@@ -209,10 +209,10 @@ class _ShowFilePageState extends State<ShowFilePage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text("Show File",
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
       ),
@@ -229,7 +229,7 @@ class _ShowFilePageState extends State<ShowFilePage> {
                 alignment: Alignment.center,
                 child: Text(
                   widget.csvFile,
-                style: theme.textTheme.headline4,
+                style: theme.textTheme.headlineMedium,
                 ),
               ),
             ),

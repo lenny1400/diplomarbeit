@@ -12,8 +12,6 @@ import 'package:simple_nav_bar/responsive_screens/task/camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_nav_bar/responsive_screens/task/signature/signature.dart';
-import 'package:simple_nav_bar/themes.dart';
-import 'package:flutter/services.dart';
 import 'package:simple_nav_bar/user_startup/user_task.dart';
 
 class CreateTask extends StatefulWidget {
@@ -116,10 +114,10 @@ class _CreateTaskState extends State<CreateTask> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text(widget.title,
-          style: theme.textTheme.headline6,
+          style: theme.textTheme.titleLarge,
         ),
         elevation: 0,
       ),
@@ -146,7 +144,7 @@ class _CreateTaskState extends State<CreateTask> {
                           padding: EdgeInsets.only(left: 40,),
                           child: Text(
                             "ta_titleActivity".tr,
-                            style: theme.textTheme.headline5,
+                            style: theme.textTheme.headlineSmall,
                           ),
                         )
                     ),
@@ -193,7 +191,7 @@ class _CreateTaskState extends State<CreateTask> {
                           padding: EdgeInsets.only(left: 40,),
                           child: Text(
                             "ta_titleMaterial".tr,
-                            style: theme.textTheme.headline5,
+                            style: theme.textTheme.headlineSmall,
                           ),
                         )
                     ),
@@ -247,7 +245,7 @@ class _CreateTaskState extends State<CreateTask> {
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
                                 "ta_titlePictures".tr,
-                                style: theme.textTheme.caption,
+                                style: theme.textTheme.bodySmall,
                               ),
                             ),
                             Padding(
@@ -371,7 +369,7 @@ class _CreateTaskState extends State<CreateTask> {
                             },
                             child: Text(
                               "ta_buttonNext".tr,
-                              style: theme.textTheme.bodyText1,
+                              style: theme.textTheme.bodyLarge,
                             ),
                           ),
                         )

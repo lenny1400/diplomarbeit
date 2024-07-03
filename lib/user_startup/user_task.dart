@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:simple_nav_bar/user_startup/user_customer.dart';
 

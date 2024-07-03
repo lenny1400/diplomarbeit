@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -315,10 +314,10 @@ class _TimePageState extends State<TimePage> {
     final currentWidth = (MediaQuery.of(context).size.width.toString()).split(".")[0];
     final currentHeight = (MediaQuery.of(context).size.height.toString()).split(".")[0];
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text("ti_appbar1".tr + " " + currentWidth+"x"+currentHeight,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
         actions: [
@@ -604,11 +603,11 @@ class _EditTimeState extends State<EditTime> {
     String newCurrentlyWorking;
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("ti_appbar2".tr,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
       ),

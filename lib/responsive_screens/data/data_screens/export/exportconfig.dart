@@ -64,10 +64,10 @@ class _ExportOptionsState extends State<ExportOptions> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
           title: Text("da_appbarOptions".tr,
-            style: theme.textTheme.caption,
+            style: theme.textTheme.bodySmall,
           ),
           elevation: 0,
       ),
@@ -203,7 +203,7 @@ class _ExportOptionsState extends State<ExportOptions> {
                     setState(() {
                       this.firstState = newValue!;
                     });
-                  }, checkColor: theme.primaryColor,activeColor: theme.shadowColor,fillColor: MaterialStateProperty.all(theme.shadowColor), ),),
+                  }, checkColor: theme.primaryColor,activeColor: theme.shadowColor,fillColor: WidgetStateProperty.all(theme.shadowColor), ),),
               ],
             )
         ),

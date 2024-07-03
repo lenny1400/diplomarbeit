@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_nav_bar/responsive_screens/task/tasks/existing_customer.dart';
@@ -77,7 +76,7 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                       },
                       child: Text(
                         'ta_buttonIntern'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     ),
                   ),
@@ -99,7 +98,7 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                       },
                       child: Text(
                         'ta_buttonNewCustomer'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     ),
                   ),
@@ -122,7 +121,7 @@ class _ResponsiveTaskState extends State<ResponsiveTask> {
                       },
                       child: Text(
                         'ta_buttonOldCustomer'.tr,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.textTheme.bodyLarge,
                       ),
                     ),
                   ),

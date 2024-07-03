@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/main.dart';
-import 'package:simple_nav_bar/main_screens/home_screen.dart';
 import 'package:simple_nav_bar/nav.dart';
 import 'package:simple_nav_bar/user_management/register.dart';
 import 'package:simple_nav_bar/themes.dart';
@@ -112,7 +110,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       resizeToAvoidBottomInset: false,
       body: Center(
         child: FittedBox(
@@ -130,7 +128,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
                         height: MediaQuery.of(context).size.height*0.1,
                         child: Text(
                           "Login",
-                          style: theme.textTheme.bodyText2,
+                          style: theme.textTheme.bodyMedium,
                         ),
                       ),
                     ),
@@ -205,7 +203,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
                       },
                       child: Text(
                         'Forgot Password',
-                        style: theme.textTheme.headline1,
+                        style: theme.textTheme.displayLarge,
                       ),
                     ),
                     Container(
@@ -224,7 +222,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
                         },
                         child: Text(
                           'Sign in',
-                          style: theme.textTheme.bodyText1,
+                          style: theme.textTheme.bodyLarge,
                         ),
                       ),
                     ),
@@ -237,7 +235,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
                           },
                         child: Text(
                           'Create Account',
-                          style: theme.textTheme.headline1,
+                          style: theme.textTheme.displayLarge,
                         ),
                       ),
                     ),

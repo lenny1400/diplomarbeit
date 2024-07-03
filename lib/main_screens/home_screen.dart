@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:simple_nav_bar/user_management/login.dart';
-import 'package:simple_nav_bar/user_management/login_register.dart';
 import '../themes.dart';
 import '../responsive_screens/home/all_tasks.dart';
 import '../responsive_screens/home/settings.dart';
@@ -92,10 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
     final currentWidth = (MediaQuery.of(context).size.width.toString()).split(".")[0];
     final currentHeight = (MediaQuery.of(context).size.height.toString()).split(".")[0];
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: Text("ho_appbar1".tr /*+ " " + currentWidth+"x"+currentHeight*/,
-          style: theme.textTheme.caption,
+          style: theme.textTheme.bodySmall,
         ),
         elevation: 0,
         actions: [

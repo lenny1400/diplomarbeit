@@ -1,11 +1,8 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_nav_bar/main_screens/home_screen.dart';
-import 'package:simple_nav_bar/responsive_screens/home/all_tasks.dart';
 import 'package:get/get.dart';
 import 'package:simple_nav_bar/responsive_screens/home/detailed_task.dart';
 
@@ -164,8 +161,7 @@ class _MobileHomeState extends State<MobileHome> {
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      onPrimary: theme.canvasColor,
-                                      primary: theme.backgroundColor,
+                                      foregroundColor: theme.canvasColor, backgroundColor: theme.colorScheme.surface,
                                       side: BorderSide(
                                         width: 1,
                                         color: theme.dividerColor,
